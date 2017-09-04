@@ -1,0 +1,123 @@
+页面说明
+学员列表  student/list.vue
+	学员报名主页  ./order.modal.vue
+	学员报名 ./classclass.vue
+	学员交费 ./orderandpay2.vue
+	现场缴费 ./order/pay_now.modal.vue  学生的余额字段需要添加
+
+	预充值 ./storedvalue.vue
+	学杂费 ./miscellaneousfees.vue
+	缴费/退费  ./order/refund.modal.vue
+	退费列表  ./order/refund.vue
+
+	预充值没有用  ./ordermain.vue
+student学生结构
+{
+	'student_name': '',     //姓名
+	'sex': '0',             //性别
+	'first_tel': '',         //第一联系人电话
+	'first_rel_rel': '',     //第一联系人关系
+	'first_rel_name': '',    //第一联系人姓名
+	'relations': [],       //联系人
+	'track_from': '其他',   //渠道来源
+	'nickname': '',       //别名
+	'birth': '',          //生日
+	'home_address': '',   //地址
+	'school': '',        //学校
+	'grade': '',         //年级
+	'class': '',         //班级
+	'note': '',         //备注
+	'region_oe_id': '0',//学员归属
+	'purpose': '0',   //意向程度
+	'amount': 0,      //余额
+	'isdel': false   //是否归档
+}
+order订单结构
+{
+	'classes_id': '',                //班级Id 
+	'course_id': '',     //课程ID
+	'origin_times': 0,    //上课次数
+	'refund_status':0,    //退款状态  0未退款  1部分退款   2 完取退款
+	'back_amount': 0,     //退款金额
+	'unit_price': 0,     //单价
+	'origin_amount': 0,   //订单金额
+	'has_discount': '',   //是否折扣
+	'has_present': '',    ／／是否赠送课次
+	'c_unit_price': '',   //课耗单价
+	'order_remark': '',   //订单备注
+	'present_times': 0,    //赠送课次
+	'discount': 0,         //折扣
+	'discount_amount': 0,  //折扣金额
+	'order_amount': 0,   //订单金额
+	'pay_amount':0,      //已经缴费金额
+	'unpay_amount': 0,  //未付款金额
+	'pay_status': 0,    //支付状态  0  未支付 1 部分支付  2 完成支付
+	'student_id': '',   //学生ID
+	'order_no': '',   //订单编号  LB + 日期+ 时间秒
+	'order_type': 1, //订单类型 1订单  2 预交费  3学杂费
+	'body': ''  //订单内容
+}
+pay支付结构
+{
+'order_id': '',       //订单ID
+'student_id': '',    //学员ID
+'classes_id': '',       //班级ID
+'money_pay_amount': '',//支付金额
+'pay_type': 0,        //支付类型  0 支付 1退款
+'use_balance': false,  //是否余额支付
+ 'balance_pay_amount': //余额付款
+}
+refund退费结构
+{
+'order_id': '',       //订单ID
+'student_id': '',    //学员ID
+ 'pay_id':'',         //支付ID
+'classes_id': '',       //班级ID
+'amount':0,//退费金额
+'refund_to': '',	//退款方式
+'money_refund_to':0  //现金退款
+'times_policy':'1', //课时处理
+'times':0 ,    //扣减课次
+'note':''      //退费备注       
+}
+clear清除费用结构
+{
+'order_id': '',       //订单ID
+'student_id': '',    //学员ID
+'classes_id': '',       //班级ID
+'times': '',         ／/清除课时数
+'amount': '',        //清除金额
+'note': ''           //清除备注
+}
+classes班级{
+'class_name': '',   //班级名称
+'course_id': '',      //课程ID
+'open_time': '',      //预计开班时间
+'close_time': '',    //预计结课时间
+'max_student_num': 0,   //最大学生
+'total_times': 0,      //总共课时
+'unit_hours': 0,      //课时时间
+'teacher_id': '',     //老师
+'del_able': false   //是否删除
+'class_flag':0      //班级状态  0 未开班，1 已经开班  2 已经结班
+}
+coursescheduling排课
+ {
+	dayloop: false,  //是否周期
+	start:'',         //开始时间
+	end:'',			//结束时间
+	days:0 ,        //星期 0 日 1-6 一-六
+	classes_id: '',  //班级ID
+	sclasses_id: '',  //教室ID 
+	teacher_id: '',   //老师ID
+} 
+attence考勤
+{
+	attence_flag: 0,  //考勤标识   1未考勤，2考勤，3请假
+	classes_id: '',  //班级ID
+	sclasses_id: '',  //教室ID 
+	teacher_id: '',   //老师ID
+	student_id：'',  //学员ID
+	coursescheduling_id:'' //排课id
+}     
+               
