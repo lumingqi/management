@@ -43,7 +43,7 @@ export default {
         submenu: [{
             menuTitle: '业主',
             index: '1-2-1',
-            to: '/student/recording',
+            to: 'useingowner',
             menuIcon: 'fa fa-envelope-open-o',
         }, {
             menuTitle: '物业处人员',
