@@ -272,3 +272,6 @@ a:hover {
     .el-tree__empty-block{
         height: auto;
     }
+    .el-submenu .el-menu-item{
+        min-width: 180px !important;
+    }
