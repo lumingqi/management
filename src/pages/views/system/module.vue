@@ -269,7 +269,6 @@
 }
 </style>
 <script>
-import systemmodule from '~/pages/views/system/module.vue'
 import pagesmodule from '~/stores/module.js'
 export default {
     name: 'systemmodule',
@@ -320,9 +319,6 @@ export default {
                 }]
             }
         }
-    },
-    components: {
-        'lb-systemmodule': systemmodule
     },
     created() {
         if (typeof (this.module) == 'object') {
