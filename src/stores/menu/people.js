@@ -11,11 +11,29 @@ export default {
             index: '1-1-1',
             to: 'useingowner',
             menuIcon: 'fa fa-envelope-open-o',
+            dropDownMenu: [{
+                'url': 'useingOwnerAdd',
+                'icon': 'fa fa-pencil',
+                'text': '编辑'
+            }, {
+                'action': 'delete',
+                'icon': 'fa fa-times',
+                'text': '删除'
+            }],
         }, {
             menuTitle: '物业处人员',
             index: '1-1-2',
-            to: 'useingproperty',
+            to: 'useingemployee',
             menuIcon: 'fa fa-envelope-open-o',
+            dropDownMenu: [{
+                'url': 'useingEmployeeAdd',
+                'icon': 'fa fa-pencil',
+                'text': '编辑'
+            }, {
+                'action': 'delete',
+                'icon': 'fa fa-times',
+                'text': '删除'
+            }],
         }]
     },
     {

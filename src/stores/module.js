@@ -29,9 +29,15 @@ import systemroles from './pagemodules/system/systemroles'
 
 
 import useingowner from './pagemodules/people/useingowner'
-import useingproperty from './pagemodules/people/useingproperty'
+import useingemployee from './pagemodules/people/useingemployee'
 
 let pages = {}
+
+pages['useingowner'] = useingowner
+pages['useingemployee'] = useingemployee
+
+
+
 pages['lessonsclasses'] = lessonsclasses
 pages['lessonmanage'] = lessonmanage
 pages['lessonclasses'] = lessonclasses
@@ -61,7 +67,5 @@ pages['systemschool'] = systemschool
 pages['systemsms'] = systemsms
 pages['systemroles'] = systemroles
 
-pages['useingowner'] = useingowner
-pages['useingproperty'] = useingproperty
 
 export default pages

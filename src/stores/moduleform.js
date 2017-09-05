@@ -25,7 +25,19 @@ import dictform from './formmodules/dictform.js'
 import refundfrom from './formmodules/refundfrom.js'
 import recordingdetailform from './formmodules/recordingdetailform.js'
 
+
+import useingOwnerAdd from './formmodules/useingOwnerAdd.js'
+import useingEmployeeAdd from './formmodules/useingEmployeeAdd.js'
+
+
+
 let pages = {}
+
+pages['useingOwnerAdd'] = useingOwnerAdd
+pages['useingEmployeeAdd'] = useingEmployeeAdd
+
+
+
 pages['sclassesform'] = sclassesform
 pages['campusform'] = campusform
 pages['leavesform'] = leavesform

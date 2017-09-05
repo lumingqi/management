@@ -1,28 +1,34 @@
 export default {
-    'pageName': 'useingowner',
-    'pageLable': '业主',
+    'pageName': 'useingemployee',
+    'pageLable': '物业人员',
     'tableSearch': [],
     'pageSearch': [
         {
             'type': 'textSearch',
             'fields': [
                 {
-                    'label': '房号',
+                    'label': '部门',
                     'defvalue': '',
                     'default': true,
-                    'value': 'room_number'
+                    'value': 'department'
                 },
                 {
                     'label': '姓名',
                     'defvalue': '',
                     'default': true,
-                    'value': 'owner_name'
+                    'value': 'employee_name'
                 },
                 {
-                    'label': '电话号码',
+                    'label': '联系方式',
                     'defvalue': '',
                     'default': true,
-                    'value': 'telephone_number'
+                    'value': 'tel_number'
+                },
+                {
+                    'label': '职务',
+                    'defvalue': '',
+                    'default': true,
+                    'value': 'position'
                 }
             ]
         },
@@ -33,7 +39,7 @@ export default {
                 {
                     'label': ' 添加',
                     'type': 'success',
-                    'showdialog': 'useingOwnerAdd',
+                    'showdialog': 'useingEmployeeAdd',
                     'actionoption': 'lessonmanageadd'
                 }, {
                     'label': '导入',
@@ -57,18 +63,23 @@ export default {
         },
         {
             'type': 'text',
-            'label': '房号',
-            'prop': 'room_number',
+            'label': '部门',
+            'prop': 'department',
         },
         {
             'type': 'text',
             'label': '姓名',
-            'prop': 'owner_name',
+            'prop': 'employee_name',
         },
         {
             'type': 'text',
-            'label': '电话号码',
-            'prop': 'telephone_number',
+            'label': '联系方式',
+            'prop': 'tel_number',
+        },
+        {
+            'type': 'text',
+            'label': '职务',
+            'prop': 'position',
         },
         {
             'type': 'text',
@@ -76,7 +87,7 @@ export default {
             'prop': 'note',
         }
     ],
-    'pageTable': 'owner',
+    'pageTable': 'employee',
     'pageTemplate': '',
     'pagePath': ''
 }
