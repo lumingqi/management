@@ -1,7 +1,7 @@
 <template>
     <div class="lbSdebarHeader">
-        <img src='/assets/images/logo.png'>
-        <span class='logo-text'>鲁班</span>
+        <img src='/assets/images/logo.jpeg'>
+        <span class='logo-text'>永兴</span>
     </div>
 </template>
 <style>
@@ -18,8 +18,8 @@
 }
 
 .lbSdebarHeader img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin-left: 17px;
 }
 
@@ -28,6 +28,7 @@
     color: white;
     font-weight: 700;
     position: relative;
+    top:2px;
     left: 4px;
 }
 </style>

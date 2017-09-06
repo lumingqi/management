@@ -1,36 +1,43 @@
 export default {
-    'pageName': 'useingowner',
-    'pageLable': '业主',
+    'pageName': 'beingrepaired',
+    'pageLable': '物业人员',
     'tableSearch': [],
     'pageSearch': [{
             'type': 'textSearch',
             'fields': [{
-                    'label': '房号',
-                    'defvalue': '',
-                    'default': true,
-                    'value': 'room_number'
-                },
-                {
                     'label': '姓名',
                     'defvalue': '',
                     'default': true,
                     'value': 'owner_name'
                 },
                 {
-                    'label': '电话号码',
+                    'label': '房号',
                     'defvalue': '',
                     'default': true,
-                    'value': 'telephone_number'
-                }
+                    'value': 'room_number'
+                },
+                {
+                    'label': '类别',
+                    'defvalue': '',
+                    'default': true,
+                    'value': 'stype'
+                },
+                {
+                    'label': '联系方式',
+                    'defvalue': '',
+                    'default': true,
+                    'value': 'tel_number'
+                },
+
             ]
         },
         {
             'type': 'singleBtnSearch',
             'span': 5,
             'fields': [{
-                'label': ' 添加',
+                'label': ' 添加维修',
                 'type': 'success',
-                'showdialog': 'useingOwnerAdd',
+                'showdialog': 'beingrepairedAdd',
                 'actionoption': 'lessonmanageadd'
             }, {
                 'label': '导入',
@@ -62,16 +69,36 @@ export default {
         },
         {
             'type': 'text',
-            'label': '电话号码',
+            'label': '联系方式',
             'prop': 'telephone_number',
         },
         {
             'type': 'text',
-            'label': '备注',
-            'prop': 'note',
+            'label': '日期',
+            'prop': 'time',
+        },
+        {
+            'type': 'text',
+            'label': '内容',
+            'prop': 'content',
+        },
+        {
+            'type': 'text',
+            'label': '图片',
+            'prop': 'image',
+        },
+        {
+            'type': 'text',
+            'label': '状态',
+            'prop': 'status',
+        },
+        {
+            'type': 'text',
+            'label': '类别',
+            'prop': 'stype',
         }
     ],
-    'pageTable': 'owner',
+    'pageTable': 'service',
     'pageTemplate': '',
     'pagePath': ''
 }

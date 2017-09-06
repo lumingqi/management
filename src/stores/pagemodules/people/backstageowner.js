@@ -1,5 +1,5 @@
 export default {
-    'pageName': 'useingowner',
+    'pageName': 'backstageowner',
     'pageLable': '业主',
     'tableSearch': [],
     'pageSearch': [{

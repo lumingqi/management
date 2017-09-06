@@ -19,7 +19,7 @@
                         </li>
                     </ul>
                 </div>
-                <span class="school" style="color:white;">校区</span>
+                <span class="school" style="color:white;">小区</span>
                 <span class="screen" @click="fullscreen">
                     <i class="fa fa-fw" :class="{'fa-compress':updown,'fa-expand':!updown}" style="color:white;"></i>
                 </span>

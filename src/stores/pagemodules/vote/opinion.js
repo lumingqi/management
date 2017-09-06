@@ -1,6 +1,6 @@
 export default {
-    'pageName': 'useingowner',
-    'pageLable': '业主',
+    'pageName': 'opinion',
+    'pageLable': '物业人员',
     'tableSearch': [],
     'pageSearch': [{
             'type': 'textSearch',
@@ -14,13 +14,19 @@ export default {
                     'label': '姓名',
                     'defvalue': '',
                     'default': true,
-                    'value': 'owner_name'
+                    'value': 'employee_name'
                 },
                 {
-                    'label': '电话号码',
+                    'label': '联系方式',
                     'defvalue': '',
                     'default': true,
-                    'value': 'telephone_number'
+                    'value': 'tel_number'
+                },
+                {
+                    'label': '日期',
+                    'defvalue': '',
+                    'default': true,
+                    'value': 'time'
                 }
             ]
         },
@@ -30,7 +36,7 @@ export default {
             'fields': [{
                 'label': ' 添加',
                 'type': 'success',
-                'showdialog': 'useingOwnerAdd',
+                'showdialog': 'opinion_add',
                 'actionoption': 'lessonmanageadd'
             }, {
                 'label': '导入',
@@ -62,16 +68,26 @@ export default {
         },
         {
             'type': 'text',
-            'label': '电话号码',
+            'label': '联系方式',
             'prop': 'telephone_number',
         },
         {
             'type': 'text',
-            'label': '备注',
-            'prop': 'note',
-        }
+            'label': '日期',
+            'prop': 'time',
+        },
+        {
+            'type': 'text',
+            'label': '内容',
+            'prop': 'content',
+        },
+        {
+            'type': 'text',
+            'label': '选择',
+            'prop': 'decision',
+        },
     ],
-    'pageTable': 'owner',
+    'pageTable': 'vote',
     'pageTemplate': '',
     'pagePath': ''
 }

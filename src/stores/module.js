@@ -28,13 +28,37 @@ import systemsms from './pagemodules/system/systemsms'
 import systemroles from './pagemodules/system/systemroles'
 
 
+
 import useingowner from './pagemodules/people/useingowner'
 import useingemployee from './pagemodules/people/useingemployee'
+import backstageowner from './pagemodules/people/backstageowner'
+import backpropertystaff from './pagemodules/people/backpropertystaff'
+import beingrepaired from './pagemodules/service/beingrepaired'
+import completerepairc from './pagemodules/service/completerepairc'
+import cancelrepair from './pagemodules/service/cancelrepair'
+import public_beingrepaired from './pagemodules/service/public_beingrepaired'
+import public_completerepairc from './pagemodules/service/public_completerepairc'
+import public_cancelrepair from './pagemodules/service/public_cancelrepair'
+import opinion from './pagemodules/vote/opinion'
+import ownervote from './pagemodules/vote/ownervote'
+
 
 let pages = {}
 
 pages['useingowner'] = useingowner
 pages['useingemployee'] = useingemployee
+pages['backstageowner'] = backstageowner
+pages['backpropertystaff'] = backpropertystaff
+pages['beingrepaired'] = beingrepaired
+pages['completerepairc'] = completerepairc
+pages['cancelrepair'] = cancelrepair
+pages['public_beingrepaired'] = public_beingrepaired
+pages['public_completerepairc'] = public_completerepairc
+pages['public_cancelrepair'] = public_cancelrepair
+pages['opinion'] = opinion
+pages['ownervote'] = ownervote
+
+
 
 
 
