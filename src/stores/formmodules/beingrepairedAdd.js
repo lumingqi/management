@@ -49,15 +49,18 @@ export default {
             'field': 'image',
         },
         {
-            'type': 'input',
+            'type': 'option',
             'label': '状态',
             'prop': '',
             'field': 'status',
         }, {
-            'type': 'input',
+            'type': 'option',
             'label': '类别',
             'prop': '',
-            'field': 'stype',
+            'value': 'ss'
+
+
+
         }
     ],
     'pageTable': 'service',
@@ -71,7 +74,8 @@ export default {
             owner_name: [
                 { required: true, message: '请输入姓名', trigger: 'blur' },
             ],
-            telephone_number: [{ required: true, validator: vm.validateTel, trigger: 'change' }]
+            telephone_number: [{ required: true, validator: vm.validateTel, trigger: 'change' }],
+
         }
-    }
+    },
 }

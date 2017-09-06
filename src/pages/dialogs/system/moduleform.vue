@@ -336,7 +336,7 @@ export default {
             expand: false,
             workday: false,
             weekday: false,
-            model: this.module.pageTable
+            model: this.module.pageTable,
         }
     },
     created() {

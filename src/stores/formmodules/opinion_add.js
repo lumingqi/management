@@ -41,7 +41,7 @@ export default {
             'field': 'content',
         },
         {
-            'type': 'input',
+            'type': 'option',
             'label': '选择',
             'prop': '',
             'field': 'decision',
