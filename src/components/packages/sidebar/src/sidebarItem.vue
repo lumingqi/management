@@ -1,6 +1,6 @@
 <template>
     <div class='lbSdebarUlStyle'>
-        <el-menu theme="dark">
+        <el-menu theme="dark"unique-opened>
             <template v-for='menuItem in menu'>
                 <el-submenu :index='menuItem.index?menuItem.index:""'>
                     <template slot="title">
