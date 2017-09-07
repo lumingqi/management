@@ -38,22 +38,6 @@
                 wx.config(res.data)
                 wx.ready(() => {
                     alert('wx ready')
-                    wx.chooseImage({
-                        count: 1, //张数， 默认9
-                        sizeType: ['compressed'], //建议压缩图
-                        sourceType: ['album', 'camera'], // 来源是相册、相机
-                        success: function (res) {
-                            //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                            console.log(res)
-                            this.localIds = res.localIds
-                        }
-                    });
-                });
-                wx.checkJsApi({
-                    jsApiList: ['chooseImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-                    success: function (res) {
-                        console.log(res)
-                    }
                 });
                 wx.error(function (res) {
                     alert("wx.config failed.0", res);
@@ -159,6 +143,16 @@
             },
             handleCamera() {
                 console.log('handleCamera')
+                wx.chooseImage({
+                    count: 1, //张数， 默认9
+                    sizeType: ['compressed'], //建议压缩图
+                    sourceType: ['album', 'camera'], // 来源是相册、相机
+                    success: function (res) {
+                        //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                        console.log(res)
+                        this.localIds = res.localIds
+                    }
+                });
 
             }
         }
