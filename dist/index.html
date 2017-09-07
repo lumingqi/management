@@ -68,6 +68,7 @@
                     </el-form-item>
                     <el-form-item label="图片" prop="">
                         <el-button @click="handleCamera">点击上传图片</el-button>
+                        <img :src="localIds" />
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="showForm">提交报修</el-button>
@@ -88,7 +89,8 @@
                 tel_phone: '',
                 position: '',
                 repair_type: '',
-                repair_content: ''
+                repair_content: '',
+                localIds: ''
             },
             options: [{
                 value: '0',
@@ -131,6 +133,9 @@
             },
             handleCamera() {
                 console.log('handleCamera')
+                wx.ready(() => {
+                    alert('wx ready')
+                });
                 wx.chooseImage({
                     count: 1, //张数， 默认9
                     sizeType: ['compressed'], //建议压缩图
@@ -138,6 +143,7 @@
                     success: function (res) {
                         //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                         console.log(res)
+                        this.localIds = res.localIds
                     }
                 });
             }
