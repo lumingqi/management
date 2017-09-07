@@ -10,37 +10,43 @@
     <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
     <script>
-        // alert(location.href.split('#')[0])
-        // wx.config({
-        //     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-        //     appId: 'wx7e0aa09a76fe616b', // 必填，公众号的唯一标识
-        //     timestamp: 1504773245214, // 必填，生成签名的时间戳
-        //     nonceStr: '0095f8439d4aef87', // 必填，生成签名的随机串
-        //     signature: '98221004e282ee5dccd11c002365244fe734b976',// 必填，签名，见附录1
-        //     jsApiList: [
-        //         'chooseImage',//拍照或从手机相册中选图接口
-        //         'previewImage',//预览图片接口
-        //         'uploadImage',//上传图片接口
-        //         'downloadImage'//下载图片接口
-        //     ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        // });
-        // wx.ready(() => {
-        //     alert('wx ready')
-        // });
-        // wx.error(function (res) {
-        //     alert("wx.config failed.");
-        // });
+        alert(location.href.split('#')[0])
+        wx.config({
+            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: 'wx7e0aa09a76fe616b', // 必填，公众号的唯一标识
+            timestamp: 1504775123, // 必填，生成签名的时间戳
+            nonceStr: '91db0a8583488f50', // 必填，生成签名的随机串
+            signature: '835f2c70ea0bddf3421a24d2ef9da46b1d611df5',// 必填，签名，见附录1
+            jsApiList: [
+                'chooseImage',//拍照或从手机相册中选图接口
+                'previewImage',//预览图片接口
+                'uploadImage',//上传图片接口
+                'downloadImage'//下载图片接口
+            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.ready(() => {
+            alert('wx ready')
+        });
+        wx.error(function (res) {
+            alert("wx.config failed.");
+        });
 
 
-        let config = {}
-        axios.get('http://app.bullstech.cn:8888/wxsignature')
-            .then(function (res) {
-                config = res
-                wx.config = config
-                console.log(config)
-            })
-       
-        console.log('222',wx.config)
+        // let config = {}
+        // axios.get('http://app.bullstech.cn:8888/wxsignature')
+        //     .then(function (res) {
+        //         config = res
+        //         wx.config = config
+        //         console.log(config)
+        //         wx.ready(() => {
+        //             alert('wx ready')
+        //         });
+        //         wx.error(function (res) {
+        //             alert("wx.config failed.");
+        //         });
+        //     })
+
+        // console.log('222', wx.config)
     </script>
 </head>
 
