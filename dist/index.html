@@ -10,11 +10,27 @@
     <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
     <script>
-        axios.get('http://app.bullstech.cn:8888/wxsignature')
-            .then(function (res) {
-                wx.config = res
-                console.log(wx.config)
-            })
+        wx.config({
+            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: 'wx30db7ec1537d9afc', // 必填，公众号的唯一标识
+            timestamp: 1504764644891, // 必填，生成签名的时间戳
+            nonceStr: 'fecdd3898e8cba4d', // 必填，生成签名的随机串
+            signature: '6ce4644642a57a7cd4252b2d0c7e10b0b8b59604',// 必填，签名，见附录1
+            jsApiList: [
+                'chooseImage',//拍照或从手机相册中选图接口
+                'previewImage',//预览图片接口
+                'uploadImage',//上传图片接口
+                'downloadImage'//下载图片接口
+            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        // let config = {}
+        // axios.get('http://app.bullstech.cn:8888/wxsignature')
+        //     .then(function (res) {
+        //         config = res
+        //         console.log(wx.config)
+        //     })
+        // wx.config = (config)
+        // console.log('222',wx.config)
     </script>
 </head>
 
@@ -118,7 +134,7 @@
                     sizeType: ['compressed'], //建议压缩图
                     sourceType: ['album', 'camera'], // 来源是相册、相机
                     success: function (res) {
-                        　　　　//var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                        //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                         $('.driver-card img').prop('src', res.localIds[0]);
                         uploadPhoto.uploadToWeixinServer(res.localIds[0], 'car')
                     }
