@@ -14,9 +14,9 @@
         wx.config({
             debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: 'wx7e0aa09a76fe616b', // 必填，公众号的唯一标识
-            timestamp: 1504766934915, // 必填，生成签名的时间戳
-            nonceStr: '84e94f20148a3e17', // 必填，生成签名的随机串
-            signature: 'a7f4414e4c069fa350e8f002e213871e1908e12d',// 必填，签名，见附录1
+            timestamp: 1504773245214, // 必填，生成签名的时间戳
+            nonceStr: '0095f8439d4aef87', // 必填，生成签名的随机串
+            signature: '12ea29a2a619716be98ddaef40f4adf6d41a3f4e',// 必填，签名，见附录1
             jsApiList: [
                 'chooseImage',//拍照或从手机相册中选图接口
                 'previewImage',//预览图片接口
@@ -29,10 +29,9 @@
         });
         wx.error(function (res) {
             alert("wx.config failed.");
-            //alert(res);
-            // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，
-            // 也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
         });
+
+
         // let config = {}
         // axios.get('http://app.bullstech.cn:8888/wxsignature')
         //     .then(function (res) {
