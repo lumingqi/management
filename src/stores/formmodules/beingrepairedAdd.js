@@ -53,13 +53,30 @@ export default {
             'label': '状态',
             'prop': '',
             'field': 'status',
+            'optionData': [{
+                value: 'wks',
+                label: '未开始'
+            }, {
+                value: 'jxz',
+                label: '进行中'
+            }, {
+                value: 'yjj',
+                label: '已解决'
+            }],
         }, {
             'type': 'option',
             'label': '类别',
             'prop': '',
-            'value': 'ss'
-
-
+            'optionData': [{
+                value: 'wks',
+                label: '灯类'
+            }, {
+                value: 'jxz',
+                label: '电器类'
+            }, {
+                value: 'yjj',
+                label: '通讯类'
+            }]
 
         }
     ],

@@ -45,6 +45,19 @@ export default {
             'label': '选择',
             'prop': '',
             'field': 'decision',
+            'optionData': [{
+                value: 'A',
+                label: 'A'
+            }, {
+                value: 'B',
+                label: 'B'
+            }, {
+                value: 'C',
+                label: 'C'
+            }, {
+                value: 'D',
+                label: 'D'
+            }]
         }
     ],
     'pageTable': 'ownervote',

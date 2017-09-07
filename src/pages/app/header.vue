@@ -2,7 +2,7 @@
     <div class="lbHeader">
         <div class="lbHeader_container">
             <div class="firstModule">
-                <i class="fa fa-bars" @click='variety()'></i>
+                <!--<i class="fa fa-bars" @click='variety()'></i>-->
                 <div class='menu' @click='handleClickShow()'>
                     <img src="/assets/images/a0.jpg">
                     <b>luban</b>

@@ -114,7 +114,7 @@
             </template>
             <template v-if="item.type=='radiogroup'">
                 <el-form-item :label="item.label" :prop="item.prop">
-                    <el-radio-group v-model="localdata.form[item.field]">
+                    <el-radio-group v-model="localdata.form[item.field]"> 
                         <template v-for="(value,index) in item.labels">
                             <el-radio-button :label="index">{{value.label}}</el-radio-button>
                         </template>
@@ -133,9 +133,9 @@
                 </el-form-item>
             </template>
             <template v-if="item.type=='option'">
-                <el-form-item :label="item.label" :prop="item.prop">
-                    <el-select v-model="localdata.form[item.field]" multiple placeholder="请选择" style="width: 100%;">
-                        <el-option v-for="value in getroleData" :key="value._id" :label="value.name" :value="value._id">
+                <el-form-item :label="item.label" :prop="item.prop" >
+                    <el-select v-model="localdata.form[item.field]" placeholder="请选择" style="width: 100%;">
+                        <el-option v-for="value in item.optionData" :key="value.value" :label="value.label" :value="value.value">
                         </el-option>
                     </el-select>
                 </el-form-item>
