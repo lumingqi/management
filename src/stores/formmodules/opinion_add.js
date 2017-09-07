@@ -45,6 +45,13 @@ export default {
             'label': '选择',
             'prop': '',
             'field': 'decision',
+            'optionData': [{
+                value: 'yes',
+                label: '同意'
+            }, {
+                value: 'no',
+                label: '不同意'
+            }]
         }
     ],
     'pageTable': 'vote',
