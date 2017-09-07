@@ -35,7 +35,7 @@
        
         axios.get('http://app.bullstech.cn:8888/wxsignature')
             .then(function (res) {
-                wx.config = res
+                wx.config = res.data
                 console.log(wx.config)
                 wx.ready(() => {
                     alert('wx ready')
