@@ -8,19 +8,17 @@
     <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
     <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
     <script>
-        wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: 'wx7e0aa09a76fe616b', // 必填，公众号的唯一标识
-            timestamp: , // 必填，生成签名的时间戳
-            nonceStr: '', // 必填，生成签名的随机串
-            signature: '',// 必填，签名，见附录1
-            jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        });
+        axios.get('http://app.bullstech.cn:8888/wxsignature')
+            .then(function (res) {
+                wx.config = res
+                console.log(wx.config)
+            })
     </script>
 </head>
 
-<body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg)"> 
+<body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg)">
     <div id="app">
         <el-row>
             <el-col :span="22" :offset="1">
@@ -51,7 +49,7 @@
                         <el-input type="textarea" v-model="form.repair_content" placeholder="请输入保修内容"></el-input>
                     </el-form-item>
                     <el-form-item label="图片" prop="">
-                        <el-button>点击上传图片</el-button>
+                        <el-button @click="handleCamera">点击上传图片</el-button>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="showForm">提交报修</el-button>
@@ -112,6 +110,19 @@
         methods: {
             showForm() {
                 console.log(this.form)
+            },
+            handleCamera() {
+                console.log('handleCamera')
+                wx.chooseImage({
+                    count: 1, //张数， 默认9
+                    sizeType: ['compressed'], //建议压缩图
+                    sourceType: ['album', 'camera'], // 来源是相册、相机
+                    success: function (res) {
+                        　　　　//var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                        $('.driver-card img').prop('src', res.localIds[0]);
+                        uploadPhoto.uploadToWeixinServer(res.localIds[0], 'car')
+                    }
+                });
             }
         }
     })
