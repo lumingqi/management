@@ -32,7 +32,7 @@
         // });
 
 
-       
+
         axios.get('http://app.bullstech.cn:8888/wxsignature')
             .then(function (res) {
                 wx.config = res.data
@@ -40,8 +40,14 @@
                 wx.ready(() => {
                     alert('wx ready')
                 });
+                wx.checkJsApi({
+                    jsApiList: ['chooseImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                    success: function (res) {
+                        console.log(res)
+                    }
+                });
                 wx.error(function (res) {
-                    alert("wx.config failed.");
+                    alert("wx.config failed.0",res);
                 });
             })
 
