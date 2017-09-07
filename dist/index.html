@@ -36,32 +36,29 @@
         axios.get('http://app.bullstech.cn:8888/wxsignature')
             .then(function (res) {
                 wx.config = res.data
-                console.log(wx.config)
-
+                wx.ready(() => {
+                    alert('wx ready')
+                    wx.chooseImage({
+                        count: 1, //张数， 默认9
+                        sizeType: ['compressed'], //建议压缩图
+                        sourceType: ['album', 'camera'], // 来源是相册、相机
+                        success: function (res) {
+                            //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                            console.log(res)
+                            this.localIds = res.localIds
+                        }
+                    });
+                });
+                wx.checkJsApi({
+                    jsApiList: ['chooseImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                    success: function (res) {
+                        console.log(res)
+                    }
+                });
+                wx.error(function (res) {
+                    alert("wx.config failed.0", res);
+                })
             })
-        wx.ready(() => {
-            alert('wx ready')
-            wx.chooseImage({
-                count: 1, //张数， 默认9
-                sizeType: ['compressed'], //建议压缩图
-                sourceType: ['album', 'camera'], // 来源是相册、相机
-                success: function (res) {
-                    //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    console.log(res)
-                    this.localIds = res.localIds
-                }
-            });
-        });
-        wx.checkJsApi({
-            jsApiList: ['chooseImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-            success: function (res) {
-                console.log(res)
-            }
-        });
-        wx.error(function (res) {
-            alert("wx.config failed.0", res);
-        });
-        console.log('222', wx.config)
     </script>
 </head>
 
@@ -108,64 +105,64 @@
     </div>
 </body>
 <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                localIds: '',
-                form: {
-                    datetime: '',
-                    room_number: '',
-                    repair_name: '',
-                    tel_phone: '',
-                    position: '',
-                    repair_type: '',
-                    repair_content: ''
-                },
-                options: [{
-                    value: '0',
-                    label: '水类'
-                }, {
-                    value: '1',
-                    label: '电类'
-                }, {
-                    value: '2',
-                    label: '公共设施'
-                }],
-                rules: {
-                    datetime: [
-                        { required: true, message: '请输入报修时间', trigger: 'blur' }
-                    ],
-                    room_number: [
-                        { required: true, message: '请输入报修房号', trigger: 'blur' }
-                    ],
-                    position: [
-                        { required: true, message: '请输入报修位置', trigger: 'blur' }
-                    ],
-                    repair_type: [
-                        { required: true, message: '请输入报修类别', trigger: 'blur' }
-                    ],
-                    repair_content: [
-                        { required: true, message: '请输入报修内容', trigger: 'blur' }
-                    ],
-                    repair_name: [
-                        { required: true, message: '请输入报修人名字', trigger: 'blur' }
-                    ],
-                    tel_phone: [
-                        { required: true, message: '请输入联系电话', trigger: 'blur' },
-                        { min: 11, max: 11, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-                    ]
-                }
+    var app = new Vue({
+        el: '#app',
+        data: {
+            localIds: '',
+            form: {
+                datetime: '',
+                room_number: '',
+                repair_name: '',
+                tel_phone: '',
+                position: '',
+                repair_type: '',
+                repair_content: ''
             },
-            methods: {
-                showForm() {
-                    console.log(this.form)
-                },
-                handleCamera() {
-                    console.log('handleCamera')
-
-                }
+            options: [{
+                value: '0',
+                label: '水类'
+            }, {
+                value: '1',
+                label: '电类'
+            }, {
+                value: '2',
+                label: '公共设施'
+            }],
+            rules: {
+                datetime: [
+                    { required: true, message: '请输入报修时间', trigger: 'blur' }
+                ],
+                room_number: [
+                    { required: true, message: '请输入报修房号', trigger: 'blur' }
+                ],
+                position: [
+                    { required: true, message: '请输入报修位置', trigger: 'blur' }
+                ],
+                repair_type: [
+                    { required: true, message: '请输入报修类别', trigger: 'blur' }
+                ],
+                repair_content: [
+                    { required: true, message: '请输入报修内容', trigger: 'blur' }
+                ],
+                repair_name: [
+                    { required: true, message: '请输入报修人名字', trigger: 'blur' }
+                ],
+                tel_phone: [
+                    { required: true, message: '请输入联系电话', trigger: 'blur' },
+                    { min: 11, max: 11, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                ]
             }
-        })
+        },
+        methods: {
+            showForm() {
+                console.log(this.form)
+            },
+            handleCamera() {
+                console.log('handleCamera')
+
+            }
+        }
+    })
 
 </script>
 
