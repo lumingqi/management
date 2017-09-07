@@ -12,10 +12,10 @@
     <script>
         wx.config({
             debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: 'wx30db7ec1537d9afc', // 必填，公众号的唯一标识
-            timestamp: 1504764644891, // 必填，生成签名的时间戳
-            nonceStr: 'fecdd3898e8cba4d', // 必填，生成签名的随机串
-            signature: '6ce4644642a57a7cd4252b2d0c7e10b0b8b59604',// 必填，签名，见附录1
+            appId: 'wx7e0aa09a76fe616b', // 必填，公众号的唯一标识
+            timestamp: 1504766934915, // 必填，生成签名的时间戳
+            nonceStr: '84e94f20148a3e17', // 必填，生成签名的随机串
+            signature: 'e9507059c997f4bd14979f07f997b09f173164bf',// 必填，签名，见附录1
             jsApiList: [
                 'chooseImage',//拍照或从手机相册中选图接口
                 'previewImage',//预览图片接口
@@ -23,11 +23,13 @@
                 'downloadImage'//下载图片接口
             ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
+
+
         // let config = {}
         // axios.get('http://app.bullstech.cn:8888/wxsignature')
         //     .then(function (res) {
         //         config = res
-        //         console.log(wx.config)
+        //         console.log(config)
         //     })
         // wx.config = (config)
         // console.log('222',wx.config)
