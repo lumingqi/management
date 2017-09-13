@@ -43,6 +43,9 @@
             </div>
             <div v-if="singleBtnSearch" class="pull-right">
                 <template v-for="item in singleBtnSearchInfo">
+                    <template v-if="item.exported">
+                        <el-button style="float:right;margin-left:3px;" :type="item.type" @click="getExported()" :icon="item.icon">{{item.label}}</el-button>
+                    </template>
                     <template v-if="getActionOption(item.actionoption)">
                         <el-button style="float:right;margin-left:3px;" :type="item.type" @click="singleBtnAction(item)" :icon="item.icon">{{item.label}}</el-button>
                     </template>
@@ -272,7 +275,7 @@
 import pagesmodule from '~/stores/module.js'
 export default {
     name: 'systemmodule',
-    props: ['module', 'info', 'searchValue', 'value', 'stepsdata'],
+    props: ['module', 'info', 'searchValue', 'value', 'stepsdata'], 
     data() {
         return {
             moduledata: '',
@@ -283,6 +286,7 @@ export default {
             datevalue: '',
             radiovalue: '0',
             highlight: false,
+            filterData:'',
             selectsearchValue: '',
             multipleSelection: [],
             deffilterObj: [],
@@ -336,6 +340,7 @@ export default {
         }
     },
     computed: {
+       
         getPagination() {
             let pagination = true
             if (this.moduledata.paginationhide) {
@@ -445,6 +450,10 @@ export default {
         }
     },
     methods: {
+         getExported() {
+            let exportedData=this.moduleTableData
+            console.log('exp',exportedData)
+        },
         handleSelectionChange(val) {
             this.multipleSelection = val
         },
@@ -454,7 +463,7 @@ export default {
                 if (this.moduledata.getOpenDialogData) {
                     dialogdata = this.moduledata.getOpenDialogData(this, item.param)
                 }
-                this.handOpenDialog(item.showdialog,dialogdata)
+                this.handOpenDialog(item.showdialog, dialogdata)
             } else {
                 if (this.moduledata[item.func]) {
                     this.moduledata[item.func](this, item.param)
@@ -643,6 +652,7 @@ export default {
             }
             console.log(filterObj)
             let filterTxt = this.base64.encode(JSON.stringify(filterObj))
+            this.filterData=filterTxt
             if (this.moduledata.pagesize) {
                 this.pagination.pagesize = this.moduledata.pagesize
             }

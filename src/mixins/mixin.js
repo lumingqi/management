@@ -22,7 +22,7 @@ moment.updateLocale('en', {
 })
 
 export default {
-    created: function () {
+    created: function() {
         this.modalsType = types.APPEND_API
         this._id = ''
         this.lodash = _
@@ -36,7 +36,7 @@ export default {
         this.pagination.pagesize = 10
         this.pagination.pagesizes = [5, 10, 20, 50, 100, 500]
     },
-    mounted: function () {
+    mounted: function() {
         this.handleGetTable()
     },
     computed: {
@@ -242,7 +242,7 @@ export default {
             }
             if (obj) {
                 if (obj[prop]) {
-                    if (typeof (obj[prop][subprop]) != 'undefined') {
+                    if (typeof(obj[prop][subprop]) != 'undefined') {
                         text += obj[prop][subprop]
                     }
                 }
@@ -405,7 +405,7 @@ export default {
                         resolve()
                     }).catch((error) => {
                         reject()
-                        //console.log(error, 'Promise error')
+                            //console.log(error, 'Promise error')
                     })
 
                 } else {

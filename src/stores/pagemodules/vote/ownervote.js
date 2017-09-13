@@ -41,16 +41,27 @@ export default {
             }, {
                 'label': '导入',
                 'type': '',
-                'showdialog': 'lb-cate',
+                'showdialog': 'lb-imported',
                 'actionoption': 'lessonmanageles'
             }, {
                 'label': '导出',
                 'type': '',
-                'showdialog': 'lb-cate',
-                'actionoption': 'lessonmanageles'
+                'func': 'exported'
             }]
         }
     ],
+    'pagesize': 10,
+    'alias': 'ownervoteexported',
+    'exported': function(vm) {
+        vm.pagination.pagesize = 1000
+        if (vm.moduledata && vm.moduledata.pageTable) {
+            vm.handleGetFilterTableTable(vm.moduledata.pageTable, vm.filterData).then((obj) => {
+                var exportedData = obj.data.data
+                console.log('1248989', exportedData)
+            })
+        }
+    },
+
     'pageTableField': [{
             'type': 'operation',
             'label': '操作',
@@ -72,7 +83,7 @@ export default {
             'prop': 'telephone_number',
         },
         {
-            'type': 'text',
+            'type': 'datetime',
             'label': '日期',
             'prop': 'time',
         },

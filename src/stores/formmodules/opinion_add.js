@@ -46,10 +46,10 @@ export default {
             'prop': '',
             'field': 'decision',
             'optionData': [{
-                value: 'yes',
+                value: '同意',
                 label: '同意'
             }, {
-                value: 'no',
+                value: '不同意',
                 label: '不同意'
             }]
         }

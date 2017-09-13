@@ -73,7 +73,7 @@ export default {
             'prop': 'telephone_number',
         },
         {
-            'type': 'text',
+            'type': 'datetime',
             'label': '日期',
             'prop': 'time',
         },

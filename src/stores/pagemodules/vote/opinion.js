@@ -41,12 +41,12 @@ export default {
             }, {
                 'label': '导入',
                 'type': '',
-                'showdialog': 'lb-cate',
+                'showdialog': 'lb-imported',
                 'actionoption': 'lessonmanageles'
             }, {
                 'label': '导出',
                 'type': '',
-                'showdialog': 'lb-cate',
+                'showdialog': 'lb-exported',
                 'actionoption': 'lessonmanageles'
             }]
         }
@@ -72,7 +72,7 @@ export default {
             'prop': 'telephone_number',
         },
         {
-            'type': 'text',
+            'type': 'datetime',
             'label': '日期',
             'prop': 'time',
         },

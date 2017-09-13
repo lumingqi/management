@@ -12,6 +12,8 @@ import PrintOrder from '~/pages/dialogs/lesson/PrintOrder.vue'
 
 import reset_account from '~/pages/dialogs/system/reset_account.modal.vue'
 import authority from '~/pages/dialogs/system/authority.vue'
+import exported from '~/pages/dialogs/system/exported.vue'
+import imported from '~/pages/dialogs/system/imported.vue'
 
 var pages = {}
 pages['lb-finishadd'] = finishadd
@@ -28,5 +30,7 @@ pages['lb-printerorder'] = PrintOrder
 
 pages['lb-resetaccountmodal'] = reset_account
 pages['lb-authority'] = authority
+pages['lb-exported'] = exported
+pages['lb-imported'] = imported
 
 export default pages

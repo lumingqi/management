@@ -8,7 +8,7 @@
             </template>
             <template v-if="item.type=='constant'">
                 <el-form-item :label="item.label" :prop="item.prop">
-                    {{item.field}}
+                    {{item.field}} 
                 </el-form-item>
             </template>
             <template v-if="item.type=='getorderPay'">
@@ -37,7 +37,7 @@
                 </el-form-item>
             </template>
             <template v-if="item.type=='orderpaystudent'">
-                <template v-if="currStudent.amount > 0 && order.order_type != 2">
+                <template v-if="currStudent.amount > 0 && order.order_type != 2"> 
                     <el-form-item :label="item.label">
                         {{currStudent.amount}}元
                         <el-switch v-model="localdata.form[item.fieldActive]" on-text="" off-text="" :field="item.fieldActive" @change="numberChange">
