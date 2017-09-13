@@ -70,7 +70,7 @@
         el: '#app',
         data: {
             localIds: '',
-            showPic:false,
+            showPic: false,
             form: {
                 datetime: '',
                 room_number: '',
@@ -78,7 +78,8 @@
                 tel_phone: '',
                 position: '',
                 repair_type: '',
-                repair_content: ''
+                repair_content: '',
+                picServerId: ''
             },
             options: [{
                 value: '0',
@@ -120,14 +121,32 @@
                 console.log(this.form)
             },
             handleCamera() {
-                let vm=this
+                let vm = this
                 wx.chooseImage({
                     count: 1, //张数， 默认9
                     sizeType: ['compressed'], //建议压缩图
                     sourceType: ['album', 'camera'], // 来源是相册、相机
-                    success:  function(res) {
-                        vm.showPic=true
+                    success: function (res) {
+                        vm.showPic = true
                         vm.localIds = res.localIds[0]// 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+
+                        wx.uploadImage({
+                            localId: res.localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+                            isShowProgressTips: 1, // 默认为1，显示进度提示
+                            success: function (res) {
+                                vm.form.picServerId = res.serverId; // 返回图片的服务器端ID
+                                alert('ServerId',vm.form.picServerId)
+                            }
+                        })
+
+                        //下载图片接口
+                        // wx.downloadImage({
+                        //     serverId: vm.form.picServerId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+                        //     isShowProgressTips: 1, // 默认为1，显示进度提示
+                        //     success: function (res) {
+                        //         var localId = res.localId; // 返回图片下载后的本地ID
+                        //     }
+                        // });
                     }
                 });
 
