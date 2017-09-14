@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body">
                 <p>
-                    <input type="file" @change="importf(this)" />
+                    <input type="file" @click="importf(this)" />
                     <div id="demo"></div>
                 </p>
             </div>
@@ -31,10 +31,10 @@ export default {
     computed: {
     },
     mounted() {
-  
+
     },
     methods: {
-        importf(obj) { 
+        importf(obj) {
             var wb
             var rABS = false
             if (!obj.files) {
@@ -45,7 +45,7 @@ export default {
             reader.onload = function(e) {
                 var data = e.target.result;
                 if (rABS) {
-                    wb = XLSX.read(btoa(fixdata(data)), { 
+                    wb = XLSX.read(btoa(fixdata(data)), {
                         type: 'base64'
                     });
                 } else {

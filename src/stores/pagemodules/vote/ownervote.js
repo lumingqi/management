@@ -34,20 +34,29 @@ export default {
             'type': 'singleBtnSearch',
             'span': 5,
             'fields': [{
-                'label': ' 添加',
-                'type': 'success',
-                'showdialog': 'ownervoteAdd',
-                'actionoption': 'lessonmanageadd'
-            }, {
-                'label': '导入',
-                'type': '',
-                'showdialog': 'lb-imported',
-                'actionoption': 'lessonmanageles'
-            }, {
-                'label': '导出',
-                'type': '',
-                'func': 'exported'
-            }]
+                    'label': ' 添加',
+                    'type': 'success',
+                    'showdialog': 'ownervoteAdd',
+                    'actionoption': 'lessonmanageadd'
+                }, {
+                    'label': '导入',
+                    'type': 'this',
+                    'isShow': true
+                },
+                {
+                    'label': '导出',
+                    'type': '',
+                    'exported': true
+                },
+
+
+                // }, {
+                //     'label': '导出',
+                //     'type': '',
+                //     'func': 'exported',
+                //     'showdialog': '',
+                // }
+            ]
         }
     ],
     'pagesize': 10,
@@ -58,9 +67,15 @@ export default {
             vm.handleGetFilterTableTable(vm.moduledata.pageTable, vm.filterData).then((obj) => {
                 var exportedData = obj.data.data
                 console.log('1248989', exportedData)
+                    // axios.get('http://app.bullstech.cn/test/dowmload/ownervote').then(obj => {
+                    //     cosole.log('123', obj)
+                    // })
             })
         }
     },
+    // 'imported': function(obj) {
+    //     alert('111aa')
+    // },
 
     'pageTableField': [{
             'type': 'operation',

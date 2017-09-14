@@ -46,6 +46,9 @@
                     <template v-if="item.exported">
                         <el-button style="float:right;margin-left:3px;" :type="item.type" @click="getExported()" :icon="item.icon">{{item.label}}</el-button>
                     </template>
+                    <template v-if="item.isShow">
+                        <input type="file" @change="getImported">
+                    </template>
                     <template v-if="getActionOption(item.actionoption)">
                         <el-button style="float:right;margin-left:3px;" :type="item.type" @click="singleBtnAction(item)" :icon="item.icon">{{item.label}}</el-button>
                     </template>
@@ -275,7 +278,7 @@
 import pagesmodule from '~/stores/module.js'
 export default {
     name: 'systemmodule',
-    props: ['module', 'info', 'searchValue', 'value', 'stepsdata'], 
+    props: ['module', 'info', 'searchValue', 'value', 'stepsdata'],
     data() {
         return {
             moduledata: '',
@@ -286,7 +289,7 @@ export default {
             datevalue: '',
             radiovalue: '0',
             highlight: false,
-            filterData:'',
+            filterData: '',
             selectsearchValue: '',
             multipleSelection: [],
             deffilterObj: [],
@@ -340,7 +343,7 @@ export default {
         }
     },
     computed: {
-       
+
         getPagination() {
             let pagination = true
             if (this.moduledata.paginationhide) {
@@ -450,9 +453,54 @@ export default {
         }
     },
     methods: {
-         getExported() {
-            let exportedData=this.moduleTableData
-            console.log('exp',exportedData)
+        getExported() {
+            let exportedData = this.moduleTableData
+            console.log('exp', exportedData)
+        },
+        getImported(obj) {
+            console.log('123', obj.srcElement.files)
+            var wb
+            var rABS = false
+            let vm = this
+            if (!obj.srcElement.files) {
+                return
+            }
+            var f = obj.srcElement.files[0]
+            var reader = new FileReader()
+            console.log('456', reader)
+            reader.onload = function(e) {
+                var data = e.target.result
+                if (rABS) {
+                    wb = XLSX.read(btoa(fixdata(data)), {
+                        type: 'base64'
+                    })
+                } else {
+                    wb = XLSX.read(data, {
+                        type: 'binary'
+                    })
+                }
+                let obj = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]])
+                vm.mx_db_bulkwrite('test1', obj).then(obj => {
+                    console.log(obj)
+                })
+                //document.getElementById("demo").innerHTML = JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]))
+            };
+            if (rABS) {
+                reader.readAsArrayBuffer(f)
+            } else {
+                reader.readAsBinaryString(f)
+            }
+        },
+
+        fixdata(data) {
+            var wb
+            var rABS = false
+            var o = "",
+                l = 0,
+                w = 10240;
+            for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+            o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+            return o;
         },
         handleSelectionChange(val) {
             this.multipleSelection = val
@@ -652,7 +700,7 @@ export default {
             }
             console.log(filterObj)
             let filterTxt = this.base64.encode(JSON.stringify(filterObj))
-            this.filterData=filterTxt
+            this.filterData = filterTxt
             if (this.moduledata.pagesize) {
                 this.pagination.pagesize = this.moduledata.pagesize
             }
