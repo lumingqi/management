@@ -1,4 +1,4 @@
-var control = require('./controllers/dboperations')
+var control = require('./controllers/db/dboperations')
 var compress = require('koa-compress')
 var logger = require('koa-logger')
 var serve = require('koa-static')
@@ -6,21 +6,37 @@ var route = require('koa-route')
 var cors = require('koa-cors')
 var koa = require('koa')
 var path = require('path')
-var xmlparse = require('./controllers/xmlparse')
+var xmlparse = require('./unit/xmlparse')
+var wx = require('./controllers/wx/wx')
+var wxserver = require('./controllers/wx/wxserver')
 var app = module.exports = new koa()
 
 app.use(logger())
 app.use(cors())
 app.use(xmlparse())
 
-app.use(route.post('/wxreg/', control.wxregpost))
-app.use(route.get('/wxreg/', control.wxreg))
-app.use(route.post('/wx/', control.wx))
-app.use(route.post('/smssend/', control.smssend))
-app.use(route.get('/getsmssend/', control.getsmssend))
-app.use(route.get('/:db/wxqrcode/:id', control.wxqrcode))
-app.use(route.post('/sms/', control.sms))
-app.use(route.post('/checksms/', control.checksms))
+//微信
+app.use(route.post('/wxmedia/', wx.wxmedia))
+app.use(route.get('/wxmenus/', wx.wxmenus))
+app.use(route.post('/wxreg/', wx.wxregpost))
+app.use(route.get('/wxreg/', wx.wxreg))
+app.use(route.post('/wx/', wx.wx))
+app.use(route.get('/:db/wxqrcode/:id', wx.wxqrcode))
+app.use(route.get('/wxsignature/', wx.wxsignature))
+
+
+//微信服务
+
+app.use(route.post('/wxservice/:type', wxserver.wxservice))
+app.use(route.get('/getwxserver/', wxserver.getwxserver))
+app.use(route.post('/wxmass/', wxserver.wxmass))
+
+//短信
+
+//阿里支付
+/* app.use(route.post('/alipay/', alipay.alipay)) */
+
+//数据
 app.use(route.post('/:db/login/', control.login))
 app.use(route.post('/:db/upload', control.upload))
 app.use(route.get('/:db/api/:name', control.all))
@@ -33,6 +49,7 @@ app.use(route.delete('/:db/api/:name/:id', control.remove))
 app.use(route.options('/', control.options))
 app.use(route.trace('/', control.trace))
 app.use(route.head('/', control.head))
+app.use(route.get('/:db/download/:name', control.download))
 
 // Serve static files
 app.use(serve(path.join(__dirname, 'public')))
@@ -44,3 +61,10 @@ if (!module.parent) {
     app.listen(8888)
     console.log('listening on port 8888')
 }
+function wxinit(){
+    wx.wxjssignature()
+    setInterval(() => {
+        wx.wxjssignature()
+    }, 60 * 60 * 1000)
+}
+wxinit()
