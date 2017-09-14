@@ -10,7 +10,7 @@ module.exports = (options = {}) => ({
         vendor: './src/index.js'
     },
     output: {
-        path: path.resolve(__dirname, 'wx'),
+        path: path.resolve(__dirname, 'dist'),
         filename: options.dev ? 'bundle.js' : 'bundle.js?[chunkhash]',
         chunkFilename: '[id].js?[chunkhash]',
     },

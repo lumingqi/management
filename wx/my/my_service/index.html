@@ -1,0 +1,117 @@
+<html lang="cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>永兴物业</title>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+</head>
+
+<body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg)">
+    <div id="app">
+        <el-row>
+            <el-col :span="22" :offset="1">
+                <h3 style="text-align:center">我的维修</h3>
+                <el-form :model="form" :rules="rules" ref="form" label-width="180px">
+                    <el-form-item label="正在维修" prop="now">
+                        <el-select v-model="form.now" placeholder="请选择">
+                            <el-option v-for="item in now" :key="item.value" :label="item.label" :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="已完成的报修" prop="finish">
+                        <el-select v-model="form.finish" placeholder="请选择">
+                            <el-option v-for="item in finish" :key="item.value" :label="item.label" :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="已取消的报修" prop="cancel">
+                        <el-select v-model="form.cancel" placeholder="请选择">
+                            <el-option v-for="item in cancel" :key="item.value" :label="item.label" :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+        </el-row>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            localIds: '',
+            form: {
+                now: '',
+                finish: '',
+                cancel: '',
+            },
+            cancel: [{
+                value: '0',
+                label: '业主家中'
+            }, {
+                value: '1',
+                label: '公共'
+            }],
+            finish: [{
+                value: '0',
+                label: '业主家中'
+            }, {
+                value: '1',
+                label: '公共'
+            }],
+            now: [{
+                value: '0',
+                label: '业主家中'
+            }, {
+                value: '1',
+                label: '公共'
+            }],
+            rules: {
+                now: [{
+                    required: true,
+                    message: '请选择',
+                    trigger: 'blur'
+                }],
+                finish: [{
+                    required: true,
+                    message: '请选择',
+                    trigger: 'blur'
+                }],
+                cancel: [{
+                    required: true,
+                    message: '请选择',
+                    trigger: 'blur'
+                }],
+            }
+        },
+        methods: {
+            showForm() {
+                console.log(this.form)
+            },
+            handleCamera() {
+                console.log('handleCamera')
+                let vm = this
+                wx.chooseImage({
+                    count: 1, //张数， 默认9
+                    sizeType: ['compressed'], //建议压缩图
+                    sourceType: ['album', 'camera'], // 来源是相册、相机
+                    success: function(res) {
+                        //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                        console.log('res', res, res.localIds)
+                        vm.localIds = res.localIds[0]
+                        console.log(this.localIds)
+                    }
+                });
+
+            }
+        }
+    })
+</script>
+
+</html>
