@@ -122,7 +122,7 @@
                 console.log(form)
                 this.$refs[form].validate((valid) => {
                     if (valid) {
-                        axios.post('http://app.bullstech.cn/service',form)
+                        axios.post('http://api.yx101.cn/service',form)
                             .then(function (res) {
                                 console.log(res)
                        })
