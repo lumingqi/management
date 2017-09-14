@@ -65,27 +65,27 @@ export default {
         {
             'type': 'text',
             'label': '姓名',
-            'prop': 'owner_name',
+            'prop': 'repair_name',
         },
         {
             'type': 'text',
             'label': '联系方式',
-            'prop': 'telephone_number',
+            'prop': 'tel_phone',
         },
         {
             'type': 'datetime',
             'label': '日期',
-            'prop': 'time',
+            'prop': 'datetime',
         },
         {
             'type': 'text',
             'label': '内容',
-            'prop': 'content',
+            'prop': 'repair_content',
         },
         {
             'type': 'text',
             'label': '图片',
-            'prop': 'image',
+            'prop': 'picServerId',
         },
         {
             'type': 'text',
@@ -95,7 +95,7 @@ export default {
         {
             'type': 'text',
             'label': '类别',
-            'prop': 'stype',
+            'prop': 'repair_type',
         }
     ],
     'pageTable': 'service',
