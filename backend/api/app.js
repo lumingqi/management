@@ -7,6 +7,7 @@ var cors = require('koa-cors')
 var koa = require('koa')
 var path = require('path')
 var xmlparse = require('./unit/xmlparse')
+var alisms = require('./controllers/sms/alisms')
 var wx = require('./controllers/wx/wx')
 var wxserver = require('./controllers/wx/wxserver')
 var app = module.exports = new koa()
@@ -31,7 +32,9 @@ app.use(route.post('/wxservice/:type', wxserver.wxservice))
 app.use(route.get('/getwxserver/', wxserver.getwxserver))
 app.use(route.post('/wxmass/', wxserver.wxmass))
 
-//短信
+//阿里短信
+app.use(route.post('/sms/', alisms.alisms))
+app.use(route.post('/checksms/', alisms.alichecksms))
 
 //阿里支付
 /* app.use(route.post('/alipay/', alipay.alipay)) */
