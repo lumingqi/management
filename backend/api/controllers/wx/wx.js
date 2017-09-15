@@ -134,17 +134,17 @@ module.exports.wxmenus = function* wxmenus() {
                     {
                         "type": "view",
                         "name": "我的资料",
-                        "url": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
+                        "url": "http://wx.yx101.cn/"
                     },
                     {
                         "type": "view",
                         "name": "我的报修",
-                        "url": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
+                        "url": "http://wx.yx101.cn/"
                     },
                     {
                         "type": "view",
                         "name": "我的维修",
-                        "url": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
+                        "url": "http://wx.yx101.cn/"
                     },
                 ]
             },
@@ -154,12 +154,12 @@ module.exports.wxmenus = function* wxmenus() {
                     {
                         "type": "view",
                         "name": "家里的报修",
-                        "url": "http://www.bullstech.cn/product.html"
+                        "url": "http://wx.yx101.cn/"
                     },
                     {
                         "type": "view",
                         "name": "公共的报修",
-                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.bullstech.cn/&response_type=code&scope=snsapi_base&state=1#wechat_redirect"
+                        "url": "http://wx.yx101.cn/"
                     }
                 ]
             },
@@ -169,12 +169,12 @@ module.exports.wxmenus = function* wxmenus() {
                     {
                         "type": "view",
                         "name": "投票",
-                        "url": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
+                        "url": "http://wx.yx101.cn/"
                     },
                     {
                         "type": "view",
                         "name": "公共维修意见",
-                        "url": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
+                        "url": "http://wx.yx101.cn/"
                     },
                 ]
             }
