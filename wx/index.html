@@ -122,7 +122,7 @@
                 let vm=this
                 this.$refs[form].validate((valid) => {
                     if (valid) {
-                        axios.post('http://api.yx101.cn/service',vm.formData)
+                        axios.post('http://api.yx101.cn/management/api/service',vm.formData)
                             .then(function (res) {
                                 console.log('res',res)
                        })
