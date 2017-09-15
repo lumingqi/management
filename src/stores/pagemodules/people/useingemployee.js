@@ -2,11 +2,9 @@ export default {
     'pageName': 'useingemployee',
     'pageLable': '物业人员',
     'tableSearch': [],
-    'pageSearch': [
-        {
+    'pageSearch': [{
             'type': 'textSearch',
-            'fields': [
-                {
+            'fields': [{
                     'label': '部门',
                     'defvalue': '',
                     'default': true,
@@ -35,28 +33,24 @@ export default {
         {
             'type': 'singleBtnSearch',
             'span': 5,
-            'fields': [
-                {
-                    'label': ' 添加',
-                    'type': 'success',
-                    'showdialog': 'useingEmployeeAdd',
-                    'actionoption': 'lessonmanageadd'
-                }, {
-                    'label': '导入',
-                    'type': '',
-                    'showdialog': 'lb-cate',
-                    'actionoption': 'lessonmanageles'
-                }, {
-                    'label': '导出',
-                    'type': '',
-                    'showdialog': 'lb-cate',
-                    'actionoption': 'lessonmanageles'
-                }
-            ]
+            'fields': [{
+                'label': ' 添加',
+                'type': 'success',
+                'showdialog': 'useingEmployeeAdd',
+                'actionoption': 'lessonmanageadd'
+            }, {
+                'label': '导入',
+                'type': '',
+                'isShow': true
+            }, {
+                'label': '导出',
+                'type': '',
+                'showdialog': 'lb-cate',
+                'actionoption': 'lessonmanageles'
+            }]
         }
     ],
-    'pageTableField': [
-        {
+    'pageTableField': [{
             'type': 'operation',
             'label': '操作',
             'prop': 'setting'

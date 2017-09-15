@@ -35,8 +35,7 @@ export default {
             }, {
                 'label': '导入',
                 'type': '',
-                'showdialog': 'lb-cate',
-                'actionoption': 'lessonmanageles'
+                'isShow': true
             }, {
                 'label': '导出',
                 'type': '',

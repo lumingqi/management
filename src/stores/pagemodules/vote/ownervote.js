@@ -40,22 +40,20 @@ export default {
                     'actionoption': 'lessonmanageadd'
                 }, {
                     'label': '导入',
-                    'type': 'this',
+                    'type': '',
                     'isShow': true
                 },
+                // {
+                //     'label': '导出',
+                //     'type': '',
+                //     'exported': true
+                // },
                 {
                     'label': '导出',
                     'type': '',
-                    'exported': true
-                },
-
-
-                // }, {
-                //     'label': '导出',
-                //     'type': '',
-                //     'func': 'exported',
-                //     'showdialog': '',
-                // }
+                    'func': 'exported',
+                    'showdialog': '',
+                }
             ]
         }
     ],
@@ -67,16 +65,20 @@ export default {
             vm.handleGetFilterTableTable(vm.moduledata.pageTable, vm.filterData).then((obj) => {
                 var exportedData = obj.data.data
                 console.log('1248989', exportedData)
-                    // axios.get('http://app.bullstech.cn/test/dowmload/ownervote').then(obj => {
-                    //     cosole.log('123', obj)
-                    // })
+
+                // var aLink = document.createElement('a')
+                // var blob = new Blob(exportedData)
+                // var evt = document.createEvent("HTMLEvents")
+                // evt.initEvent("click", false, false)
+                // aLink.download = fileName
+                // aLink.href = URL.createObjectURL(blob)
+                // aLink.dispatchEvent(evt)
             })
         }
+        axios.get('http://api.yx101.cn/management/download/ownervote').then(obj => {
+            cosole.log('123', obj)
+        })
     },
-    // 'imported': function(obj) {
-    //     alert('111aa')
-    // },
-
     'pageTableField': [{
             'type': 'operation',
             'label': '操作',

@@ -42,8 +42,7 @@ export default {
             }, {
                 'label': '导入',
                 'type': '',
-                'showdialog': 'lb-cate',
-                'actionoption': 'lessonmanageles'
+                'isShow': true
             }, {
                 'label': '导出',
                 'type': '',
@@ -65,12 +64,12 @@ export default {
         {
             'type': 'text',
             'label': '姓名',
-            'prop': 'repair_name',
+            'prop': 'owner_name',
         },
         {
             'type': 'text',
             'label': '联系方式',
-            'prop': 'tel_phone',
+            'prop': 'tel_number',
         },
         {
             'type': 'datetime',
@@ -80,12 +79,12 @@ export default {
         {
             'type': 'text',
             'label': '内容',
-            'prop': 'repair_content',
+            'prop': 'content',
         },
         {
             'type': 'text',
             'label': '图片',
-            'prop': 'picServerId',
+            'prop': 'image',
         },
         {
             'type': 'text',
@@ -95,7 +94,7 @@ export default {
         {
             'type': 'text',
             'label': '类别',
-            'prop': 'repair_type',
+            'prop': 'stype',
         }
     ],
     'pageTable': 'service',

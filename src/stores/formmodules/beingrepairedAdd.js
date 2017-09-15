@@ -4,7 +4,7 @@ export default {
     'form': {
         'room_number': '',
         'owner_name': '',
-        'telephone_number': '',
+        'tel_number': '',
         'time': '',
         'content': '',
         'image': '',
@@ -26,8 +26,8 @@ export default {
         {
             'type': 'input',
             'label': '电话号码',
-            'prop': 'telephone_number',
-            'field': 'telephone_number'
+            'prop': 'tel_number',
+            'field': 'tel_number'
         },
         {
             'type': 'datetime',
@@ -52,7 +52,7 @@ export default {
             'type': 'option',
             'label': '状态',
             'prop': '',
-            'field': 'status',
+            'field': 'stype',
             'optionData': [{
                 value: 'wks',
                 label: '未开始'
@@ -67,6 +67,7 @@ export default {
             'type': 'option',
             'label': '类别',
             'prop': '',
+            'field': 'status',
             'optionData': [{
                 value: 'wks',
                 label: '灯类'

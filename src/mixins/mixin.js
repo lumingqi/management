@@ -118,9 +118,9 @@ export default {
             return false
         },
         getActionOption(key) {
-            if (key == undefined) {
-                return false
-            }
+            // if (key == undefined) {
+            //     return false
+            // }
             return this.getRole(key + '_opt')
         },
         getToFixed(amount) {

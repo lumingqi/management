@@ -41,8 +41,7 @@ export default {
             }, {
                 'label': '导入',
                 'type': '',
-                'showdialog': 'lb-imported',
-                'actionoption': 'lessonmanageles'
+                'isShow': true
             }, {
                 'label': '导出',
                 'type': '',

@@ -44,10 +44,10 @@
             <div v-if="singleBtnSearch" class="pull-right">
                 <template v-for="item in singleBtnSearchInfo">
                     <template v-if="item.exported">
-                        <el-button style="float:right;margin-left:3px;" :type="item.type" @click="getExported()" :icon="item.icon">{{item.label}}</el-button>
+                        <el-button style="float:right;margin-left:3px;padding:2.5px;position:relative;width: 68px;top: 10px;" :type="item.type" @click="getExported()" :icon="item.icon">{{item.label}}</el-button>
                     </template>
                     <template v-if="item.isShow">
-                        <input type="file" @change="getImported">
+                        <input type="file" @change="getImported" style="float:right;margin-left:39px;width:69px;position:relative;top: 10px;font-size: 16px;left: -28px;">
                     </template>
                     <template v-if="getActionOption(item.actionoption)">
                         <el-button style="float:right;margin-left:3px;" :type="item.type" @click="singleBtnAction(item)" :icon="item.icon">{{item.label}}</el-button>
@@ -482,6 +482,7 @@ export default {
                 let obj = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]])
                 vm.mx_db_bulkwrite('test1', obj).then(obj => {
                     console.log(obj)
+                    console.log('158', JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]])))
                 })
                 //document.getElementById("demo").innerHTML = JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]))
             };

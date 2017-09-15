@@ -70,7 +70,7 @@ export default {
         {
             'type': 'text',
             'label': '联系方式',
-            'prop': 'telephone_number',
+            'prop': 'tel_number',
         },
         {
             'type': 'datetime',
