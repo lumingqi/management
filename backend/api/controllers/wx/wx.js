@@ -262,7 +262,7 @@ module.exports.wxreg = function* wxreg() {
     var timestamp = this.query.timestamp
     var nonce = this.query.nonce
     var echostr = this.query.echostr
-    var token = 'bullstech'
+    var token = 'yongxinwuye'
     console.log('signature:' + signature, 'timestamp:' + timestamp, 'nonce:' + nonce, 'echostr:' + echostr, 'token' + token)
 
     /*  加密/校验流程如下： */
