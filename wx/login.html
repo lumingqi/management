@@ -9,19 +9,6 @@
     <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
-    <script>
-        axios.get('http://api.yx101.cn/wxsignature')
-            .then(function (res) {
-                wx.config(res.data)
-                console.log(res.data)
-                wx.ready(() => {
-                    console.log('wx ready')
-                });
-                wx.error(function (res) {
-                    console.log("wx.config failed.0", res);
-                })
-            })
-    </script>
 </head>
 
 <body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg);background-size: cover;">
@@ -124,7 +111,7 @@
                     if (valid) {
                         axios.post('http://api.yx101.cn/management/api/service',vm.formData)
                             .then(function (res) {
-                                alert('res',res.data)
+                                console.log('res',res)
                        })
                     }
                 })
