@@ -117,15 +117,15 @@ module.exports.wxmenus = function* wxmenus() {
     }
     let access_info = {}
     access_info = yield net.ajax(access_options)
-    console.log(access_info.access_token)
-    let options = {
-        hostname: 'api.weixin.qq.com',
-        port: 443,
-        path: '/cgi-bin/ticket/getticket?access_token=' + access_info.access_token + '&type=jsapi',
-        method: 'GET',
-    }
-    access_smssend = yield net.ajax(options)
-    this.body = yield access_smssend
+    // console.log(access_info.access_token)
+    // let options = {
+    //     hostname: 'api.weixin.qq.com',
+    //     port: 443,
+    //     path: '/cgi-bin/ticket/getticket?access_token=' + access_info.access_token + '&type=jsapi',
+    //     method: 'GET',
+    // }
+    // access_smssend = yield net.ajax(options)
+    this.body = yield access_info
     /*    let wx_item = {
         "button": [
             {
