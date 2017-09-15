@@ -129,34 +129,54 @@ module.exports.wxmenus = function* wxmenus() {
     /*    let wx_item = {
         "button": [
             {
-                "name": "教育资讯",
-                "sub_button": [
-                    {
-                        "type": "view_limited",
-                        "name": "关于培训",
-                        "media_id": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
-                    }
-                ]
-            },
-            {
-                "name": "关于鲁班",
+                "name": "我",
                 "sub_button": [
                     {
                         "type": "view",
-                        "name": "关于产品",
+                        "name": "我的资料",
+                        "url": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
+                    },
+                    {
+                        "type": "view",
+                        "name": "我的报修",
+                        "url": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
+                    },
+                    {
+                        "type": "view",
+                        "name": "我的维修",
+                        "url": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
+                    },
+                ]
+            },
+            {
+                "name": "报修",
+                "sub_button": [
+                    {
+                        "type": "view",
+                        "name": "家里的报修",
                         "url": "http://www.bullstech.cn/product.html"
                     },
                     {
                         "type": "view",
-                        "name": "学生端",
+                        "name": "公共的报修",
                         "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.bullstech.cn/&response_type=code&scope=snsapi_base&state=1#wechat_redirect"
                     }
                 ]
             },
             {
-                "type": "view_limited",
-                "name": "关于公司",
-                "media_id": "Jx3yEcQbBtg3ZmMBXGQGCDW1u1Goc0aRdOdcAL1sQgc"
+                "name": "其他",
+                "sub_button": [
+                    {
+                        "type": "view",
+                        "name": "投票",
+                        "url": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
+                    },
+                    {
+                        "type": "view",
+                        "name": "公共维修意见",
+                        "url": "Jx3yEcQbBtg3ZmMBXGQGCHLsznYJdr2b6mZoE1RHjtw"
+                    },
+                ]
             }
         ]
     }
