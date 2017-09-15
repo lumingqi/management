@@ -119,12 +119,12 @@
         },
         methods: {
             submitForm(form) {
-                console.log(form)
+                console.log('form',form)
                 this.$refs[form].validate((valid) => {
                     if (valid) {
                         axios.post('http://api.yx101.cn/service',form)
                             .then(function (res) {
-                                console.log(res)
+                                console.log('res',res)
                        })
                     }
                 })
