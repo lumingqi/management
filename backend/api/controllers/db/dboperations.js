@@ -449,6 +449,7 @@ module.exports.download = function* download(db, name, next) {
     console.log('datas', datas)
     var buffer = xlsx.build([{ name: "mySheetName", datas: datas }]);
     console.log('labelbody', buffer)
+    this.set('Content-disposition', 'attachment;filename=file.txt')
     this.body = buffer.toString()
 
 }
