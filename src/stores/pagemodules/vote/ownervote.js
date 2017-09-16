@@ -64,15 +64,14 @@ export default {
         if (vm.moduledata && vm.moduledata.pageTable) {
             vm.handleGetFilterTableTable(vm.moduledata.pageTable, vm.filterData).then((obj) => {
                 var exportedData = obj.data.data
-                console.log('1248989', exportedData)
-
-                // var aLink = document.createElement('a')
-                // var blob = new Blob(exportedData)
-                // var evt = document.createEvent("HTMLEvents")
-                // evt.initEvent("click", false, false)
-                // aLink.download = fileName
-                // aLink.href = URL.createObjectURL(blob)
-                // aLink.dispatchEvent(evt)
+                console.log('189', exportedData)
+                    // var aLink = document.createElement('a')
+                    // var blob = new Blob(exportedData)
+                    // var evt = document.createEvent("HTMLEvents")
+                    // evt.initEvent("click", false, false)
+                    // aLink.download = fileName
+                    // aLink.href = URL.createObjectURL(blob)
+                    // aLink.dispatchEvent(evt)
             })
         }
         axios.get('http://api.yx101.cn/management/download/ownervote').then(obj => {
