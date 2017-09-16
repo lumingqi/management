@@ -96,16 +96,17 @@ module.exports.wxjssignature = function () {
         return net.ajax(options)
     }).then(access_smssend => {
         var sha1Code = crypto.createHash('sha1')
-        config.timestamp = parseInt(new Date().getTime()/1000)
-        var code = sha1Code.update(access_smssend.ticket+config.timestamp, 'utf-8').digest('hex')
+        config.timestamp = parseInt(new Date().getTime() / 1000)
+        var code = sha1Code.update(access_smssend.ticket + config.timestamp, 'utf-8').digest('hex')
         config.nonceStr = code.substring(0, 16)
-    
+
 
         var str = `jsapi_ticket=${access_smssend.ticket}&noncestr=${config.nonceStr}&timestamp=${config.timestamp}&url=http://wx.yx101.cn/`
         var sha2Code = crypto.createHash('sha1')
         config.signature = sha2Code.update(str, 'utf-8').digest('hex')
     })
 }
+//获取 access_token
 module.exports.wxmenus = function* wxmenus() {
     if ('GET' != this.method) return yield next
     let access_smssend = {}
@@ -126,61 +127,61 @@ module.exports.wxmenus = function* wxmenus() {
     // }
     // access_smssend = yield net.ajax(options)
     this.body = yield access_info
-    /*    let wx_item = {
-        "button": [
-            {
-                "name": "我",
-                "sub_button": [
-                    {
-                        "type": "view",
-                        "name": "我的资料",
-                        "url": "http://wx.yx101.cn/login.html"
-                    },
-                    {
-                        "type": "view",
-                        "name": "我的报修",
-                        "url": "http://wx.yx101.cn/"
-                    },
-                    {
-                        "type": "view",
-                        "name": "我的维修",
-                        "url": "http://wx.yx101.cn/"
-                    },
-                ]
-            },
-            {
-                "name": "报修",
-                "sub_button": [
-                    {
-                        "type": "view",
-                        "name": "家里的报修",
-                        "url": "http://wx.yx101.cn/"
-                    },
-                    {
-                        "type": "view",
-                        "name": "公共的报修",
-                        "url": "http://wx.yx101.cn/"
-                    }
-                ]
-            },
-            {
-                "name": "其他",
-                "sub_button": [
-                    {
-                        "type": "view",
-                        "name": "投票",
-                        "url": "http://wx.yx101.cn/"
-                    },
-                    {
-                        "type": "view",
-                        "name": "公共维修意见",
-                        "url": "http://wx.yx101.cn/"
-                    },
-                ]
-            }
-        ]
-    }
-    let body = JSON.stringify(wx_item)
+    // let wx_item = {
+    //     "button": [
+    //         {
+    //             "name": "我",
+    //             "sub_button": [
+    //                 {
+    //                     "type": "view",
+    //                     "name": "我的资料",
+    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+    //                 },
+    //                 {
+    //                     "type": "view",
+    //                     "name": "我的报修",
+    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+    //                 },
+    //                 {
+    //                     "type": "view",
+    //                     "name": "我的维修",
+    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+    //                 },
+    //             ]
+    //         },
+    //         {
+    //             "name": "报修",
+    //             "sub_button": [
+    //                 {
+    //                     "type": "view",
+    //                     "name": "家里的报修",
+    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+    //                 },
+    //                 {
+    //                     "type": "view",
+    //                     "name": "公共的报修",
+    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+    //                 },
+    //             ]
+    //         },
+    //         {
+    //             "name": "其他",
+    //             "sub_button": [
+    //                 {
+    //                     "type": "view",
+    //                     "name": "投票",
+    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+    //                 },
+    //                 {
+    //                     "type": "view",
+    //                     "name": "公共维修意见",
+    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+    //                 },
+    //             ]
+    //         }
+    //     ]
+    // }
+    /*let body = JSON.stringify(wx_item)
     console.log(body) */
     /*  let options = {
          hostname: 'api.weixin.qq.com',
@@ -226,7 +227,7 @@ module.exports.wxregpost = function* wxregpost() {
     }
     console.log(Event)
     //欢迎关注布尔斯科技,如果你要登陆学生端,请点击菜单关于鲁班到学生端,查看你的信息吧
-    if (Event.indexOf('SCAN') != -1||Event.indexOf('subscribe') != -1) {
+    if (Event.indexOf('SCAN') != -1 || Event.indexOf('subscribe') != -1) {
         net.ajax(access_options).then(access_info => {
             let textdata = `{
             "touser":"${openid}",
