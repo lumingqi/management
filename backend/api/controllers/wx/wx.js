@@ -134,7 +134,7 @@ module.exports.wxmenus = function* wxmenus() {
                     {
                         "type": "view",
                         "name": "我的资料",
-                        "url": "http://wx.yx101.cn/"
+                        "url": "http://wx.yx101.cn/login.html"
                     },
                     {
                         "type": "view",
