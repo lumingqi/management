@@ -441,14 +441,14 @@ module.exports.download = function* download(db, name, next) {
     for (var key in data) {
         var datat = []
         for (var keys in data[key]) {
-            datat.push(data[key][keys])
+            datat.push(data[key][keys].toString())
         }
         datas.push(datat)
     }
     let nowtime = new Date().getTime()
     console.log('datas', datas)
     var buffer = xlsx.build([{ name: "mySheetName", datas: datas }]);
-    console.log('labelbody', buffer)
+    console.log('labelbody', buffer.toString())
     this.set('Content-disposition', 'attachment;filename=file.txt')
     this.body = buffer.toString()
 
