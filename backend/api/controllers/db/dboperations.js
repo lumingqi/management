@@ -438,7 +438,6 @@ module.exports.download = function* download(db, name, next) {
     let data = yield cursor.toArray()
         // db.close()
     let nowtime = new Date().getTime()
-    console.log('mySheetName', mySheetName)
     console.log('data', data)
     var labelbody = xlsx.build([{ name: "mySheetName", data: data }])
     console.log('labelbody', labelbody)
