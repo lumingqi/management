@@ -322,8 +322,8 @@ module.exports.bulkWrite = function* bulkWrite(db, name, next) {
                 }
             } else {
                 opt.updateOne = {
-                    filter: { '_id': element._id }
-                    , update: { $set: element }
+                    filter: { '_id': element._id },
+                    update: { $set: element }
                 }
             }
         } else {
@@ -353,18 +353,18 @@ module.exports.remove = function* remove(db, name, id, next) {
 }
 
 
-module.exports.head = function* () {
+module.exports.head = function*() {
     return yield
 }
 
-module.exports.options = function* () {
+module.exports.options = function*() {
     this.set('Access-Control-Allow-Method', 'HEAD,GET,PUT,DELETE,OPTIONS')
     this.set('Access-Control-Allow-Origin', '*')
     this.status = 204
     this.body = yield 'Allow: HEAD,GET,PUT,DELETE,OPTIONS'
 }
 
-module.exports.trace = function* () {
+module.exports.trace = function*() {
     this.body = yield 'Smart! But you can\'t trace.'
 }
 module.exports.download = function* download(db, name, next) {
@@ -441,15 +441,15 @@ module.exports.download = function* download(db, name, next) {
     let count = yield table.count(findObj)
     options.push({ '$match': findObj })
     options.push({ '$sort': sortObj })
-    //options.push({ '$skip': skip })
-    //options.push({ '$limit': limit })
+        //options.push({ '$skip': skip })
+        //options.push({ '$limit': limit })
     console.log(options, name, count)
     let cursor = table.aggregate(options)
     let data = yield cursor.toArray()
     db.close()
     let nowtime = new Date().getTime()
-    var labelbody = xlsx.build([{name: "mySheetName", data: data}])
+    var labelbody = xlsx.build([{ name: "mySheetName", data: data }])
+    console.log('123', labelbody)
     this.body = labelbody
 
 }
-
