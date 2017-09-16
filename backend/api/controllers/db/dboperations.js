@@ -441,9 +441,13 @@ module.exports.download = function* download(db, name, next) {
     for (var key in data) {
         var datat = []
         for (var keys in data[key]) {
-            datat.push(data[key][keys])
+            if (data[key][keys]) {
+                datat.push(data[key][keys].toString())
+            } else {
+                datat.push('')
+            }
         }
-        datas.push(datat).toString()
+        datas.push(datat)
     }
     let nowtime = new Date().getTime()
     console.log('datas', datas)
