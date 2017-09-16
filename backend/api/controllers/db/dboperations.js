@@ -435,7 +435,11 @@ module.exports.download = function* download(db, name, next) {
         //options.push({ '$limit': limit })
     console.log(options, name, count)
     let cursor = table.aggregate(options)
-    let data = yield cursor.toArray()
+    let da = yield cursor.toArray()
+    let datao = []
+    let data = []
+    datao.push('da')
+    data.push('datao')
         // db.close()
     let nowtime = new Date().getTime()
     console.log('data', data)
