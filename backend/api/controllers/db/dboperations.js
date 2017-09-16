@@ -369,17 +369,7 @@ module.exports.trace = function*() {
 }
 module.exports.download = function* download(db, name, next) {
     if ('GET' != this.method) return yield next
-    let token = this.req.headers.authorization
-    let authtime = this.req.headers.authtime
     console.log(db)
-    if (db != 'webclone' && db != 'test') {
-        if (!verify(token, authtime)) {
-            this.status = 401
-            console.log('Access Forbidden')
-            this.body = 'Access Forbidden'
-            return
-        }
-    }
     var db = yield MongoClient.connect(dbunit.getdbstr(db))
     let table = db.collection(name)
     let query = this.query
@@ -449,7 +439,7 @@ module.exports.download = function* download(db, name, next) {
     db.close()
     let nowtime = new Date().getTime()
     var labelbody = xlsx.build([{ name: "mySheetName", data: data }])
-    console.log('123', labelbody)
+    console.log('123a', labelbody)
     this.body = labelbody
 
 }
