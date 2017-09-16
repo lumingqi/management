@@ -435,15 +435,19 @@ module.exports.download = function* download(db, name, next) {
         //options.push({ '$limit': limit })
     console.log(options, name, count)
     let cursor = table.aggregate(options)
-    let da = yield cursor.toArray()
-    let datao = []
-    let data = []
-    datao.push('da')
-    data.push('datao')
+    let data = yield cursor.toArray()
         // db.close()
+    var datas = []
+    for (var key in data) {
+        var datat = []
+        for (var keys in data[key]) {
+            datat.push(data[key][keys])
+        }
+        datas.push(datat)
+    }
     let nowtime = new Date().getTime()
-    console.log('data', data)
-    var buffer = xlsx.build([{ name: "mySheetName", data: data }]);
+    console.log('datat', datat)
+    var buffer = xlsx.build([{ name: "mySheetName", datat: datat }]);
     console.log('labelbody', buffer)
     this.body = buffer
 
