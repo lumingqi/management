@@ -446,9 +446,9 @@ module.exports.download = function* download(db, name, next) {
         datas.push(datat)
     }
     let nowtime = new Date().getTime()
-    console.log('datat', datat)
-    var buffer = xlsx.build([{ name: "mySheetName", datat: datat }]);
+    console.log('datas', datas)
+    var buffer = xlsx.build([{ name: "mySheetName", datas: datas }]);
     console.log('labelbody', buffer)
-    this.body = buffer
+    this.body = buffer.toString()
 
 }

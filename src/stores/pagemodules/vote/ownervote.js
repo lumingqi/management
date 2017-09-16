@@ -75,7 +75,7 @@ export default {
             })
         }
         axios.get('http://api.yx101.cn/management/download/ownervote').then(obj => {
-            cosole.log('123', obj)
+            console.log('123', obj)
         })
     },
     'pageTableField': [{
