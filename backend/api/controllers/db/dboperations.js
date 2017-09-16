@@ -322,8 +322,8 @@ module.exports.bulkWrite = function* bulkWrite(db, name, next) {
                 }
             } else {
                 opt.updateOne = {
-                    filter: { '_id': element._id }
-                    , update: { $set: element }
+                    filter: { '_id': element._id },
+                    update: { $set: element }
                 }
             }
         } else {
@@ -353,33 +353,23 @@ module.exports.remove = function* remove(db, name, id, next) {
 }
 
 
-module.exports.head = function* () {
+module.exports.head = function*() {
     return yield
 }
 
-module.exports.options = function* () {
+module.exports.options = function*() {
     this.set('Access-Control-Allow-Method', 'HEAD,GET,PUT,DELETE,OPTIONS')
     this.set('Access-Control-Allow-Origin', '*')
     this.status = 204
     this.body = yield 'Allow: HEAD,GET,PUT,DELETE,OPTIONS'
 }
 
-module.exports.trace = function* () {
+module.exports.trace = function*() {
     this.body = yield 'Smart! But you can\'t trace.'
 }
 module.exports.download = function* download(db, name, next) {
     if ('GET' != this.method) return yield next
-    let token = this.req.headers.authorization
-    let authtime = this.req.headers.authtime
     console.log(db)
-    if (db != 'webclone' && db != 'test') {
-        if (!verify(token, authtime)) {
-            this.status = 401
-            console.log('Access Forbidden')
-            this.body = 'Access Forbidden'
-            return
-        }
-    }
     var db = yield MongoClient.connect(dbunit.getdbstr(db))
     let table = db.collection(name)
     let query = this.query
@@ -441,15 +431,16 @@ module.exports.download = function* download(db, name, next) {
     let count = yield table.count(findObj)
     options.push({ '$match': findObj })
     options.push({ '$sort': sortObj })
-    //options.push({ '$skip': skip })
-    //options.push({ '$limit': limit })
+        //options.push({ '$skip': skip })
+        //options.push({ '$limit': limit })
     console.log(options, name, count)
     let cursor = table.aggregate(options)
     let data = yield cursor.toArray()
-    db.close()
+        // db.close()
     let nowtime = new Date().getTime()
-    var labelbody = xlsx.build([{name: "mySheetName", data: data}])
-    this.body = labelbody
+    console.log('data', data)
+    var buffer = xlsx.build([{ name: "mySheetName", data: data }]);
+    console.log('labelbody', buffer)
+    this.body = buffer
 
 }
-
