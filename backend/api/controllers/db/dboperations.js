@@ -148,6 +148,15 @@ function verify(token, authtime) {
     }
     return result
 }
+
+function getDatetime(datestring) {
+    let dateTemp = moment(datestring)
+    let datetimestr = 0
+    if (dateTemp.isValid()) {
+        datetimestr = dateTemp.toDate().getTime()
+    }
+    return datetimestr
+}
 module.exports.all = function* all(db, name, next) {
     if ('GET' != this.method) return yield next
     let token = this.req.headers.authorization
