@@ -155,7 +155,7 @@ module.exports.wxmenus = function* wxmenus() {
     //                 {
     //                     "type": "view",
     //                     "name": "家里的报修",
-    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+    //                     "url": "http://wx.yx101.cn/"
     //                 },
     //                 {
     //                     "type": "view",
