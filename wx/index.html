@@ -146,18 +146,30 @@
                                 vm.formData.picServerId = res.serverId; // 返回图片的服务器端ID
                                 alert('picServerId', vm.formData.picServerId)
 
-                                wx.downloadImage({
-                                    serverId: vm.formData.picServerId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
-                                    isShowProgressTips: 1, // 默认为1，显示进度提示
-                                    success: function (res) {
-                                        var localId = res.localId; // 返回图片下载后的本地ID
-                                         alert(localId)
-                                    }
-                                });
+                                axios.get('http://api.yx101.cn/wxGetPic?vm.formData.picServerId')
+                                    .then(function (res) {
+                                        wx.config(res.data)
+                                        console.log(res.data)
+                                        wx.ready(() => {
+                                            console.log('wx ready')
+                                        });
+                                        wx.error(function (res) {
+                                            console.log("wx.config failed.0", res);
+                                        })
+                                    })
+
+
+                                //下载图片接口
+                                // wx.downloadImage({
+                                //     serverId: vm.formData.picServerId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+                                //     isShowProgressTips: 1, // 默认为1，显示进度提示
+                                //     success: function (res) {
+                                //         var localId = res.localId; // 返回图片下载后的本地ID
+                                //         alert(localId)
+                                //     }
+                                // });
                             }
                         })
-
-                        //下载图片接口
 
                     }
                 });

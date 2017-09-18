@@ -9,7 +9,6 @@
     <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
-
 </head>
 
 <body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg);background-size: cover;">
@@ -47,7 +46,7 @@
                 ownphone: '',
                 phonemsg: '',
             },
-            checkphone: function(rule, value, callback) {
+            checkphone: function (rule, value, callback) {
                 if (value === '') {
                     callback(new Error('注册手机号不能为空'));
                 } else {
@@ -60,21 +59,15 @@
                 }
             },
             rules: {
-                phone: [{
-                    required: true,
-                    validator: this.checkphone,
-                    trigger: 'change'
-                }, ],
-                ownphone: [{
-                    required: true,
-                    validator: this.checkphone,
-                    trigger: 'change'
-                }, ],
-                phonemsg: [{
-                    required: true,
-                    message: '请输入正确的短信验证码',
-                    trigger: 'change'
-                }],
+                phone: [
+                    { required: true, validator: this.checkphone, trigger: 'change' },
+                ],
+                ownphone: [
+                    { required: true, validator: this.checkphone, trigger: 'change' },
+                ],
+                phonemsg: [
+                    { required: true, message: '请输入正确的短信验证码', trigger: 'change' }
+                ],
             }
         },
         mounted() {
@@ -90,12 +83,9 @@
             }
             console.log(cdstr)
             if (cdstr.length > 0) {
-                axios.post('http://api.yx101.cn/wx', {
-                    code: cdstr
-                }).then(obj => {
+                axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
                     console.log(obj)
-                    this.$store.commit('getopenid', obj.data.openid)
-                    let openid = obj.data.openid
+                    let openid ='dsw234de45ff67gr56y784th45y6'
                     filterObj = []
                     filterObj.push({
                         'key': 'openid',
@@ -120,7 +110,7 @@
         methods: {
             submitForm() {
                 axios.get('http://api.yx101.cn/wx')
-                    .then(function(res) {
+                    .then(function (res) {
                         console.log('res', res)
                     })
             },
@@ -140,6 +130,7 @@
             }
         }
     })
+
 </script>
 
 </html>

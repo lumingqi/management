@@ -33,7 +33,7 @@ module.exports.wxGetPic = function* wxGetPic(db, id, next) {
     }
     let access_info = {}
     access_info = yield net.ajax(access_options)
-    let access_options = {
+    let getwx_pic = {
         hostname: 'qyapi.weixin.qq.com',
         port: 443,
         path: '/cgi-bin/media/get?access_token='+access_info.access_token+'&media_id='+id,
