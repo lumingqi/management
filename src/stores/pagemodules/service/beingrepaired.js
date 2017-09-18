@@ -82,9 +82,9 @@ export default {
             'prop': 'content',
         },
         {
-            'type': 'text',
+            'type': 'getPic',
             'label': '图片',
-            'prop': 'image',
+            'prop': 'picServerId',
         },
         {
             'type': 'text',
