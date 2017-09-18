@@ -23,27 +23,6 @@ var config = {
         'downloadImage'//下载图片接口
     ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 }
-module.exports.wxGetPic = function* wxGetPic(db, id, next) {
-    if ('GET' != this.method) return yield next
-         let access_options = {
-        hostname: 'api.weixin.qq.com',
-        port: 443,
-        path: '/cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b=def8cea610a77523e47b42d9a28f9182',
-        method: 'GET',
-    }
-    let access_info = {}
-    access_info = yield net.ajax(access_options)
-    let getwx_pic = {
-        hostname: 'qyapi.weixin.qq.com',
-        port: 443,
-        path: '/cgi-bin/media/get?access_token='+access_info.access_token+'&media_id='+id,
-        method: 'GET',
-    }
-    let wxpic = yield net.ajax(access_options)
-    console.log(wxpic)
-    // https://qyapi.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID
-
-}
 module.exports.wx = function* wx() {
     if ('POST' != this.method) return yield next
     var model = yield parse(this, {
