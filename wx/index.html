@@ -138,40 +138,47 @@
                     success: function (res) {
                         vm.showPic = true
                         vm.localIds = res.localIds[0]// 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-
-                        wx.uploadImage({
-                            localId: res.localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
-                            isShowProgressTips: 1, // 默认为1，显示进度提示
+                        wx.getLocalImgData({
+                            localId: res.localIds[0], // 图片的localID
                             success: function (res) {
-                                vm.formData.picServerId = res.serverId; // 返回图片的服务器端ID
-                                alert('picServerId', vm.formData.picServerId)
-
-                                axios.get('http://api.yx101.cn/wxGetPic?vm.formData.picServerId')
-                                    .then(function (res) {
-                                        console.log(vm.formData.picServerId)
-                                        wx.ready(() => {
-                                            console.log('wx ready')
-                                        });
-                                        wx.error(function (res) {
-                                            console.log("wx.config failed.0", res);
-                                        })
-                                    })
-
-
-                                //下载图片接口
-                                // wx.downloadImage({
-                                //     serverId: vm.formData.picServerId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
-                                //     isShowProgressTips: 1, // 默认为1，显示进度提示
-                                //     success: function (res) {
-                                //         var localId = res.localId; // 返回图片下载后的本地ID
-                                //         alert(localId)
-                                //     }
-                                // });
+                                vm.formData.picServerId = res.localData; // localData是图片的base64数据，可以用img标签显示
                             }
-                        })
+                        });
 
+
+                        // wx.uploadImage({
+                        //     localId: res.localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+                        //     isShowProgressTips: 1, // 默认为1，显示进度提示
+                        //     success: function (res) {
+                        //         vm.formData.picServerId = res.serverId; // 返回图片的服务器端ID
+                        //         alert('picServerId', vm.formData.picServerId)
+
+                        //         axios.get('http://api.yx101.cn/wxGetPic?vm.formData.picServerId')
+                        //             .then(function (res) {
+                        //                 console.log(vm.formData.picServerId)
+                        //                 wx.ready(() => {
+                        //                     console.log('wx ready')
+                        //                 });
+                        //                 wx.error(function (res) {
+                        //                     console.log("wx.config failed.0", res);
+                        //                 })
+                        //             })
+
+
+                        //下载图片接口
+                        // wx.downloadImage({
+                        //     serverId: vm.formData.picServerId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+                        //     isShowProgressTips: 1, // 默认为1，显示进度提示
+                        //     success: function (res) {
+                        //         var localId = res.localId; // 返回图片下载后的本地ID
+                        //         alert(localId)
+                        //     }
+                        // });
                     }
-                });
+                })
+
+            }
+        });
 
             }
         }
