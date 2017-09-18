@@ -22,6 +22,7 @@ app.use(route.get('/wxmenus/', wx.wxmenus))
 app.use(route.post('/wxreg/', wx.wxregpost))
 app.use(route.get('/wxreg/', wx.wxreg))
 app.use(route.post('/wx/', wx.wx))
+app.use(route.get('/:db/wxGetPic/:id', wx.wxGetPic))
 app.use(route.get('/:db/wxqrcode/:id', wx.wxqrcode))
 app.use(route.get('/wxsignature/', wx.wxsignature))
 
