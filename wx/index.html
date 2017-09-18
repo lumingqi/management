@@ -142,6 +142,7 @@
                             localId: res.localIds[0], // 图片的localID
                             success: function (res) {
                                 vm.formData.picServerId = res.localData; // localData是图片的base64数据，可以用img标签显示
+                                alert('ceshi',vm.formData.picServerId)
                             }
                         });
 
