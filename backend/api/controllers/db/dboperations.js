@@ -453,6 +453,8 @@ module.exports.download = function* download(db, name, next) {
 
     for (var key in data) {
         delete data[key]._id
+        delete data[key].op_id
+        delete data[key].op_name
         var datat = []
         for (var keys in data[key]) {
             if (data[key][keys]) {
