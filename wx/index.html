@@ -119,13 +119,13 @@
         },
         methods: {
             submitForm(form) {
-                let vm=this
+                let vm = this
                 this.$refs[form].validate((valid) => {
                     if (valid) {
-                        axios.post('http://api.yx101.cn/management/api/service',vm.formData)
+                        axios.post('http://api.yx101.cn/management/api/service', vm.formData)
                             .then(function (res) {
-                                alert('res',res.data)
-                       })
+                                alert('res', res.data)
+                            })
                     }
                 })
             },
@@ -145,18 +145,20 @@
                             success: function (res) {
                                 vm.formData.picServerId = res.serverId; // 返回图片的服务器端ID
                                 alert('picServerId', vm.formData.picServerId)
+
+                                wx.downloadImage({
+                                    serverId: vm.formData.picServerId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+                                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                                    success: function (res) {
+                                        var localId = res.localId; // 返回图片下载后的本地ID
+                                        alert(localId)
+                                    }
+                                });
                             }
                         })
 
                         //下载图片接口
-                        wx.downloadImage({
-                            serverId: vm.formData.picServerId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
-                            isShowProgressTips: 1, // 默认为1，显示进度提示
-                            success: function (res) {
-                                var localId = res.localId; // 返回图片下载后的本地ID
-                                alert(localId)
-                            }
-                        });
+
                     }
                 });
 
