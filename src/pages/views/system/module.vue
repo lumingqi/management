@@ -42,7 +42,7 @@
                 </el-button-group>
             </div>
             <div v-if="singleBtnSearch" class="pull-right">
-                <template v-for="item in singleBtnSearchInfo">
+                <template v-for="item in singleBtnSearchInfo"> 
                     <template v-if="item.exported">
                         <el-button style="float:right;margin-left:3px;padding:2.5px;position:relative;width: 68px;top: 10px;" :type="item.type" @click="getExported()" :icon="item.icon">{{item.label}}</el-button>
                     </template>
