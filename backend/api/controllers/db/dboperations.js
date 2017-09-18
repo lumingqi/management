@@ -439,10 +439,22 @@ module.exports.download = function* download(db, name, next) {
     console.log('123data', data)
         // db.close()
     var datas = []
+        // for (var key in data) {
+        //     var datat = []
+        //     for (var keys in data[key]) {
+        //         if (data[key][keys]) {
+        //             datat.push(data[key][keys].toString())
+        //         } else {
+        //             datat.push('')
+        //         }
+        //     }
+        //     datas.push(datat)
+        // }
+
     for (var key in data) {
         var datat = []
         for (var keys in data[key]) {
-            if (data[key][keys]) {
+            if (data[key][keys] && keys != _id) {
                 datat.push(data[key][keys].toString())
             } else {
                 datat.push('')
@@ -450,21 +462,6 @@ module.exports.download = function* download(db, name, next) {
         }
         datas.push(datat)
     }
-
-    // for (var key in data) {
-    //     var datat = []
-    //     for (var keys in data[key]) {
-    //         if (keys == _id) {
-    //             continue
-    //         } else if (data[key][keys]) {
-    //             datat.push(data[key][keys].toString())
-    //                 // } else {
-    //                 //     datat.push('')
-    //                 // }
-    //             console.log('123456', keys)
-    //         }
-    //         datas.push(datat)
-    //     }
 
     let nowtime = new Date().getTime()
     console.log('datas', datas)
