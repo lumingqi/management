@@ -23,7 +23,27 @@ var config = {
         'downloadImage'//下载图片接口
     ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 }
+module.exports.wxGetPic = function* wxGetPic(db, id, next) {
+    if ('GET' != this.method) return yield next
+         let access_options = {
+        hostname: 'api.weixin.qq.com',
+        port: 443,
+        path: '/cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b=def8cea610a77523e47b42d9a28f9182',
+        method: 'GET',
+    }
+    let access_info = {}
+    access_info = yield net.ajax(access_options)
+    let getwx_pic = {
+        hostname: 'qyapi.weixin.qq.com',
+        port: 443,
+        path: '/cgi-bin/media/get?access_token='+access_info.access_token+'&media_id='+id,
+        method: 'GET',
+    }
+    let wxpic = yield net.ajax(access_options)
+    console.log(wxpic)
+    // https://qyapi.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID
 
+}
 module.exports.wx = function* wx() {
     if ('POST' != this.method) return yield next
     var model = yield parse(this, {
@@ -127,60 +147,61 @@ module.exports.wxmenus = function* wxmenus() {
     // }
     // access_smssend = yield net.ajax(options)
     this.body = yield access_info
-    // let wx_item = {
-    //     "button": [
-    //         {
-    //             "name": "我",
-    //             "sub_button": [
-    //                 {
-    //                     "type": "view",
-    //                     "name": "我的资料",
-    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
-    //                 },
-    //                 {
-    //                     "type": "view",
-    //                     "name": "我的报修",
-    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
-    //                 },
-    //                 {
-    //                     "type": "view",
-    //                     "name": "我的维修",
-    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
-    //                 },
-    //             ]
-    //         },
-    //         {
-    //             "name": "报修",
-    //             "sub_button": [
-    //                 {
-    //                     "type": "view",
-    //                     "name": "家里的报修",
-    //                     "url": "http://wx.yx101.cn/"
-    //                 },
-    //                 {
-    //                     "type": "view",
-    //                     "name": "公共的报修",
-    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
-    //                 },
-    //             ]
-    //         },
-    //         {
-    //             "name": "其他",
-    //             "sub_button": [
-    //                 {
-    //                     "type": "view",
-    //                     "name": "投票",
-    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
-    //                 },
-    //                 {
-    //                     "type": "view",
-    //                     "name": "公共维修意见",
-    //                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
-    //                 },
-    //             ]
-    //         }
-    //     ]
-    // }
+    /*let wx_item = {
+        "button": [
+            {
+                "name": "我",
+                "sub_button": [
+                    {
+                        "type": "view",
+                        "name": "我的资料",
+                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                    },
+                    {
+                        "type": "view",
+                        "name": "我的报修",
+                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                    },
+                    {
+                        "type": "view",
+                        "name": "我的维修",
+                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                    },
+                ]
+            },
+            {
+                "name": "报修",
+                "sub_button": [
+                    {
+                        "type": "view",
+                        "name": "家里的报修",
+                        "url": "http://wx.yx101.cn/"
+                    },
+                    {
+                        "type": "view",
+                        "name": "公共的报修",
+                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                    },
+                ]
+            },
+            {
+                "name": "其他",
+                "sub_button": [
+                    {
+                        "type": "view",
+                        "name": "投票",
+                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                    },
+                    {
+                        "type": "view",
+                        "name": "公共维修意见",
+                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                    },
+                ]
+            }
+        ]
+    }
+    */
     /*let body = JSON.stringify(wx_item)
     console.log(body) */
     /*  let options = {
