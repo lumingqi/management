@@ -87,7 +87,7 @@
                                 <a class="link" @click="lessonrouter($event,item.prop,scope.row)">排课详情</a>
                             </template>
                             <template v-if="item.type=='getPic'">
-                                {{item.prop}}
+                                {{cope.row[item.prop]}}
                                 <!-- <img :src="item.prop"> -->
                             </template>
                             <template v-if="item.type=='teachertype'">
