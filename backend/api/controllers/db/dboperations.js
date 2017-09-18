@@ -452,9 +452,9 @@ module.exports.download = function* download(db, name, next) {
         // }
 
     for (var key in data) {
+        delete data[key]._id
         var datat = []
         for (var keys in data[key]) {
-            data[key].splice(0, 1)
             if (data[key][keys]) {
                 datat.push(data[key][keys].toString())
             } else {
