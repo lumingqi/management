@@ -368,108 +368,108 @@ module.exports.trace = function*() {
     this.body = yield 'Smart! But you can\'t trace.'
 }
 module.exports.download = function* download(db, name, next) {
-        if ('GET' != this.method) return yield next
-        console.log(db)
-        var db = yield MongoClient.connect(dbunit.getdbstr(db))
-        let table = db.collection(name)
-        let query = this.query
-        let limit = Number.parseInt(query.prepage || 30)
-        let skip = Number.parseInt(query.page || 0) * limit
-        let filter = query.filter
-        let findObj = {}
-        let sortObj = {}
-        let findsort = false
-        let options = []
-        console.log(filter)
-        if (filter) {
-            try {
-                let filterObj = JSON.parse(Buffer.from(filter, 'base64').toString())
-                if (filterObj) {
-                    for (var item of filterObj) {
-                        let value = item.value
-                        let type = item.type
-                        let key = item.key
-                        if (type == 'sort') {
-                            findsort = true
-                            sortObj[key] = Number(value)
-                        } else if (type == 'like') {
-                            let like = new RegExp(value)
-                            findObj[key] = like
-                        } else if (type == 'unwind') {
-                            options.push({ '$unwind': value })
-                        } else if (type == 'lookup') {
-                            options.push({ '$lookup': value })
-                        } else if (type == 'lt') {
-                            findObj[key] = findObj[key] || {}
-                            findObj[key]['$lt'] = value
-                            console.log(findObj[key])
-                        } else if (type == 'gt') {
-                            findObj[key] = findObj[key] || {}
-                            findObj[key]['$gt'] = value
-                            console.log(findObj[key])
-                        } else if (type == 'lte') {
-                            findObj[key] = findObj[key] || {}
-                            findObj[key]['$lte'] = value
-                            console.log(findObj[key])
-                        } else if (type == 'gte') {
-                            findObj[key] = findObj[key] || {}
-                            findObj[key]['$gte'] = value
-                            console.log(findObj[key])
-                        } else {
-                            findObj[key] = value
-                        }
+    if ('GET' != this.method) return yield next
+    console.log(db)
+    var db = yield MongoClient.connect(dbunit.getdbstr(db))
+    let table = db.collection(name)
+    let query = this.query
+    let limit = Number.parseInt(query.prepage || 30)
+    let skip = Number.parseInt(query.page || 0) * limit
+    let filter = query.filter
+    let findObj = {}
+    let sortObj = {}
+    let findsort = false
+    let options = []
+    console.log(filter)
+    if (filter) {
+        try {
+            let filterObj = JSON.parse(Buffer.from(filter, 'base64').toString())
+            if (filterObj) {
+                for (var item of filterObj) {
+                    let value = item.value
+                    let type = item.type
+                    let key = item.key
+                    if (type == 'sort') {
+                        findsort = true
+                        sortObj[key] = Number(value)
+                    } else if (type == 'like') {
+                        let like = new RegExp(value)
+                        findObj[key] = like
+                    } else if (type == 'unwind') {
+                        options.push({ '$unwind': value })
+                    } else if (type == 'lookup') {
+                        options.push({ '$lookup': value })
+                    } else if (type == 'lt') {
+                        findObj[key] = findObj[key] || {}
+                        findObj[key]['$lt'] = value
+                        console.log(findObj[key])
+                    } else if (type == 'gt') {
+                        findObj[key] = findObj[key] || {}
+                        findObj[key]['$gt'] = value
+                        console.log(findObj[key])
+                    } else if (type == 'lte') {
+                        findObj[key] = findObj[key] || {}
+                        findObj[key]['$lte'] = value
+                        console.log(findObj[key])
+                    } else if (type == 'gte') {
+                        findObj[key] = findObj[key] || {}
+                        findObj[key]['$gte'] = value
+                        console.log(findObj[key])
+                    } else {
+                        findObj[key] = value
                     }
                 }
-            } catch (e) {
-                console.log(e)
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    changeModelId(findObj)
+    if (!findsort) {
+        sortObj = { '_id': -1 }
+    }
+    let count = yield table.count(findObj)
+    options.push({ '$match': findObj })
+    options.push({ '$sort': sortObj })
+        //options.push({ '$skip': skip })
+        //options.push({ '$limit': limit })
+    console.log(options, name, count)
+    let cursor = table.aggregate(options)
+    let data = yield cursor.toArray()
+    console.log('123data', data)
+        // db.close()
+    var datas = []
+    for (var key in data) {
+        var datat = []
+        for (var keys in data[key]) {
+            if (data[key][keys]) {
+                datat.push(data[key][keys].toString())
+            } else {
+                datat.push('')
             }
         }
-        changeModelId(findObj)
-        if (!findsort) {
-            sortObj = { '_id': -1 }
-        }
-        let count = yield table.count(findObj)
-        options.push({ '$match': findObj })
-        options.push({ '$sort': sortObj })
-            //options.push({ '$skip': skip })
-            //options.push({ '$limit': limit })
-        console.log(options, name, count)
-        let cursor = table.aggregate(options)
-        let data = yield cursor.toArray()
-        console.log('123data', data)
-            // db.close()
-        var datas = []
-            // for (var key in data) {
-            //     var datat = []
-            //     for (var keys in data[key]) {
-            //         if (data[key][keys]) {
-            //             datat.push(data[key][keys].toString())
-            //         } else {
-            //             datat.push('')
-            //         }
-            //     }
-            //     datas.push(datat)
-            // }
+        datas.push(datat)
+    }
 
-        for (var key in data) {
-            var datat = []
-            for (var keys in data[key]) {
-                if (keys == _id) {
-                    continue
-                } else if (data[key][keys]) {
-                    datat.push(data[key][keys].toString())
-                        // } else {
-                        //     datat.push('')
-                        // }
-                    console.log('123456', keys)
-                }
-                datas.push(datat)
-            }
+    // for (var key in data) {
+    //     var datat = []
+    //     for (var keys in data[key]) {
+    //         if (keys == _id) {
+    //             continue
+    //         } else if (data[key][keys]) {
+    //             datat.push(data[key][keys].toString())
+    //                 // } else {
+    //                 //     datat.push('')
+    //                 // }
+    //             console.log('123456', keys)
+    //         }
+    //         datas.push(datat)
+    //     }
 
-            let nowtime = new Date().getTime()
-            console.log('datas', datas)
-            var buffer = xlsx.build([{ name: "mySheetName", data: datas }])
-            this.set('Content-disposition', 'attachment;filename=file.xlsx')
-            this.body = buffer
+    let nowtime = new Date().getTime()
+    console.log('datas', datas)
+    var buffer = xlsx.build([{ name: "mySheetName", data: datas }])
+    this.set('Content-disposition', 'attachment;filename=file.xlsx')
+    this.body = buffer
 
-        }
+}
