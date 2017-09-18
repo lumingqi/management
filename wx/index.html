@@ -140,8 +140,8 @@
                         vm.localIds = res.localIds[0]// 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                         wx.getLocalImgData({
                             localId: res.localIds[0], // 图片的localID
-                            success: function (res) {
-                                vm.formData.picServerId = res.localData; // localData是图片的base64数据，可以用img标签显示
+                            success: function (obj) {
+                                vm.formData.picServerId = obj.localData; // localData是图片的base64数据，可以用img标签显示
                                 alert('ceshi',vm.formData.picServerId)
                             }
                         });
