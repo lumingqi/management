@@ -87,7 +87,8 @@
                                 <a class="link" @click="lessonrouter($event,item.prop,scope.row)">排课详情</a>
                             </template>
                             <template v-if="item.type=='getPic'">
-                                <img :src="item.prop">
+                                {{item.prop}}
+                                <!-- <img :src="item.prop"> -->
                             </template>
                             <template v-if="item.type=='teachertype'">
                                 <el-tag type="success">{{ scope.row[item.prop] == '0' ? '全职':'兼职' }}</el-tag>
