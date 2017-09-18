@@ -450,11 +450,11 @@ module.exports.download = function* download(db, name, next) {
         //     }
         //     datas.push(datat)
         // }
-
     for (var key in data) {
         delete data[key]._id
         delete data[key].op_id
         delete data[key].op_name
+        console.log('时间123', data[key].time)
         var datat = []
         for (var keys in data[key]) {
             if (data[key][keys]) {
