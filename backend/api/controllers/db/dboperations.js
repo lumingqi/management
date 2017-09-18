@@ -459,6 +459,7 @@ module.exports.download = function* download(db, name, next) {
             } else {
                 datat.push(data[key][keys].toString())
             }
+            console.log('456', keys)
         }
         datas.push(datat)
     }
