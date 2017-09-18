@@ -454,7 +454,8 @@ module.exports.download = function* download(db, name, next) {
             delete data[key]._id
             delete data[key].op_id
             delete data[key].op_name
-            console.log('时间123', moment(data[key].time).format('YYYY-MM-DD HH:mm:ss'))
+            var times = moment(data[key].time).format('YYYY-MM-DD HH:mm:ss')
+            console.log('时间123', times)
             var datat = []
             for (var keys in data[key]) {
                 if (data[key][keys]) {
