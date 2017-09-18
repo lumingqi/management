@@ -455,7 +455,7 @@ module.exports.download = function* download(db, name, next) {
         var datat = []
         for (var keys in data[key]) {
             if (data[key][keys]) {
-                delete data[key]._id
+                delete data[key]._id.toString()
                 datat.push(data[key][keys].toString())
             } else {
                 datat.push('')
