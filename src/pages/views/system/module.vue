@@ -88,7 +88,7 @@
                             </template>
                             <template v-if="item.type=='getPic'">
                                 <!-- {{scope.row[item.prop]}} -->
-                                 <img :src="scope.row[item.prop]"  style="width:10px"> 
+                                 <img :src="scope.row[item.prop]"  style="width:25px"> 
                             </template>
                             <template v-if="item.type=='teachertype'">
                                 <el-tag type="success">{{ scope.row[item.prop] == '0' ? '全职':'兼职' }}</el-tag>
