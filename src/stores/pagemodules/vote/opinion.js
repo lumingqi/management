@@ -41,7 +41,7 @@ export default {
             }, {
                 'label': '导入',
                 'type': '',
-                'isShow': true
+                'imported': true
             }, {
                 'label': '导出',
                 'type': '',

@@ -46,10 +46,11 @@
                     <template v-if="item.exported">
                         <el-button style="float:right;margin-left:3px;padding:2.5px;position:relative;width: 68px;top: 10px;" :type="item.type" @click="getExported()" :icon="item.icon">{{item.label}}</el-button>
                     </template>
-                    <template v-if="item.isShow">
-                        <input type="file" @change="getImported" style="float:right;margin-left:39px;width:69px;position:relative;top: 10px;font-size: 16px;left: -28px;">
+                    <template v-if="item.imported">
+                        <!--<input type="file" @change="getImported" style="float:right;margin-left:39px;width:69px;position:relative;top: 10px;font-size: 16px;left: -28px;">-->
+                        <button style="width:57px;height:35px;line-height: 29px;">导入<input type="file" @change="getImported" style="float:right;margin-left:39px;width:69px;position:relative;top: -16px;font-size: 16px;left: 13px;z-index: 999;opacity: 0;"></button>
                     </template>
-                    <template v-if="getActionOption(item.actionoption)">
+                    <template v-else-if="getActionOption(item.actionoption)">
                         <el-button style="float:right;margin-left:3px;" :type="item.type" @click="singleBtnAction(item)" :icon="item.icon">{{item.label}}</el-button>
                     </template>
                 </template>

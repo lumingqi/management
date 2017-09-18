@@ -436,8 +436,21 @@ module.exports.download = function* download(db, name, next) {
     console.log(options, name, count)
     let cursor = table.aggregate(options)
     let data = yield cursor.toArray()
+    console.log('123data', data)
         // db.close()
     var datas = []
+        // for (var key in data) {
+        //     var datat = []
+        //     for (var keys in data[key]) {
+        //         if (data[key][keys]) {
+        //             datat.push(data[key][keys].toString())
+        //         } else {
+        //             datat.push('')
+        //         }
+        //     }
+        //     datas.push(datat)
+        // }
+
     for (var key in data) {
         var datat = []
         for (var keys in data[key]) {
@@ -449,6 +462,7 @@ module.exports.download = function* download(db, name, next) {
         }
         datas.push(datat)
     }
+
     let nowtime = new Date().getTime()
     console.log('datas', datas)
     var buffer = xlsx.build([{ name: "mySheetName", data: datas }])
