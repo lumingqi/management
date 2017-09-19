@@ -37,6 +37,7 @@ module.exports.wx = function* wx() {
         method: 'GET'
     }
     wxinfo = yield net.ajax(options)
+    console.log('wxinfo is '+wxinfo)
     let wxobj = {}
     if (wxinfo) {
         wxobj.openid = wxinfo.openid
