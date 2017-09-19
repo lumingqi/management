@@ -85,25 +85,15 @@
             if (cdstr.length > 0) {
                 axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
                     console.log(obj)
-                    let openid ='dsw234de45ff67gr56y784th45y6'
+                    let openid = obj.data.openid
                     filterObj = []
                     filterObj.push({
                         'key': 'openid',
                         'value': openid,
                         'type': ''
                     })
-                    console.log(openid, filterObj)
-                    filterTxt = this.base64.encode(JSON.stringify(filterObj))
-                    this.handleGetFilterTableTable('student', filterTxt).then(obj => {
-                        console.log(obj.data)
-                        if (obj.data.count > 0) {
-                            this.$store.commit('student', obj.data.data[0]._id)
-                            this.$store.commit('homes', 'lb-home')
-                        } else {
-                            this.$store.commit('getopenid', openid)
-                            this.$store.commit('homes', 'lb-verification')
-                        }
-                    })
+                    alert(openid, filterObj)
+                    
                 })
             }
         },
