@@ -87,7 +87,17 @@
                     console.log(obj.data)
                     let openid = obj.data.openid
                     console.log(openid)
-                    
+                    filterObj = []
+                    filterObj.push({
+                        'key': 'openid',
+                        'value': openid,
+                        'type': ''
+                    })
+                    console.log(openid, filterObj)
+                    filterTxt = this.base64.encode(JSON.stringify(filterObj))
+                    axios.get('http://api.yx101.cn/management/api/owner&filter='+filterTxt).then(obj => {
+                        console.log(obj.data)
+                    })
                 })
             }
         },

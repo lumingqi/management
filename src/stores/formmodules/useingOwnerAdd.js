@@ -28,6 +28,12 @@ export default {
         },
         {
             'type': 'input',
+            'label': 'openId',
+            'prop': '',
+            'field': 'openid'
+        },
+        {
+            'type': 'input',
             'label': '备注',
             'prop': '',
             'field': 'note',

@@ -66,6 +66,11 @@ export default {
         },
         {
             'type': 'text',
+            'label': 'openId',
+            'prop': 'openid',
+        },
+        {
+            'type': 'text',
             'label': '备注',
             'prop': 'note',
         }
