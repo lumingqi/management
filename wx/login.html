@@ -84,15 +84,9 @@
             console.log(cdstr)
             if (cdstr.length > 0) {
                 axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
-                    console.dir('obj is '+obj.data)
+                    console.log(obj.data)
                     let openid = obj.data.openid
-                    filterObj = []
-                    filterObj.push({
-                        'key': 'openid',
-                        'value': openid,
-                        'type': ''
-                    })
-                    console.log('openid is '+openid)
+                    console.log(openid)
                     
                 })
             }
