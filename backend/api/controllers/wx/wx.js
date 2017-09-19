@@ -33,7 +33,7 @@ module.exports.wx = function* wx() {
     let options = {
         hostname: 'api.weixin.qq.com',
         port: 443,
-        path: '/sns/oauth2/access_token?appid=wx7e0aa09a76fe616b=def8cea610a77523e47b42d9a28f9182=' + model.code + '&grant_type=authorization_code',
+        path: '/sns/oauth2/access_token?appid=wx7e0aa09a76fe616b=def8cea610a77523e47b42d9a28f9182&code=' + model.code + '&grant_type=authorization_code',
         method: 'GET'
     }
     wxinfo = yield net.ajax(options)
