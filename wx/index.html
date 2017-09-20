@@ -38,8 +38,8 @@
                 console.log('filterTxt', filterTxt)
                 axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
                     console.log(obj.data)
-                     console.log(obj.data.data.length)
-                    if (obj.data.data.length= 0) {
+                    console.log(obj.data.data.length)
+                    if (obj.data.data.length== 0) {
                         console.log('obj.data.data.length')
                         // window.location.href = 'http://wx.yx101.cn/login.html'
                         window.location.href = 'http://wx.yx101.cn/login.html?'+Math.random();
