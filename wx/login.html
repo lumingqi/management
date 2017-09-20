@@ -42,6 +42,7 @@
         data: {
             msgDisabled: false,
             msgText: '获取验证码',
+            openId: '',
             registerForm: {
                 phone: '',
                 ownphone: '',
@@ -72,23 +73,27 @@
             }
         },
         mounted() {
-
+            let vm = this
+            let codeurl = window.location.search
+            let codeindex = codeurl.indexOf('=')
+            let codeend = codeurl.indexOf('&')
+            let cdstr = ''
+            let openid = ''
+            if (codeend) {
+                cdstr = codeurl.slice(codeindex + 1, codeend)
+            }
+            console.log(cdstr)
+            if (cdstr.length > 0) {
+                axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
+                    vm.openId = obj.data.openid
+                })
+            }
         },
         methods: {
-            submitForm() {
-                let codeurl = window.location.search
-                let codeindex = codeurl.indexOf('=')
-                let codeend = codeurl.indexOf('&')
-                let cdstr = ''
-                let openid = ''
-                if (codeend) {
-                    cdstr = codeurl.slice(codeindex + 1, codeend)
-                }
-                console.log(cdstr)
-                if (cdstr.length > 0) {
-                    axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
-                        openid = obj.data.openid
-                        console.log('openid1 is' + openid)
+            submitForm(formName) {
+                let vm = this
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
                         let filterObj = []
                         filterObj.push({
                             'key': 'telephone_number',
@@ -104,16 +109,22 @@
                             console.log(owninfo._id)
                             if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
                                 console.log('openid2 is ' + openid)
-                                owninfo.wxopen_id = openid
+                                owninfo.wxopen_id = vm.openId
                                 let ownid = owninfo._id
                                 console.log(ownid)
                                 axios.put('http://api.yx101.cn/management/api/owner/' + ownid, owninfo).then(obj => {
                                     console.log(obj)
                                 })
+                            } else {
+                                alert('此手机号已绑定微信，请用绑定微信登录或者解绑后再绑定')
                             }
                         })
-                    })
-                }
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+
 
             },
             getMsg() {
