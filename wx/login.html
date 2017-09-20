@@ -82,7 +82,7 @@
                     'value': this.registerForm.phone,
                     'type': ''
                 })
-                console.log(openid, filterObj)
+                console.log(this.registerForm.phone, filterObj)
                 let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
                 console.log('filterTxt', filterTxt)
                 axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
