@@ -88,32 +88,33 @@
                 if (cdstr.length > 0) {
                     axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
                         openid = obj.data.openid
-                        console.log('openid1 is'+openid)
+                        console.log('openid1 is' + openid)
+                        let filterObj = []
+                        filterObj.push({
+                            'key': 'telephone_number',
+                            'value': this.registerForm.phone,
+                            'type': ''
+                        })
+                        console.log(this.registerForm.phone, filterObj)
+                        let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+                        console.log('filterTxt', filterTxt)
+                        axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+                            console.log(obj.data.data)
+                            let owninfo = obj.data.data[0]
+                            console.log(owninfo._id)
+                            if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
+                                console.log('openid2 is ' + openid)
+                                owninfo.wxopen_id = openid
+                                let ownid = owninfo._id
+                                console.log(ownid)
+                                axios.put('http://api.yx101.cn/management/api/owner/' + ownid, owninfo).then(obj => {
+                                    console.log(obj)
+                                })
+                            }
+                        })
                     })
                 }
-                let filterObj = []
-                filterObj.push({
-                    'key': 'telephone_number',
-                    'value': this.registerForm.phone,
-                    'type': ''
-                })
-                console.log(this.registerForm.phone, filterObj)
-                let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
-                console.log('filterTxt', filterTxt)
-                axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
-                    console.log(obj.data.data)
-                    let owninfo = obj.data.data[0]
-                    console.log(owninfo._id)
-                    if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
-                        console.log('openid2 is '+openid )
-                        owninfo.wxopen_id=openid
-                        let ownid=owninfo._id
-                        console.log(ownid)
-                        axios.put('http://api.yx101.cn/management/api/owner/' + ownid,owninfo).then(obj => {
-                            console.log(obj)
-                        })
-                    }
-                })
+
             },
             getMsg() {
                 this.msgDisabled = true
