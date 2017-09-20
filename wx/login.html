@@ -72,37 +72,7 @@
             }
         },
         mounted() {
-            let codeurl = window.location.search
-            let codeindex = codeurl.indexOf('=')
-            let codeend = codeurl.indexOf('&')
-            console.log(codeurl);
-            console.log(codeindex);
-            console.log(codeend);
-            let cdstr = ''
-            if (codeend) {
-                cdstr = codeurl.slice(codeindex + 1, codeend)
-            }
-            console.log(cdstr)
-            if (cdstr.length > 0) {
-                axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
-                    console.log(obj.data)
-                    let openid = obj.data.openid
-                    console.log(openid)
-                    filterObj = []
-                    filterObj.push({
-                        'key': 'openid',
-                        'value': openid,
-                        'type': ''
-                    })
-                    console.log(openid, filterObj)
-                    // let base64 = new Base64();  
-                    let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
-                    console.log('filterTxt',filterTxt)
-                    axios.get('http://api.yx101.cn/management/api/owner/?filter='+filterTxt).then(obj => {
-                        console.log(obj.data)
-                    })
-                })
-            }
+            
         },
         methods: {
             submitForm() {
