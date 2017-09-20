@@ -102,7 +102,7 @@
                 axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
                     console.log(obj.data.data)
                     let owninfo = obj.data.data
-                    console.log(owninfo._id)
+                    console.log(obj.data.data._id)
                     if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
                         owninfo.wxopen_id=openid
                         let ownid=owninfo._id
