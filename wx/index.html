@@ -39,6 +39,7 @@
                 axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
                     console.log(obj.data)
                     if (obj.data.length <= 0) {
+                        console.log('href',obj.data.length)
                         window.location.href = 'http://wx.yx101.cn/login.html'
                     }
                 })
