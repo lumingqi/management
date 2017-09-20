@@ -38,8 +38,8 @@
                 console.log('filterTxt', filterTxt)
                 axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
                     console.log(obj.data)
+                    console.log('href', obj.data.length)
                     if (obj.data.length <= 0) {
-                        console.log('href',obj.data.length)
                         window.location.href = 'http://wx.yx101.cn/login.html'
                     }
                 })
@@ -47,17 +47,17 @@
         }
     </script>
     <script>
-            axios.get('http://api.yx101.cn/wxsignature')
-                .then(function (res) {
-                    wx.config(res.data)
-                    console.log(res.data)
-                    wx.ready(() => {
-                        console.log('wx ready')
-                    });
-                    wx.error(function (res) {
-                        console.log("wx.config failed.0", res);
-                    })
+        axios.get('http://api.yx101.cn/wxsignature')
+            .then(function (res) {
+                wx.config(res.data)
+                console.log(res.data)
+                wx.ready(() => {
+                    console.log('wx ready')
+                });
+                wx.error(function (res) {
+                    console.log("wx.config failed.0", res);
                 })
+            })
     </script>
 </head>
 
