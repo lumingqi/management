@@ -67,7 +67,7 @@ export default {
         {
             'type': 'text',
             'label': 'openId',
-            'prop': 'openid',
+            'prop': 'wxopen_id',
         },
         {
             'type': 'text',

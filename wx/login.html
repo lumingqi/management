@@ -76,6 +76,20 @@
         },
         methods: {
             submitForm() {
+                let codeurl = window.location.search
+                let codeindex = codeurl.indexOf('=')
+                let codeend = codeurl.indexOf('&')
+                let cdstr = ''
+                let openid = ''
+                if (codeend) {
+                    cdstr = codeurl.slice(codeindex + 1, codeend)
+                }
+                console.log(cdstr)
+                if (cdstr.length > 0) {
+                    axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
+                        openid = obj.data.openid
+                    })
+                }
                 let filterObj = []
                 filterObj.push({
                     'key': 'telephone_number',
@@ -87,6 +101,14 @@
                 console.log('filterTxt', filterTxt)
                 axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
                     console.log(obj.data.data)
+                    let owninfo = obj.data.data
+                    if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
+                        owninfo.wxopen_id=openid
+                        let ownid=owninfo._id
+                        axios.put('http://api.yx101.cn/management/api/owner/' + ownid,owninfo).then(obj => {
+                            console.log(obj)
+                        })
+                    }
                 })
             },
             getMsg() {

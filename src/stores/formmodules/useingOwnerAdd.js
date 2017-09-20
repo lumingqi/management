@@ -4,6 +4,7 @@ export default {
     'form': {
         'room_number': '',
         'owner_name': '',
+        'wxopen_id':'',
         'telephone_number': '',
         'note': '',
     },
