@@ -104,6 +104,7 @@
                     let owninfo = obj.data.data[0]
                     console.log(owninfo._id)
                     if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
+                        console.log('openid is '+openid )
                         owninfo.wxopen_id=openid
                         let ownid=owninfo._id
                         console.log(ownid)
