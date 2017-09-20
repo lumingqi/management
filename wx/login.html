@@ -105,6 +105,7 @@
                     if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
                         owninfo.wxopen_id=openid
                         let ownid=owninfo._id
+                        console.log(ownid)
                         axios.put('http://api.yx101.cn/management/api/owner/' + ownid,owninfo).then(obj => {
                             console.log(obj)
                         })
