@@ -16,7 +16,7 @@
     <div id="app">
         <el-row>
             <el-col :span="22" :offset="1">
-                <h3 style="text-align:center">绑定微信号</h3>
+                <h3 style="text-align:center">您的账号还未绑定，请先绑定微信号</h3>
                 <el-form :model="registerForm" :rules="rules" ref="registerForm" label-width="100px">
                     <el-form-item label="物业登记手机" prop="phone">
                         <el-input v-model="registerForm.phone"></el-input>
@@ -72,14 +72,22 @@
             }
         },
         mounted() {
-            
+
         },
         methods: {
             submitForm() {
-                axios.get('http://api.yx101.cn/wx')
-                    .then(function (res) {
-                        console.log('res', res)
-                    })
+                let filterObj = []
+                filterObj.push({
+                    'key': 'telephone_number',
+                    'value': this.registerForm.phone,
+                    'type': ''
+                })
+                console.log(openid, filterObj)
+                let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+                console.log('filterTxt', filterTxt)
+                axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+                    console.log(obj.data.data)
+                })
             },
             getMsg() {
                 this.msgDisabled = true

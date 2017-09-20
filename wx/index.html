@@ -8,13 +8,13 @@
     <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
     <script src="./js/base64.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-     <script>
-        
+    <script>
+
     </script>
     <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
     <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
-   
+
     <script>
         axios.get('http://api.yx101.cn/wxsignature')
             .then(function (res) {
@@ -73,156 +73,156 @@
     </div>
 </body>
 <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                localIds: '',
-                showPic: false,
-                formData: {
-                    datetime: '',
-                    room_number: '',
-                    repair_name: '',
-                    tel_phone: '',
-                    position: '',
-                    repair_type: '',
-                    repair_content: '',
-                    picServerId: ''
-                },
-                options: [{
-                    value: '0',
-                    label: '水类'
-                }, {
-                    value: '1',
-                    label: '电类'
-                }, {
-                    value: '2',
-                    label: '公共设施'
-                }],
-                rules: {
-                    datetime: [
-                        { required: true, message: '请输入报修时间', trigger: 'blur' }
-                    ],
-                    room_number: [
-                        { required: true, message: '请输入报修房号', trigger: 'blur' }
-                    ],
-                    position: [
-                        { required: true, message: '请输入报修位置', trigger: 'blur' }
-                    ],
-                    repair_type: [
-                        { required: true, message: '请输入报修类别', trigger: 'blur' }
-                    ],
-                    repair_content: [
-                        { required: true, message: '请输入报修内容', trigger: 'blur' }
-                    ],
-                    repair_name: [
-                        { required: true, message: '请输入报修人名字', trigger: 'blur' }
-                    ],
-                    tel_phone: [
-                        { required: true, message: '请输入联系电话', trigger: 'blur' },
-                        { min: 11, max: 11, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-                    ]
-                }
+    var app = new Vue({
+        el: '#app',
+        data: {
+            localIds: '',
+            showPic: false,
+            formData: {
+                datetime: '',
+                room_number: '',
+                repair_name: '',
+                tel_phone: '',
+                position: '',
+                repair_type: '',
+                repair_content: '',
+                picServerId: ''
             },
-            created(){
-                let codeurl = window.location.search
-        let codeindex = codeurl.indexOf('=')
-        let codeend = codeurl.indexOf('&')
-        console.log(codeurl);
-        console.log(codeindex);
-        console.log(codeend);
-        let cdstr = ''
-        if (codeend) {
-            cdstr = codeurl.slice(codeindex + 1, codeend)
-        }
-        console.log(cdstr)
-        if (cdstr.length > 0) {
-            axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
-                console.log(obj.data)
-                let openid = obj.data.openid
-                console.log(openid)
-                filterObj = []
-                filterObj.push({
-                    'key': 'openid',
-                    'value': openid,
-                    'type': ''
-                })
-                console.log(openid, filterObj)
-                let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
-                console.log('filterTxt', filterTxt)
-                axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+            options: [{
+                value: '0',
+                label: '水类'
+            }, {
+                value: '1',
+                label: '电类'
+            }, {
+                value: '2',
+                label: '公共设施'
+            }],
+            rules: {
+                datetime: [
+                    { required: true, message: '请输入报修时间', trigger: 'blur' }
+                ],
+                room_number: [
+                    { required: true, message: '请输入报修房号', trigger: 'blur' }
+                ],
+                position: [
+                    { required: true, message: '请输入报修位置', trigger: 'blur' }
+                ],
+                repair_type: [
+                    { required: true, message: '请输入报修类别', trigger: 'blur' }
+                ],
+                repair_content: [
+                    { required: true, message: '请输入报修内容', trigger: 'blur' }
+                ],
+                repair_name: [
+                    { required: true, message: '请输入报修人名字', trigger: 'blur' }
+                ],
+                tel_phone: [
+                    { required: true, message: '请输入联系电话', trigger: 'blur' },
+                    { min: 11, max: 11, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                ]
+            }
+        },
+        created() {
+            let codeurl = window.location.search
+            let codeindex = codeurl.indexOf('=')
+            let codeend = codeurl.indexOf('&')
+            console.log(codeurl);
+            console.log(codeindex);
+            console.log(codeend);
+            let cdstr = ''
+            if (codeend) {
+                cdstr = codeurl.slice(codeindex + 1, codeend)
+            }
+            console.log(cdstr)
+            if (cdstr.length > 0) {
+                axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
                     console.log(obj.data)
-                    console.log(obj.data.data.length)
-                    if (obj.data.data.length== 0) {
-                        console.log('obj.data.data.length')
-                        window.location.href = 'http://wx.yx101.cn/login.html'
+                    let openid = obj.data.openid
+                    console.log(openid)
+                    filterObj = []
+                    filterObj.push({
+                        'key': 'openid',
+                        'value': openid,
+                        'type': ''
+                    })
+                    console.log(openid, filterObj)
+                    let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+                    console.log('filterTxt', filterTxt)
+                    axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+                        console.log(obj.data)
+                        console.log(obj.data.data.length)
+                        if (obj.data.data.length == 0) {
+                            console.log('obj.data.data.length')
+                            window.location.href = 'http://wx.yx101.cn/login.html'
+                        }
+                    })
+                })
+            }
+        },
+        methods: {
+            submitForm(form) {
+                let vm = this
+                this.$refs[form].validate((valid) => {
+                    if (valid) {
+                        axios.post('http://api.yx101.cn/management/api/service', vm.formData)
+                            .then(function (res) {
+                                alert('res', res.data)
+                            })
                     }
                 })
-            })
-        }
             },
-            methods: {
-                submitForm(form) {
-                    let vm = this
-                    this.$refs[form].validate((valid) => {
-                        if (valid) {
-                            axios.post('http://api.yx101.cn/management/api/service', vm.formData)
-                                .then(function (res) {
-                                    alert('res', res.data)
-                                })
-                        }
-                    })
-                },
-                handleCamera() {
-                    let vm = this
-                    wx.chooseImage({
-                        count: 1, //张数， 默认9
-                        sizeType: ['compressed'], //建议压缩图
-                        sourceType: ['album', 'camera'], // 来源是相册、相机
-                        success: function (res) {
-                            vm.showPic = true
-                            vm.localIds = res.localIds[0]// 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                            wx.getLocalImgData({
-                                localId: res.localIds[0], // 图片的localID
-                                success: function (obj) {
-                                    vm.formData.picServerId = obj.localData; // localData是图片的base64数据，可以用img标签显示
-                                }
-                            });
+            handleCamera() {
+                let vm = this
+                wx.chooseImage({
+                    count: 1, //张数， 默认9
+                    sizeType: ['compressed'], //建议压缩图
+                    sourceType: ['album', 'camera'], // 来源是相册、相机
+                    success: function (res) {
+                        vm.showPic = true
+                        vm.localIds = res.localIds[0]// 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                        wx.getLocalImgData({
+                            localId: res.localIds[0], // 图片的localID
+                            success: function (obj) {
+                                vm.formData.picServerId = obj.localData; // localData是图片的base64数据，可以用img标签显示
+                            }
+                        });
 
 
-                            // wx.uploadImage({
-                            //     localId: res.localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
-                            //     isShowProgressTips: 1, // 默认为1，显示进度提示
-                            //     success: function (res) {
-                            //         vm.formData.picServerId = res.serverId; // 返回图片的服务器端ID
-                            //         alert('picServerId', vm.formData.picServerId)
+                        // wx.uploadImage({
+                        //     localId: res.localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+                        //     isShowProgressTips: 1, // 默认为1，显示进度提示
+                        //     success: function (res) {
+                        //         vm.formData.picServerId = res.serverId; // 返回图片的服务器端ID
+                        //         alert('picServerId', vm.formData.picServerId)
 
-                            //         axios.get('http://api.yx101.cn/wxGetPic?vm.formData.picServerId')
-                            //             .then(function (res) {
-                            //                 console.log(vm.formData.picServerId)
-                            //                 wx.ready(() => {
-                            //                     console.log('wx ready')
-                            //                 });
-                            //                 wx.error(function (res) {
-                            //                     console.log("wx.config failed.0", res);
-                            //                 })
-                            //             })
+                        //         axios.get('http://api.yx101.cn/wxGetPic?vm.formData.picServerId')
+                        //             .then(function (res) {
+                        //                 console.log(vm.formData.picServerId)
+                        //                 wx.ready(() => {
+                        //                     console.log('wx ready')
+                        //                 });
+                        //                 wx.error(function (res) {
+                        //                     console.log("wx.config failed.0", res);
+                        //                 })
+                        //             })
 
 
-                            //下载图片接口
-                            // wx.downloadImage({
-                            //     serverId: vm.formData.picServerId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
-                            //     isShowProgressTips: 1, // 默认为1，显示进度提示
-                            //     success: function (res) {
-                            //         var localId = res.localId; // 返回图片下载后的本地ID
-                            //         alert(localId)
-                            //     }
-                            // });
-                        }
-                    })
+                        //下载图片接口
+                        // wx.downloadImage({
+                        //     serverId: vm.formData.picServerId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+                        //     isShowProgressTips: 1, // 默认为1，显示进度提示
+                        //     success: function (res) {
+                        //         var localId = res.localId; // 返回图片下载后的本地ID
+                        //         alert(localId)
+                        //     }
+                        // });
+                    }
+                })
 
-                }
             }
-        })
+        }
+    })
 
 </script>
 
