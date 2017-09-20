@@ -6,11 +6,7 @@
     <title>永兴物业</title>
     <script src="./js/base64.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-    <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
-    <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
-    <script>
+     <script>
         let codeurl = window.location.search
         let codeindex = codeurl.indexOf('=')
         let codeend = codeurl.indexOf('&')
@@ -41,13 +37,17 @@
                     console.log(obj.data.data.length)
                     if (obj.data.data.length== 0) {
                         console.log('obj.data.data.length')
-                        // window.location.href = 'http://wx.yx101.cn/login.html'
                         window.location.href = 'http://wx.yx101.cn/login.html'
                     }
                 })
             })
         }
     </script>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+   
     <script>
         axios.get('http://api.yx101.cn/wxsignature')
             .then(function (res) {
