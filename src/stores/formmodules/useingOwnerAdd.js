@@ -31,7 +31,7 @@ export default {
             'type': 'input',
             'label': 'openId',
             'prop': '',
-            'field': 'openid'
+            'field': 'wxopen_id'
         },
         {
             'type': 'input',
