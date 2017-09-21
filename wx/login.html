@@ -128,7 +128,7 @@
 
             },
             getMsg() {
-                axios.post('http://api.yx101.cn/sms', { ownphone: '13666908726' }).then(obj => {
+                axios.post('http://api.yx101.cn/sms', {phone: '13666908726' }).then(obj => {
                     console.log(obj)
                 })
                 this.msgDisabled = true
