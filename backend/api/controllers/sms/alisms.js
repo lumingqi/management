@@ -38,16 +38,16 @@ module.exports.alisms = function* alisms() {
     let nowtime = new Date().getTime()
     let smssend = yield db.collection('smssend').insert(
         {
-            'phone': model.phone,
+            'phone': model.ownphone,
             'number': number,
             'smstime': nowtime
         })
     let sms = yield db.collection('sms').findOneAndUpdate(
         {
-            phone: model.phone
+            phone: model.ownphone
         },
         {
-            'phone': model.phone,
+            'phone': model.ownphone,
             'number': number,
             'smstime': nowtime,
             'smscheck': false
@@ -57,9 +57,9 @@ module.exports.alisms = function* alisms() {
         })
 
     let res = yield smsClient.sendSMS({
-        PhoneNumbers: model.phone,
-        SignName: '鲁班SAAS系统',
-        TemplateCode: 'SMS_81415024',
+        PhoneNumbers: model.ownphone,
+        SignName: '永兴物业',
+        TemplateCode: 'SMS_98060016',
         TemplateParam: JSON.stringify({ 'number': number })
     })
     let { Code } = res
@@ -104,7 +104,7 @@ module.exports.alichecksms = function* alichecksms(next) {
             info = '短信验证通过'
             let smscheck = yield table.findOneAndUpdate(
                 {
-                    phone: model.phone
+                    phone: model.ownphone
                 },
                 {
                     'smscheck': true
