@@ -92,6 +92,9 @@
         methods: {
             submitForm(formName) {
                 let vm = this
+                axios.post('http://api.yx101.cn/alichecksms', { phone: vm.registerForm.ownphone,number: vm.registerForm.phonemsg}).then(obj => {
+                    console.log(obj)
+                })
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let filterObj = []
