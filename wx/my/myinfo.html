@@ -84,13 +84,10 @@
                             console.log('obj.data.data.length')
                             window.location.href = 'http://wx.yx101.cn/login.html'
                         }else{
-                            let owninfo=obj.data.data
-                            console.log('owninfo',owninfo)
+                            let owninfo=obj.data.data[0]
                             vm.formData.room_number=owninfo.room_number
-                            console.log('vm.formData.room_number',vm.formData.room_number)
                             vm.formData.owner_name=owninfo.owner_name
                             vm.formData.telephone_number=owninfo.telephone_number
-                            console.log(vm.formData)
                         }
                     })
                 })
