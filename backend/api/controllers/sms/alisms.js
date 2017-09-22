@@ -60,7 +60,7 @@ module.exports.alisms = function* alisms() {
         PhoneNumbers: model.phone,
         SignName: '永兴物业',
         TemplateCode: 'SMS_98060016',
-        TemplateParam: JSON.stringify({ 'number': number })
+        TemplateParam: JSON.stringify({ 'code': number })
     })
     let { Code } = res
     let smsinfo = {}
