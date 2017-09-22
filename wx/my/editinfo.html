@@ -1,0 +1,134 @@
+<html lang="cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>永兴物业</title>
+
+    <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+    <script src="./js/base64.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
+
+    <script>
+        axios.get('http://api.yx101.cn/wxsignature')
+            .then(function (res) {
+                wx.config(res.data)
+                console.log(res.data)
+                wx.ready(() => {
+                    console.log('wx ready')
+                });
+                wx.error(function (res) {
+                    console.log("wx.config failed.0", res);
+                })
+            })
+    </script>
+</head>
+
+<body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg);background-size: cover;">
+    <div id="app">
+        <el-row>
+            <el-col :span="22" :offset="1">
+                <h3 style="text-align:center">报修</h3>
+                <el-form :model="formData" :rules="rules" ref="formData" label-width="80px">
+                    <el-form-item label="房号" prop="room_number">
+                        <el-input v-model="formData.room_number" placeholder="请输入您家房号"></el-input>
+                    </el-form-item>
+                    <el-form-item label="姓名" prop="owner_name">
+                        <el-input v-model="formData.owner_name" placeholder="请输入您的姓名"></el-input>
+                    </el-form-item>
+                    <el-form-item label="联系电话" prop="telephone_number">
+                        <el-input v-model="formData.telephone_number" placeholder="请输入您要登记的联系号码"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="submitForm('formData')">保存修改</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+        </el-row>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            formData: {
+                'room_number': '',
+                'owner_name': '',
+                'telephone_number': '',
+            },
+            rules: {
+                room_number: [
+                    { required: true, message: '请输入您家房号', trigger: 'blur' }
+                ],
+                owner_name: [
+                    { required: true, message: '请输入您的姓名', trigger: 'blur' }
+                ],
+                telephone_number: [
+                    { required: true, message: '请输入您要登记的联系号码', trigger: 'blur' },
+                    { min: 11, max: 11, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                ]
+            }
+        },
+        created() {
+            let openid = sessionStorage.getItem('wxopen_id');
+            console.log(openid)
+            filterObj = []
+            filterObj.push({
+                'key': 'wxopen_id',
+                'value': openid,
+                'type': ''
+            })
+            console.log(openid, filterObj)
+            let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+            console.log('filterTxt', filterTxt)
+            axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+                console.log(obj.data.data.length)
+                if (obj.data.data.length == 0) {
+                    console.log('obj.data.data.length')
+                    window.location.href = 'http://wx.yx101.cn/login.html'
+                } else {
+                    let owninfo = obj.data.data[0]
+                    vm.formData.room_number = owninfo.room_number
+                    vm.formData.owner_name = owninfo.owner_name
+                    vm.formData.telephone_number = owninfo.telephone_number
+                    sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
+                    //获取cookie的openid
+                    //let  openid = sessionStorage.getItem('wxopen_id');
+                }
+            })
+        },
+        methods: {
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        let filterObj = []
+                        filterObj.push({
+                            'key': 'telephone_number',
+                            'value': this.registerForm.telephone_number,
+                            'type': ''
+                        })
+                        console.log(this.registerForm.telephone_number, filterObj)
+                        let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+                        console.log('filterTxt', filterTxt)
+                        axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+                            console.log(obj.data.data)
+                            let owninfo = obj.data.data[0]
+                            let ownid = owninfo._id
+                            axios.put('http://api.yx101.cn/management/api/owner/' + ownid, vm.formData).then(obj => {
+                                console.log(obj)
+                            })
+
+                        })
+                    }
+                })
+            }
+        }
+
+    })
+
+</script>
+
+</html>

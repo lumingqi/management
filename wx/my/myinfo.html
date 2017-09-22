@@ -32,11 +32,14 @@
         <el-card class="box-card">
             <div slot="header" class="clearfix">
                 <span style="line-height: 36px;">我的资料：</span>
-                <el-button style="float: right;" type="primary">修改资料</el-button>
+                <el-button style="float: right;" type="primary" @click="editinfo">修改资料</el-button>
             </div>
-            <div>房   号：{{formData.room_number}}</div>
-            <div>业主姓名:{{formData.owner_name}}</div>
-            <div>登记手机:{{formData.telephone_number}}</div>
+            <p>房   号：</p>
+             <p>{{formData.room_number}}</p>
+            <div>业主姓名:</div>
+            <p{{formData.owner_name}}></p>
+            <div>登记手机:</div>
+            <p>{{formData.telephone_number}}</p>
         </el-card>
     </div>
 </body>
@@ -78,7 +81,6 @@
                     let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
                     console.log('filterTxt', filterTxt)
                     axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
-                        console.log(obj.data)
                         console.log(obj.data.data.length)
                         if (obj.data.data.length == 0) {
                             console.log('obj.data.data.length')
@@ -89,14 +91,17 @@
                             vm.formData.owner_name=owninfo.owner_name
                             vm.formData.telephone_number=owninfo.telephone_number
                             sessionStorage.setItem('wxopen_id',owninfo.wxopen_id)
-                            let  openid = sessionStorage.getItem('wxopen_id');
-                            console.log(openid)
+                            //获取cookie的openid
+                            //let  openid = sessionStorage.getItem('wxopen_id');
                         }
                     })
                 })
             }
         },
         methods: {
+            editinfo(){
+                window.location.href = 'http://wx.yx101.cn/my/editinfo.html'
+            }
         }
     })
 

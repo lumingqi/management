@@ -108,7 +108,6 @@
                                 <!-- <pre class="ng-binding widths">{{ scope.row[item.prop]}}</pre> -->
                             </template>
                             <template v-if="item.type=='datetime'">
-                                <el-icon name="time"></el-icon>
                                 <span style="margin-left: 10px">{{ getDateFormat(scope.row[item.prop]) }}</span>
                             </template>
                             <template v-if="item.type=='datetimeMinute'">
