@@ -88,6 +88,9 @@
                             vm.formData.room_number=owninfo.room_number
                             vm.formData.owner_name=owninfo.owner_name
                             vm.formData.telephone_number=owninfo.telephone_number
+                            sessionStorage.setItem('wxopen_id',owninfo.wxopen_id)
+                            let  openid = sessionStorage.getItem('wxopen_id');
+                            console.log(openid)
                         }
                     })
                 })
