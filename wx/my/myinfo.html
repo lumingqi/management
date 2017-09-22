@@ -36,9 +36,9 @@
             </div>
             <p>房   号：</p>
              <p>{{formData.room_number}}</p>
-            <div>业主姓名:</div>
-            <p{{formData.owner_name}}></p>
-            <div>登记手机:</div>
+            <p>业主姓名:</p>
+            <p>{{formData.owner_name}}></p>
+            <p>登记手机:</p>
             <p>{{formData.telephone_number}}</p>
         </el-card>
     </div>
@@ -100,6 +100,7 @@
         },
         methods: {
             editinfo(){
+
                 window.location.href = 'http://wx.yx101.cn/my/editinfo.html'
             }
         }
