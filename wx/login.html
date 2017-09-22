@@ -92,46 +92,50 @@
         methods: {
             submitForm(formName) {
                 let vm = this
-                axios.post('http://api.yx101.cn/checksms', { phone: vm.registerForm.ownphone,number: vm.registerForm.phonemsg}).then(obj => {
-                    console.log(obj.data)
-                })
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        let filterObj = []
-                        filterObj.push({
-                            'key': 'telephone_number',
-                            'value': this.registerForm.phone,
-                            'type': ''
-                        })
-                        console.log(this.registerForm.phone, filterObj)
-                        let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
-                        console.log('filterTxt', filterTxt)
-                        axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
-                            console.log(obj.data.data)
-                            let owninfo = obj.data.data[0]
-                            console.log(owninfo._id)
-                            if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
-                                console.log('openid2 is ' + openid)
-                                owninfo.wxopen_id = vm.openId
-                                let ownid = owninfo._id
-                                console.log(ownid)
-                                axios.put('http://api.yx101.cn/management/api/owner/' + ownid, owninfo).then(obj => {
-                                    console.log(obj)
+                axios.post('http://api.yx101.cn/checksms', { phone: vm.registerForm.ownphone, number: vm.registerForm.phonemsg }).then(obj => {
+                    if (obj.data.status == 0) {
+                        this.$refs[formName].validate((valid) => {
+                            if (valid) {
+                                let filterObj = []
+                                filterObj.push({
+                                    'key': 'telephone_number',
+                                    'value': this.registerForm.phone,
+                                    'type': ''
+                                })
+                                console.log(this.registerForm.phone, filterObj)
+                                let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+                                console.log('filterTxt', filterTxt)
+                                axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+                                    console.log(obj.data.data)
+                                    let owninfo = obj.data.data[0]
+                                    console.log(owninfo._id)
+                                    if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
+                                        console.log('openid2 is ' + openid)
+                                        owninfo.wxopen_id = vm.openId
+                                        let ownid = owninfo._id
+                                        console.log(ownid)
+                                        axios.put('http://api.yx101.cn/management/api/owner/' + ownid, owninfo).then(obj => {
+                                            console.log(obj)
+                                        })
+                                    } else {
+                                        alert('此手机号已绑定微信，请用绑定微信登录或者解绑后再绑定')
+                                    }
                                 })
                             } else {
-                                alert('此手机号已绑定微信，请用绑定微信登录或者解绑后再绑定')
+                                console.log('error submit!!');
+                                return false;
                             }
-                        })
-                    } else {
-                        console.log('error submit!!');
-                        return false;
+                        });
+                    }else{
+                        alert('短信验证码错误或者已超时')
                     }
-                });
+                })
+
 
 
             },
             getMsg() {
-                axios.post('http://api.yx101.cn/sms', {phone: '13666908726' }).then(obj => {
+                axios.post('http://api.yx101.cn/sms', { phone: '13666908726' }).then(obj => {
                     console.log(obj)
                 })
                 this.msgDisabled = true
