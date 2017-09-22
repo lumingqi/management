@@ -103,6 +103,7 @@
         },
         methods: {
             submitForm(formName) {
+                let vm=this
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let filterObj = []
