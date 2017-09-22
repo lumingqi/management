@@ -35,8 +35,8 @@
                 <el-button style="float: right;" type="primary">修改资料</el-button>
             </div>
             <div>房   号：{{formData.room_number}}</div>
-            <div>业主姓名{{formData.owner_name}}</div>
-            <div>登记手机{{formData.owner_name}}</div>
+            <div>业主姓名:{{formData.owner_name}}</div>
+            <div>登记手机:{{formData.telephone_number}}</div>
         </el-card>
     </div>
 </body>
@@ -47,7 +47,7 @@
             formData: {
                 'room_number': '',
                 'owner_name': '',
-                'owner_name': '',
+                'telephone_number': '',
             }
         },
         created() {
@@ -86,8 +86,10 @@
                         }else{
                             let owninfo=obj.data.data
                             vm.formData.room_number=owninfo.room_number
+                            console.log('vm.formData.room_number',vm.formData.room_number)
                             vm.formData.owner_name=owninfo.owner_name
                             vm.formData.telephone_number=owninfo.telephone_number
+                            console.log(vm.formData)
                         }
                     })
                 })
