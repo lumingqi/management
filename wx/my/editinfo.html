@@ -55,9 +55,9 @@
         el: '#app',
         data: {
             formData: {
-                'room_number': '',
-                'owner_name': '',
-                'telephone_number': '',
+                room_number: '',
+                owner_name: '',
+                telephone_number: '',
             },
             rules: {
                 room_number: [
@@ -67,8 +67,7 @@
                     { required: true, message: '请输入您的姓名', trigger: 'blur' }
                 ],
                 telephone_number: [
-                    { required: true, message: '请输入您要登记的联系号码', trigger: 'blur' },
-                    { min: 11, max: 11, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                    { required: true,min: 11, max: 11, message: '请输入11 位数联系号码', trigger: 'blur' }
                 ]
             }
         },
