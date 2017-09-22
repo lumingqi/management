@@ -85,6 +85,7 @@
                             window.location.href = 'http://wx.yx101.cn/login.html'
                         }else{
                             let owninfo=obj.data.data
+                            console.log('owninfo',owninfo)
                             vm.formData.room_number=owninfo.room_number
                             console.log('vm.formData.room_number',vm.formData.room_number)
                             vm.formData.owner_name=owninfo.owner_name
