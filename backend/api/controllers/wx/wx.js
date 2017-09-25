@@ -322,7 +322,7 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     let access_options = {
         hostname: 'api.weixin.qq.com',
         port: 443,
-        path: '/cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b=def8cea610a77523e47b42d9a28f9182',
+        path: '/cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b&secret=def8cea610a77523e47b42d9a28f9182',
         method: 'GET',
     }
     let access_info = {}
