@@ -8,11 +8,10 @@ const jwt = require('jsonwebtoken')
 var fs = require('fs')
 var Buffer = require('buffer').Buffer
 var path = require('path')
-var axios=require('axios')
+var axios = require('axios')
 var dbstr = 'mongodb://localhost/'
 const querystring = require('querystring')
 var net = require('../../unit/net')
-var netjson = require('../../unit/netjson')
 var config = {
     debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId: 'wx7e0aa09a76fe616b', // 必填，公众号的唯一标识
@@ -367,7 +366,7 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     // }
     // let texts = net.ajax(options, reqinfo)
     axios.post('http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + access_info.access_token, reqinfo).then(obj => {
-                    console.log(obj)
-            })
+        console.log(obj)
+    })
     console.log(texts)
 }
