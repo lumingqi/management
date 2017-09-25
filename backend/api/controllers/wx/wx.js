@@ -328,10 +328,11 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     let access_info = {}
     access_info = yield net.ajax(access_options)
     console.log(model)
-    //model.data = JSON.stringify(model.data)
+    model.data = JSON.stringify(model.data)
     let textdata =JSON.stringify(model)
     console.log(textdata)
     //https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN
+    console.log(this.body.data)
     let options = {
         hostname: 'api.weixin.qq.com',
         port: 443,
@@ -339,9 +340,9 @@ module.exports.wxpostmsg = function* wxpostmsg() {
         method: 'POST',
         headers: {
             "content-type": "application/json",
-            'Content-Length': textdata.length,
+            'Content-Length': this.body.data.length,
         }
     }
-    let texts = net.ajax(options, model)
+    let texts = net.ajax(options, this.body.data)
     console.log(texts)
 }
