@@ -467,11 +467,22 @@ export default {
                 "url": "http://wx.yx101.cn/login.html",
                 "topcolor": "#FF0000",
                 "data": {
-                    "first": "你的报修请求通过了，详情如下",
-                    "keyword1": "21321321321321323213",
-                    "keyword2": "维修报价：500元",
-                    "remark": "感谢使用永兴物业系统，期望为你提供更好的服务体验",
-                    
+                    "first": {
+                        "value": "你的报修请求通过了，详情如下",
+                        "color": "#173177"
+                    },
+                    "keyword1": {
+                        "value": "21321321321321323213",
+                        "color": "#173177"
+                    },
+                    "keyword2": {
+                        "value": "维修报价：500元",
+                        "color": "#173177"
+                    },
+                    "remark": {
+                        "value": "感谢使用永兴物业系统，期望为你提供更好的服务体验",
+                        "color": "#173177"
+                    }
                 }
             }
             axios.post('http://api.yx101.cn/wxpostmsg', msginfo).then(obj => {

@@ -328,6 +328,7 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     let access_info = {}
     access_info = yield net.ajax(access_options)
     console.log(model)
+    model.data = JSON.stringify(model.data)
     let textdata =JSON.stringify(model)
     console.log(textdata)
     //https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN
