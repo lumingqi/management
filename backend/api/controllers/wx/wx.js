@@ -336,19 +336,19 @@ module.exports.wxpostmsg = function* wxpostmsg() {
         "url": "http://wx.yx101.cn/login.html",
         "topcolor": "#FF0000",
         "data": {
-            "first": {
+            "First": {
                 "value": "你的报修请求通过了，详情如下",
                 "color": "#173177"
             },
-            "keyword1": {
+            "Keyword1": {
                 "value": "21321321321321323213",
                 "color": "#173177"
             },
-            "keyword2": {
+            "Keyword2": {
                 "value": "维修报价：500元",
                 "color": "#173177"
             },
-            "remark": {
+            "Remark": {
                 "value": "感谢使用永兴物业系统，期望为你提供更好的服务体验",
                 "color": "#173177"
             }
