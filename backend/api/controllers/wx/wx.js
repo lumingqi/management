@@ -314,3 +314,28 @@ module.exports.wxmedia = function* wxmedia() {
     let wxinfo = yield net.ajax(options, body)
     this.body = yield wxinfo
 }
+module.exports.wxpostmsg = function* wxpostmsg() {
+    if ('POST' != this.method) return yield next
+    var model = yield parse(this, {
+        limit: '200kb'
+    })
+    let access_options = {
+        hostname: 'api.weixin.qq.com',
+        port: 443,
+        path: '/cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b=def8cea610a77523e47b42d9a28f9182',
+        method: 'GET',
+    }
+    let textdata =JSON.stringify(model)
+    let options = {
+        hostname: 'api.weixin.qq.com',
+        port: 443,
+        path: '/cgi-bin/message/custom/send?access_token=' + access_info.access_token,
+        method: 'POST',
+        headers: {
+            "content-type": "application/json",
+            'Content-Length': textdata.length,
+        }
+    }
+    let texts = net.ajax(options, textdata)
+    console.log(texts)
+}

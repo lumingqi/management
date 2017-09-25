@@ -42,7 +42,7 @@
                 </el-button-group>
             </div>
             <div v-if="singleBtnSearch" class="pull-right">
-                <template v-for="item in singleBtnSearchInfo"> 
+                <template v-for="item in singleBtnSearchInfo">
                     <template v-if="item.exported">
                         <el-button style="float:right;margin-left:3px;padding:2.5px;position:relative;width: 68px;top: 10px;" :type="item.type" @click="getExported()" :icon="item.icon">{{item.label}}</el-button>
                     </template>
@@ -77,6 +77,9 @@
                 <template v-else-if="item.type!='checkbox'&&item.type!='operation'">
                     <el-table-column :label="item.label" :type="item.expand?'expand':''">
                         <template scope="scope">
+                            <template v-if="item.type=='postbutton'">
+                                <el-button type="success" size="mini" @click="postMsg(scope.row.wxopen_id)">发送报价</el-button>
+                            </template>
                             <template v-if="item.type=='tableexpand'">
                                 <!-- <lb-systemmodule :module="item.props" :info="true" :search-value="$store.state.envs.currStudent._id"></lb-systemmodule> -->
                             </template>
@@ -87,7 +90,7 @@
                                 <a class="link" @click="lessonrouter($event,item.prop,scope.row)">排课详情</a>
                             </template>
                             <template v-if="item.type=='getPic'">
-                                <img :src="scope.row[item.prop]"  style="height:90px"> 
+                                <img :src="scope.row[item.prop]" style="height:90px">
                             </template>
                             <template v-if="item.type=='teachertype'">
                                 <el-tag type="success">{{ scope.row[item.prop] == '0' ? '全职':'兼职' }}</el-tag>
@@ -456,6 +459,37 @@ export default {
         }
     },
     methods: {
+        postMsg(msg) {
+            console.log(msg)
+            let msginfo = {
+                "touser": "oQBciwwrZulw5OGALBB74MVnlnn8",
+                "template_id": "EPoBuDGSu3F_9pWK2-uTR455ugxyL-TCkBfYILuBSyQ",
+                "url": "http://wx.yx101.cn/login.html",
+                "topcolor": "#FF0000",
+                "data": {
+                    "first": {
+                        "value": "你的报修请求通过了，详情如下",
+                        "color": "#173177"
+                    },
+                    "keyword1": {
+                        "value": "21321321321321323213",
+                        "color": "#173177"
+                    },
+                    "keyword2": {
+                        "value": "维修报价：500元",
+                        "color": "#173177"
+                    },
+                    "remark": {
+                        "value": "感谢使用永兴物业系统，期望为你提供更好的服务体验",
+                        "color": "#173177"
+                    }
+                }
+            }
+            axios.post('http://api.yx101.cn/wxpostmsg', msginfo).then(obj => {
+                    console.log(obj)
+            })
+
+        },
         getExported() {
             let exportedData = this.moduleTableData
             console.log('exp', exportedData)

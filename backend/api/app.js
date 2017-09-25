@@ -24,6 +24,7 @@ app.use(route.get('/wxreg/', wx.wxreg))
 app.use(route.post('/wx/', wx.wx))
 app.use(route.get('/:db/wxqrcode/:id', wx.wxqrcode))
 app.use(route.get('/wxsignature/', wx.wxsignature))
+app.use(route.post('/wxpostmsg/', wx.wxpostmsg))
 
 
 //微信服务
