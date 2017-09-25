@@ -8,9 +8,11 @@ const jwt = require('jsonwebtoken')
 var fs = require('fs')
 var Buffer = require('buffer').Buffer
 var path = require('path')
+var axios=require('axios')
 var dbstr = 'mongodb://localhost/'
 const querystring = require('querystring')
 var net = require('../../unit/net')
+var netjson = require('../../unit/netjson')
 var config = {
     debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId: 'wx7e0aa09a76fe616b', // 必填，公众号的唯一标识
@@ -329,30 +331,43 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     access_info = yield net.ajax(access_options)
     model.data = JSON.stringify(model.data)
     let textdata = JSON.stringify(model)
-
-    let reqinfo =`{
+    let reqinfo = `{
         "touser": "oQBciwwrZulw5OGALBB74MVnlnn8",
         "template_id": "EPoBuDGSu3F_9pWK2-uTR455ugxyL-TCkBfYILuBSyQ",
         "url": "http://wx.yx101.cn/login.html",
         "topcolor": "#FF0000",
         "data": {
-            "User": {
+            "first": {
                 "value": "你的报修请求通过了，详情如下",
+                "color": "#173177"
+            },
+            "keyword1": {
+                "value": "21321321321321323213",
+                "color": "#173177"
+            },
+            "keyword2": {
+                "value": "维修报价：500元",
+                "color": "#173177"
+            },
+            "remark": {
+                "value": "感谢使用永兴物业系统，期望为你提供更好的服务体验",
                 "color": "#173177"
             }
         }
-    }` 
-    //https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN
-    let options = {
-        hostname: 'api.weixin.qq.com',
-        port: 443,
-        path: '/cgi-bin/message/template/send?access_token=' + access_info.access_token,
-        method: 'POST',
-        headers: {
-            "content-type": "application/json",
-            'Content-Length': reqinfo.length,
-        }
-    }
-    let texts = net.ajax(options, reqinfo)
+    }`
+    // let options = {
+    //     hostname: 'api.weixin.qq.com',
+    //     port: 443,
+    //     path: '/cgi-bin/message/template/send?access_token=' + access_info.access_token,
+    //     method: 'POST',
+    //     headers: {
+    //         "content-type": "application/json",
+    //         'Content-Length': reqinfo.length,
+    //     }
+    // }
+    // let texts = net.ajax(options, reqinfo)
+    axios.post('http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + access_info.access_token, reqinfo).then(obj => {
+                    console.log(obj)
+            })
     console.log(texts)
 }
