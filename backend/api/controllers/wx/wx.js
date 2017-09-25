@@ -325,6 +325,8 @@ module.exports.wxpostmsg = function* wxpostmsg() {
         path: '/cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b=def8cea610a77523e47b42d9a28f9182',
         method: 'GET',
     }
+    let access_info = {}
+    access_info = yield net.ajax(access_options)
     let textdata =JSON.stringify(model)
     let options = {
         hostname: 'api.weixin.qq.com',
