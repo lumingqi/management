@@ -328,7 +328,7 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     let access_info = {}
     access_info = yield net.ajax(access_options)
     console.log(model)
-    let textdata =JSON.stringify(model)
+    let textdata =JSON.parse(model)
     console.log(textdata)
     let options = {
         hostname: 'api.weixin.qq.com',
