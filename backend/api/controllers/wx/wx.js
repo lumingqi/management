@@ -330,10 +330,11 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     console.log(model)
     let textdata =JSON.parse(model)
     console.log(textdata)
+    //https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN
     let options = {
         hostname: 'api.weixin.qq.com',
         port: 443,
-        path: '/cgi-bin/message/custom/send?access_token=' + access_info.access_token,
+        path: '/cgi-bin/message/template/send?access_token=' + access_info.access_token,
         method: 'POST',
         headers: {
             "content-type": "application/json",
