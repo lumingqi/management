@@ -328,9 +328,33 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     let access_info = {}
     access_info = yield net.ajax(access_options)
     model.data = JSON.stringify(model.data)
-    let textdata =JSON.stringify(model)
+    let textdata = JSON.stringify(model)
+
+    let reqinfo =`{
+        "touser": "oQBciwwrZulw5OGALBB74MVnlnn8",
+        "template_id": "EPoBuDGSu3F_9pWK2-uTR455ugxyL-TCkBfYILuBSyQ",
+        "url": "http://wx.yx101.cn/login.html",
+        "topcolor": "#FF0000",
+        "data": {
+            "first": {
+                "value": "你的报修请求通过了，详情如下",
+                "color": "#173177"
+            },
+            "keyword1": {
+                "value": "21321321321321323213",
+                "color": "#173177"
+            },
+            "keyword2": {
+                "value": "维修报价：500元",
+                "color": "#173177"
+            },
+            "remark": {
+                "value": "感谢使用永兴物业系统，期望为你提供更好的服务体验",
+                "color": "#173177"
+            }
+        }
+    }` 
     //https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN
-    console.log('--------',this.require.body)
     let options = {
         hostname: 'api.weixin.qq.com',
         port: 443,
@@ -338,9 +362,9 @@ module.exports.wxpostmsg = function* wxpostmsg() {
         method: 'POST',
         headers: {
             "content-type": "application/json",
-            'Content-Length': this.body.length,
+            'Content-Length': reqinfo.length,
         }
     }
-    let texts = net.ajax(options, this.body)
+    let texts = net.ajax(options, reqinfo)
     console.log(texts)
 }
