@@ -328,8 +328,8 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     }
     let access_info = {}
     access_info = yield net.ajax(access_options)
-    model.data = JSON.stringify(model.data)
-    let textdata = JSON.stringify(model)
+    // model.data = JSON.stringify(model.data)
+    // let textdata = JSON.stringify(model)
     let reqinfo = `{
         "touser": "oQBciwwrZulw5OGALBB74MVnlnn8",
         "template_id": "EPoBuDGSu3F_9pWK2-uTR455ugxyL-TCkBfYILuBSyQ",
@@ -365,8 +365,7 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     //     }
     // }
     // let texts = net.ajax(options, reqinfo)
-    axios.post('http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + access_info.access_token, reqinfo).then(obj => {
+    axios.post('http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + access_info.access_token, model).then(obj => {
         console.log(obj)
     })
-    console.log(texts)
 }
