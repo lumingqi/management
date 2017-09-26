@@ -1,0 +1,122 @@
+<html lang="cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>永兴物业</title>
+
+    <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+    <script src="../js/base64.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
+
+    <script>
+        axios.get('http://api.yx101.cn/wxsignature')
+            .then(function (res) {
+                wx.config(res.data)
+                console.log(res.data)
+                wx.ready(() => {
+                    console.log('wx ready')
+                });
+                wx.error(function (res) {
+                    console.log("wx.config failed.0", res);
+                })
+            })
+    </script>
+</head>
+
+<body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg);background-size: cover;">
+    <div id="app">
+        <el-row>
+            <el-col :span="22" :offset="1">
+                <h3 style="text-align:center">报修</h3>
+                <el-form :model="formData" :rules="rules" ref="formData" label-width="80px">
+                    <el-form-item label="是否维修" prop="datetime">
+                        <el-radio class="radio" v-model="radio" label="1">同意</el-radio>
+                        <el-radio class="radio" v-model="radio" label="2">取消</el-radio>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="submitForm('formData')">提交报修</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+        </el-row>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            formData: {
+                repair_price: '',
+                repair_no: '',
+            }
+        },
+        created() {
+            function getParams(key) {
+                var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) {
+                    return unescape(r[2]);
+                }
+                return null;
+            };
+            this.repair_price = getParams('repair_price')
+            this.repair_no = getParams('repair_no')
+            alert(this.repair_price,this.repair_no)
+            // let vm=this
+            // let codeurl = window.location.search
+            // let codeindex = codeurl.indexOf('=')
+            // let codeend = codeurl.indexOf('&')
+            // console.log(codeurl);
+            // console.log(codeindex);
+            // console.log(codeend);
+            // let cdstr = ''
+            // if (codeend) {
+            //     cdstr = codeurl.slice(codeindex + 1, codeend)
+            // }
+            // console.log(cdstr)
+            // if (cdstr.length > 0) {
+            //     axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
+            //         console.log(obj.data)
+            //         let openid = obj.data.openid
+            //         console.log(openid)
+            //         filterObj = []
+            //         filterObj.push({
+            //             'key': 'wxopen_id',
+            //             'value': openid,
+            //             'type': ''
+            //         })
+            //         console.log(openid, filterObj)
+            //         let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+            //         console.log('filterTxt', filterTxt)
+            //         axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+            //             console.log(obj.data.data.length)
+            //             if (obj.data.data.length == 0) {
+            //                 console.log('obj.data.data.length')
+            //                 window.location.href = 'http://wx.yx101.cn/login.html'
+            //             }else{
+            //                 let owninfo=obj.data.data[0]
+            //                 vm.formData.room_number=owninfo.room_number
+            //                 vm.formData.owner_name=owninfo.owner_name
+            //                 vm.formData.telephone_number=owninfo.telephone_number
+            //                 sessionStorage.setItem('wxopen_id',owninfo.wxopen_id)
+            //                 //获取cookie的openid
+            //                 //let  openid = sessionStorage.getItem('wxopen_id');
+            //             }
+            //         })
+            //     })
+            // }
+        },
+        methods: {
+            editinfo() {
+                window.location.href = 'http://wx.yx101.cn/my/editinfo.html'
+            }
+        }
+    })
+
+</script>
+
+</html>

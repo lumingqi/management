@@ -464,7 +464,7 @@ export default {
             let msginfo = {
                 "touser": "oQBciwwrZulw5OGALBB74MVnlnn8",
                 "template_id": "EPoBuDGSu3F_9pWK2-uTR455ugxyL-TCkBfYILuBSyQ",
-                "url": "http://wx.yx101.cn/login.html",
+                "url": "http://wx.yx101.cn/login.html?repair_no="+msg.repair_no+"&&repair_price="+msg.repair_price,
                 "topcolor": "#FF0000",
                 "data": {
                     "first": {
@@ -480,7 +480,7 @@ export default {
                         "color": "#173177"
                     },
                     "remark": {
-                        "value": "请点击详情，选择你是否需要进行此项报修，谢谢！",
+                        "value": "请点击详情，根据报价，选择是否进行此项维修，谢谢！",
                         "color": "#173177"
                     }
                 }
