@@ -3,9 +3,9 @@ export default {
     'pageLable': '维修物品',
     'form': {
         'room_number': '',
-        'owner_name': '',
-        'tel_number': '',
-        'time': '',
+        'repair_name': '',
+        'tel_phone': '',
+        'datetime': '',
         'content': '',
         'image': '',
         'status': '',
@@ -20,33 +20,27 @@ export default {
         {
             'type': 'input',
             'label': '姓名',
-            'prop': 'owner_name',
-            'field': 'owner_name'
+            'prop': 'repair_name',
+            'field': 'repair_name'
         },
         {
             'type': 'input',
             'label': '电话号码',
-            'prop': 'tel_number',
-            'field': 'tel_number'
+            'prop': 'tel_phone',
+            'field': 'tel_phone'
         },
         {
             'type': 'datetime',
             'label': '日期',
             'prop': '',
-            'field': 'time',
+            'field': 'datetime',
             'datetype': 'date',
         },
         {
             'type': 'input',
             'label': '内容',
             'prop': '',
-            'field': 'content',
-        },
-        {
-            'type': 'input',
-            'label': '图片',
-            'prop': '',
-            'field': 'image',
+            'field': 'repair_content',
         },
         {
             'type': 'option',
