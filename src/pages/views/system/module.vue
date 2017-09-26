@@ -476,11 +476,11 @@ export default {
                         "color": "#173177"
                     },
                     "keyword2": {
-                        "value": "维修报价：500元",
+                        "value": "维修价格为"+msg.repair_price+"元",
                         "color": "#173177"
                     },
                     "remark": {
-                        "value": "感谢使用永兴物业系统，期望为你提供更好的服务体验",
+                        "value": "请点击详情，选择你是否需要进行此项报修，谢谢！",
                         "color": "#173177"
                     }
                 }
