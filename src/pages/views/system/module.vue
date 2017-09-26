@@ -78,7 +78,7 @@
                     <el-table-column :label="item.label" :type="item.expand?'expand':''">
                         <template scope="scope">
                             <template v-if="item.type=='postbutton'">
-                                <el-button type="success" size="mini" @click="postMsg(scope.row.wxopen_id)">发送报价</el-button>
+                                <el-button type="success" size="mini" @click="postMsg(scope.row)">发送报价</el-button>
                             </template>
                             <template v-if="item.type=='tableexpand'">
                                 <!-- <lb-systemmodule :module="item.props" :info="true" :search-value="$store.state.envs.currStudent._id"></lb-systemmodule> -->

@@ -84,6 +84,7 @@
                 repair_name: '',
                 tel_phone: '',
                 position: '',
+                repair_no:'',
                 repair_type: '',
                 repair_content: '',
                 picServerId: ''
@@ -159,6 +160,10 @@
                     })
                 })
             }
+        },
+        mounted(){
+            this.formData.repair_no='YX'+ this.moment().format('YYYYMMDDssSSSS')
+            alert(this.formData.repair_no)
         },
         methods: {
             submitForm(form) {
