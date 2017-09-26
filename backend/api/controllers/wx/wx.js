@@ -322,6 +322,7 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     })
     let access_info = {}
     axios.get('http://api.weixin.qq.com//cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b&secret=def8cea610a77523e47b42d9a28f9182').then(obj => {
+        console.log(obj)
         access_info=obj
     })
     axios.post('http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + access_info.access_token, model).then(obj => {
