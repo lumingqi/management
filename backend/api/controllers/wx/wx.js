@@ -320,14 +320,10 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     var model = yield parse(this, {
         limit: '200kb'
     })
-    let access_options = {
-        hostname: 'api.weixin.qq.com',
-        port: 443,
-        path: '/cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b&secret=def8cea610a77523e47b42d9a28f9182',
-        method: 'GET',
-    }
     let access_info = {}
-    access_info = yield net.ajax(access_options)
+    axios.get('http://api.weixin.qq.com//cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b&secret=def8cea610a77523e47b42d9a28f9182').then(obj => {
+        access_info=obj
+    })
     axios.post('http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + access_info.access_token, model).then(obj => {
         console.log(obj)
     })
