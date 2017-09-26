@@ -472,7 +472,7 @@ export default {
                         "color": "#173177"
                     },
                     "keyword1": {
-                        "value": ${msg.repair_no},
+                        "value": msg.repair_no,
                         "color": "#173177"
                     },
                     "keyword2": {
