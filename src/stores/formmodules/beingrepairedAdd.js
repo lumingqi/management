@@ -6,10 +6,8 @@ export default {
         'repair_name': '',
         'tel_phone': '',
         'datetime': '',
-        'content': '',
-        'image': '',
-        'status': '',
-        'stype': '',
+        'repair_content': '',
+        'repair_status': '',
     },
     'formField': [{
             'type': 'input',
@@ -30,11 +28,10 @@ export default {
             'field': 'tel_phone'
         },
         {
-            'type': 'datetime',
+            'type': 'input',
             'label': '日期',
             'prop': '',
             'field': 'datetime',
-            'datetype': 'date',
         },
         {
             'type': 'input',
@@ -46,33 +43,17 @@ export default {
             'type': 'option',
             'label': '状态',
             'prop': '',
-            'field': 'stype',
+            'field': 'repair_status',
             'optionData': [{
-                value: 'wks',
-                label: '未开始'
+                value: '受理中',
+                label: '受理中'
             }, {
-                value: 'jxz',
-                label: '进行中'
+                value: '已完成',
+                label: '已完成'
             }, {
-                value: 'yjj',
-                label: '已解决'
+                value: '已取消',
+                label: '已取消'
             }],
-        }, {
-            'type': 'option',
-            'label': '类别',
-            'prop': '',
-            'field': 'status',
-            'optionData': [{
-                value: 'wks',
-                label: '灯类'
-            }, {
-                value: 'jxz',
-                label: '电器类'
-            }, {
-                value: 'yjj',
-                label: '通讯类'
-            }]
-
         }
     ],
     'pageTable': 'service',

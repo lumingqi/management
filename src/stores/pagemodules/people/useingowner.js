@@ -57,12 +57,12 @@ export default {
     {
         'type': 'text',
         'label': '姓名',
-        'prop': 'repair_name',
+        'prop': 'owner_name',
     },
     {
         'type': 'text',
         'label': '电话号码',
-        'prop': 'tel_phone',
+        'prop': 'telephone_number',
     },
     {
         'type': 'text',

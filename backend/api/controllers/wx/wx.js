@@ -137,17 +137,17 @@ module.exports.wxmenus = function* wxmenus() {
                     {
                         "type": "view",
                         "name": "我的资料",
-                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/my/myinfo.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
                     },
                     {
                         "type": "view",
                         "name": "我的报修",
-                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/my/myrepair.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
                     },
                     {
                         "type": "view",
                         "name": "我的维修",
-                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/my/myrepair.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
                     },
                 ]
             },

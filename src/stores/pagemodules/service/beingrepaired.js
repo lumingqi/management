@@ -1,6 +1,6 @@
 export default {
     'pageName': 'beingrepaired',
-    'pageLable': '物业人员',
+    'pageLable': '个人正在维修',
     'tableSearch': [],
     'pageSearch': [{
             'type': 'textSearch',
@@ -64,12 +64,12 @@ export default {
         {
             'type': 'text',
             'label': '姓名',
-            'prop': 'owner_name',
+            'prop': 'repair_name',
         },
         {
             'type': 'text',
             'label': '联系方式',
-            'prop': 'tel_number',
+            'prop': 'tel_phone',
         },
         {
             'type': 'datetime',
@@ -79,7 +79,7 @@ export default {
         {
             'type': 'text',
             'label': '内容',
-            'prop': 'content',
+            'prop': 'repair_content',
         },
         {
             'type': 'getPic',
@@ -88,14 +88,18 @@ export default {
         },
         {
             'type': 'text',
-            'label': '状态',
-            'prop': 'status',
+            'label': '保价',
+            'prop': 'repair_price',
         },
         {
             'type': 'text',
-            'label': '类别',
-            'prop': 'stype',
-        }
+            'label': '状态',
+            'prop': 'repair_status',
+        },
+        {
+        'type': 'postbutton',
+        'label': '发送',
+    }
     ],
     'pageTable': 'service',
     'pageTemplate': '',

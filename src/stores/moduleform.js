@@ -26,12 +26,13 @@ import refundfrom from './formmodules/refundfrom.js'
 import recordingdetailform from './formmodules/recordingdetailform.js'
 
 
+
 import useingOwnerAdd from './formmodules/useingOwnerAdd.js'
 import useingEmployeeAdd from './formmodules/useingEmployeeAdd.js'
 import beingrepairedAdd from './formmodules/beingrepairedAdd.js'
 import opinion_add from './formmodules/opinion_add.js'
 import ownervoteAdd from './formmodules/ownervoteAdd.js'
-
+import beingrepairprice from './formmodules/beingrepairprice.js'
 
 
 
@@ -42,6 +43,7 @@ pages['useingEmployeeAdd'] = useingEmployeeAdd
 pages['beingrepairedAdd'] = beingrepairedAdd
 pages['opinion_add'] = opinion_add
 pages['ownervoteAdd'] = ownervoteAdd
+pages['beingrepairprice'] = beingrepairprice
 
 
 

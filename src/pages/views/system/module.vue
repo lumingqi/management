@@ -461,7 +461,7 @@ export default {
     methods: {
         postMsg(msg) {
             console.log(msg)
-            let msginfo = {
+            let msginfo = `{
                 "touser": "oQBciwwrZulw5OGALBB74MVnlnn8",
                 "template_id": "EPoBuDGSu3F_9pWK2-uTR455ugxyL-TCkBfYILuBSyQ",
                 "url": "http://wx.yx101.cn/login.html",
@@ -472,7 +472,7 @@ export default {
                         "color": "#173177"
                     },
                     "keyword1": {
-                        "value": "21321321321321323213",
+                        "value": ${msg.repair_no},
                         "color": "#173177"
                     },
                     "keyword2": {
@@ -484,7 +484,7 @@ export default {
                         "color": "#173177"
                     }
                 }
-            }
+            }`
             axios.post('http://api.yx101.cn/wxpostmsg', msginfo).then(obj => {
                     console.log(obj)
             })

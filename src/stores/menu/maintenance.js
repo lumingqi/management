@@ -16,6 +16,10 @@ export default {
                     'icon': 'fa fa-pencil',
                     'text': '编辑'
                 }, {
+                    'url': 'beingrepairprice',
+                    'icon': 'fa fa-pencil',
+                    'text': '报价'
+                },{
                     'action': 'delete',
                     'icon': 'fa fa-times',
                     'text': '删除'

@@ -80,9 +80,12 @@
                 datetime: '',
                 room_number: '',
                 repair_name: '',
+                wxopen_id:'',
                 tel_phone: '',
                 position: '',
                 repair_no:'',
+                repair_price:'',
+                repair_status:'',
                 repair_type: '',
                 repair_content: '',
                 picServerId: ''
@@ -137,6 +140,7 @@
             if (cdstr.length > 0) {
                 axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
                     console.log(obj.data)
+                    vm.formData.wxopen_id=obj.data.openid
                     let openid = obj.data.openid
                     console.log(openid)
                     filterObj = []
