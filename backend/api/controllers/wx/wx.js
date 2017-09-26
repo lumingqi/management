@@ -328,7 +328,10 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     }
     let access_info = {}
     access_info = yield net.ajax(access_options)
+    let reqinfo={}
     axios.post('http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + access_info.access_token, model).then(obj => {
         console.log(obj)
+        reqinfo=obj
     })
+    this.body = yield reqinfo
 }
