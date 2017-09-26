@@ -135,7 +135,8 @@
 
             },
             getMsg() {
-                axios.post('http://api.yx101.cn/sms', { phone: '13666908726' }).then(obj => {
+                let vm=this
+                axios.post('http://api.yx101.cn/sms', { phone: vm.registerForm.ownphone }).then(obj => {
                     console.log(obj)
                 })
                 this.msgDisabled = true
