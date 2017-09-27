@@ -40,8 +40,7 @@
             <p>内   容：{{formData.repair_content}}</p>
             <p>图   片：</p>
             <img :src="formData.picServerId" style="width:100%" >
-            <p>维修类型：电类</p>
-            <p>维修进度：受理中</p>
+            <p>维修进度:{{formData.repair_status}}</p>
         </el-card>
     </div>
 </body>
@@ -52,54 +51,56 @@
             formData: {}
         },
         created() {
-            let vm=this
-            axios.get('http://api.yx101.cn/management/api/service/59ca091ff2a84a4bae30fbf1').then(obj => {
-                console.log(obj.data[0])
-                this.formData=obj.data[0]
-            })
             // let vm=this
-            // let codeurl = window.location.search
-            // let codeindex = codeurl.indexOf('=')
-            // let codeend = codeurl.indexOf('&')
-            // console.log(codeurl);
-            // console.log(codeindex);
-            // console.log(codeend);
-            // let cdstr = ''
-            // if (codeend) {
-            //     cdstr = codeurl.slice(codeindex + 1, codeend)
-            // }
-            // console.log(cdstr)
-            // if (cdstr.length > 0) {
-            //     axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
-            //         console.log(obj.data)
-            //         let openid = obj.data.openid
-            //         console.log(openid)
-            //         filterObj = []
-            //         filterObj.push({
-            //             'key': 'wxopen_id',
-            //             'value': openid,
-            //             'type': ''
-            //         })
-            //         console.log(openid, filterObj)
-            //         let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
-            //         console.log('filterTxt', filterTxt)
-            //         axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
-            //             console.log(obj.data.data.length)
-            //             if (obj.data.data.length == 0) {
-            //                 console.log('obj.data.data.length')
-            //                 window.location.href = 'http://wx.yx101.cn/login.html'
-            //             }else{
-            //                 let owninfo=obj.data.data[0]
-            //                 vm.formData.room_number=owninfo.room_number
-            //                 vm.formData.owner_name=owninfo.owner_name
-            //                 vm.formData.telephone_number=owninfo.telephone_number
-            //                 sessionStorage.setItem('wxopen_id',owninfo.wxopen_id)
-            //                 //获取cookie的openid
-            //                 //let  openid = sessionStorage.getItem('wxopen_id');
-            //             }
-            //         })
-            //     })
-            // }
+            // axios.get('http://api.yx101.cn/management/api/service/59ca091ff2a84a4bae30fbf1').then(obj => {
+            //     console.log(obj.data[0])
+            //     this.formData=obj.data[0]
+            // })
+            let vm=this
+            let codeurl = window.location.search
+            let codeindex = codeurl.indexOf('=')
+            let codeend = codeurl.indexOf('&')
+            console.log(codeurl);
+            console.log(codeindex);
+            console.log(codeend);
+            let cdstr = ''
+            if (codeend) {
+                cdstr = codeurl.slice(codeindex + 1, codeend)
+            }
+            console.log(cdstr)
+            if (cdstr.length > 0) {
+                axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
+                    console.log(obj.data)
+                    let openid = obj.data.openid
+                    console.log(openid)
+                    filterObj = []
+                    filterObj.push({
+                        'key': 'wxopen_id',
+                        'value': openid,
+                        'type': ''
+                    })
+                    console.log(openid, filterObj)
+                    let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+                    console.log('filterTxt', filterTxt)
+                    axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+                        console.log(obj.data.data.length)
+                        if (obj.data.data.length == 0) {
+                            console.log('obj.data.data.length')
+                             window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
+                        }else{
+                            let owninfo=obj.data.data[0]
+                            vm.formData.room_number=owninfo.room_number
+                            vm.formData.owner_name=owninfo.owner_name
+                            vm.formData.telephone_number=owninfo.telephone_number
+                            vm.formData.repair_content=owninfo.repair_content
+                            vm.formData.repair_status=owninfo.repair_status
+                            sessionStorage.setItem('wxopen_id',owninfo.wxopen_id)
+                            //获取cookie的openid
+                            //let  openid = sessionStorage.getItem('wxopen_id');
+                        }
+                    })
+                })
+            }
         },
         methods: {
             editinfo(){

@@ -46,15 +46,15 @@
                     <el-form-item label="联系电话" prop="tel_phone">
                         <el-input v-model="formData.tel_phone" placeholder="请输入报修联系号码"></el-input>
                     </el-form-item>
-                    <el-form-item label="位置" prop="position">
+                    <!-- <el-form-item label="位置" prop="position">
                         <el-input v-model="formData.position" placeholder="请输入维修位置"></el-input>
-                    </el-form-item>
-                    <el-form-item label="报修类别" prop="repair_type">
+                    </el-form-item> -->
+                    <!-- <el-form-item label="报修类别" prop="repair_type">
                         <el-select v-model="formData.repair_type" placeholder="请选择">
                             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                             </el-option>
                         </el-select>
-                    </el-form-item>
+                    </el-form-item> -->
                     <el-form-item label="报修内容" prop="repair_content">
                         <el-input type="textarea" v-model="formData.repair_content" placeholder="请输入保修内容"></el-input>
                     </el-form-item>
@@ -82,25 +82,25 @@
                 repair_name: '',
                 wxopen_id:'',
                 tel_phone: '',
-                position: '',
+                //position: '',
                 isRepair:'2',
                 repair_no:'',
                 repair_price:'',
                 repair_status:'受理中',
-                repair_type: '',
+                // repair_type: '',
                 repair_content: '',
                 picServerId: ''
             },
-            options: [{
-                value: '0',
-                label: '水类'
-            }, {
-                value: '1',
-                label: '电类'
-            }, {
-                value: '2',
-                label: '公共设施'
-            }],
+            // options: [{
+            //     value: '0',
+            //     label: '水类'
+            // }, {
+            //     value: '1',
+            //     label: '电类'
+            // }, {
+            //     value: '2',
+            //     label: '公共设施'
+            // }],
             rules: {
                 datetime: [
                     { required: true, message: '请输入报修时间', trigger: 'blur' }
