@@ -31,17 +31,15 @@
     <div id="app">
         <el-row>
             <el-col :span="22" :offset="1">
-                
-                <h3 style="text-align:center">您的报修编号：{{formData.repair_no}}</h3>
-                <h3 style="text-align:center">此项报修价格：{{formData.repair_price}}</h3>
-                
+                <h4 style="text-align:center">此项报修价格：{{formData.repair_price}}</h4>
                 <el-form :model="formData" ref="formData" label-width="80px">
                     <el-form-item label="是否维修" prop="datetime">
-                        <el-radio class="radio" v-model="radio" label="1">同意</el-radio>
-                        <el-radio class="radio" v-model="radio" label="2">取消</el-radio>
+                        <el-radio class="radio" v-model="isRepair" label="1">同意</el-radio>
+                        <el-radio class="radio" v-model="isRepair" label="2">取消</el-radio>
                     </el-form-item>
+                    {{isRepair}}
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('formData')">提交报修</el-button>
+                        <el-button type="primary" @click="submitForm('formData')">提交意愿</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
