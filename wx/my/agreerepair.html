@@ -34,8 +34,8 @@
                 <h4 style="text-align:center">此项报修价格：{{formData.repair_price}}</h4>
                 <el-form :model="formData" ref="formData" label-width="80px">
                     <el-form-item label="是否维修" prop="datetime">
-                        <el-radio class="radio" v-model="isRepair" label="1">同意</el-radio>
-                        <el-radio class="radio" v-model="isRepair" label="2">取消</el-radio>
+                        <el-radio class="radio" v-model="isRepair" label="0">同意</el-radio>
+                        <el-radio class="radio" v-model="isRepair" label="1">取消</el-radio>
                     </el-form-item>
                     {{isRepair}}
                     <el-form-item>

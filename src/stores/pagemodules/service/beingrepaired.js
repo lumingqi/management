@@ -97,6 +97,22 @@ export default {
             'prop': 'repair_price',
         },
         {
+            'type': 'getButtongroupText',
+            'label': '是否同意维修',
+            'color': 'gray',
+            'prop': 'isRepair',
+            'othertype': [{
+                'value': '0',
+                'text': '同意'
+            }, {
+                'value': '1',
+                'text': '不同意'
+            },{
+                'value': '2',
+                'text': '待确认'
+            }]
+        },
+        {
             'type': 'text',
             'label': '状态',
             'prop': 'repair_status',
