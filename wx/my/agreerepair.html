@@ -128,6 +128,9 @@
                         let id=info._id
                         axios.put('http://api.yx101.cn/management/api/service/' + id,{'isRepair':vm.isRepair}).then(obj => {
                             console.log(obj)
+                            if(obj.status=='200'){
+                                alert('提交成功')
+                            }
                         })
                     })
                 }

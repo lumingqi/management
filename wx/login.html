@@ -110,12 +110,15 @@
                                     let owninfo = obj.data.data[0]
                                     console.log(owninfo._id)
                                     if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
-                                        console.log('openid2 is ' + openid)
                                         owninfo.wxopen_id = vm.openId
                                         let ownid = owninfo._id
                                         console.log(ownid)
                                         axios.put('http://api.yx101.cn/management/api/owner/' + ownid, owninfo).then(obj => {
                                             console.log(obj)
+                                            if (obj.status == '200') {
+                                                sessionStorage.setItem('wxopen_id',vm.openId)
+                                                window.location.href = 'http://wx.yx101.cn/my/myinfo.html'
+                                            }
                                         })
                                     } else {
                                         alert('此手机号已绑定微信，请用绑定微信登录或者解绑后再绑定')
@@ -127,13 +130,13 @@
                             }
                         });
                         alert('恭喜你，验证通过')
-                    }else{
+                    } else {
                         alert('短信验证码错误或者已超时')
                     }
                 })
             },
             getMsg() {
-                let vm=this
+                let vm = this
                 axios.post('http://api.yx101.cn/sms', { phone: vm.registerForm.ownphone }).then(obj => {
                     console.log(obj)
                 })

@@ -35,14 +35,11 @@
                 <!-- <el-button style="float: right;" type="primary" @click="editinfo">修改资料</el-button> -->
             </div>
             <p>房   号：</p>
-             <!-- <p>{{formData.room_number}}</p> -->
-              <p>9#903</p>
+            <el-tag type="gray">{{formData.room_number}}</el-tag>
             <p>业主姓名:</p>
-            <!-- <p>{{formData.owner_name}}</p> -->
-             <p>许多大</p>
+            <el-tag type="gray">{{formData.owner_name}}</el-tag>
             <p>登记手机:</p>
-            <!-- <p>{{formData.telephone_number}}</p> -->
-            <p>13666908876</p>
+            <el-tag type="gray">{{formData.telephone_number}}</el-tag>
         </el-card>
     </div>
 </body>
@@ -57,49 +54,49 @@
             }
         },
         created() {
-            // let vm=this
-            // let codeurl = window.location.search
-            // let codeindex = codeurl.indexOf('=')
-            // let codeend = codeurl.indexOf('&')
-            // console.log(codeurl);
-            // console.log(codeindex);
-            // console.log(codeend);
-            // let cdstr = ''
-            // if (codeend) {
-            //     cdstr = codeurl.slice(codeindex + 1, codeend)
-            // }
-            // console.log(cdstr)
-            // if (cdstr.length > 0) {
-            //     axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
-            //         console.log(obj.data)
-            //         let openid = obj.data.openid
-            //         console.log(openid)
-            //         filterObj = []
-            //         filterObj.push({
-            //             'key': 'wxopen_id',
-            //             'value': openid,
-            //             'type': ''
-            //         })
-            //         console.log(openid, filterObj)
-            //         let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
-            //         console.log('filterTxt', filterTxt)
-            //         axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
-            //             console.log(obj.data.data.length)
-            //             if (obj.data.data.length == 0) {
-            //                 console.log('obj.data.data.length')
-            //                 window.location.href = 'http://wx.yx101.cn/login.html'
-            //             }else{
-            //                 let owninfo=obj.data.data[0]
-            //                 vm.formData.room_number=owninfo.room_number
-            //                 vm.formData.owner_name=owninfo.owner_name
-            //                 vm.formData.telephone_number=owninfo.telephone_number
-            //                 sessionStorage.setItem('wxopen_id',owninfo.wxopen_id)
-            //                 //获取cookie的openid
-            //                 //let  openid = sessionStorage.getItem('wxopen_id');
-            //             }
-            //         })
-            //     })
-            // }
+            let vm=this
+            let codeurl = window.location.search
+            let codeindex = codeurl.indexOf('=')
+            let codeend = codeurl.indexOf('&')
+            console.log(codeurl);
+            console.log(codeindex);
+            console.log(codeend);
+            let cdstr = ''
+            if (codeend) {
+                cdstr = codeurl.slice(codeindex + 1, codeend)
+            }
+            console.log(cdstr)
+            if (cdstr.length > 0) {
+                axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
+                    console.log(obj.data)
+                    let openid = obj.data.openid
+                    console.log(openid)
+                    filterObj = []
+                    filterObj.push({
+                        'key': 'wxopen_id',
+                        'value': openid,
+                        'type': ''
+                    })
+                    console.log(openid, filterObj)
+                    let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+                    console.log('filterTxt', filterTxt)
+                    axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+                        console.log(obj.data.data.length)
+                        if (obj.data.data.length == 0) {
+                            console.log('obj.data.data.length')
+                            window.location.href = 'http://wx.yx101.cn/login.html'
+                        }else{
+                            let owninfo=obj.data.data[0]
+                            vm.formData.room_number=owninfo.room_number
+                            vm.formData.owner_name=owninfo.owner_name
+                            vm.formData.telephone_number=owninfo.telephone_number
+                            sessionStorage.setItem('wxopen_id',owninfo.wxopen_id)
+                            //获取cookie的openid
+                            //let  openid = sessionStorage.getItem('wxopen_id');
+                        }
+                    })
+                })
+            }
         },
         methods: {
             editinfo(){
