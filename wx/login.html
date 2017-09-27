@@ -86,7 +86,7 @@
             if (cdstr.length > 0) {
                 axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
                     vm.openId = obj.data.openid
-                    console.log(vm.openId)
+                    console.log('------',vm.openId)
                 })
             }
         },
