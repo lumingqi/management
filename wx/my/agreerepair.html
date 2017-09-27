@@ -31,15 +31,14 @@
     <div id="app">
         <el-row>
             <el-col :span="22" :offset="1">
-                <h4 style="text-align:center">此项报修价格：{{formData.repair_price}}</h4>
+                <h4 style="text-align:center">此项报修价格：{{]repair_price}}</h4>
                 <el-form :model="formData" ref="formData" label-width="80px">
                     <el-form-item label="是否维修" prop="datetime">
                         <el-radio class="radio" v-model="isRepair" label="0">同意</el-radio>
                         <el-radio class="radio" v-model="isRepair" label="1">取消</el-radio>
                     </el-form-item>
-                    {{isRepair}}
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('formData')">提交意愿</el-button>
+                        <el-button type="primary" @click="submitAgree">提交意愿</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
@@ -50,11 +49,9 @@
     var app = new Vue({
         el: '#app',
         data: {
-            isRepair:'',
-            formData: {
+            isRepair: '',
                 repair_price: '',
                 repair_no: '',
-            }
         },
         created() {
             function getParams(key) {
@@ -65,9 +62,9 @@
                 }
                 return null;
             };
-            this.formData.repair_price = getParams('repair_price')
-            this.formData.repair_no = getParams('repair_no')
-            console.log('------',this.formData.repair_price, this.formData.repair_no)
+            this.repair_price = getParams('repair_price')
+            this.frepair_no = getParams('repair_no')
+            console.log('------', this.repair_price, this.repair_no)
             // let vm=this
             // let codeurl = window.location.search
             // let codeindex = codeurl.indexOf('=')
@@ -113,8 +110,21 @@
             // }
         },
         methods: {
-            editinfo() {
-                window.location.href = 'http://wx.yx101.cn/my/editinfo.html'
+            submitAgree() {
+                let vm=this
+                if (this.isRepair != '') {
+                    filterObj = []
+                    filterObj.push({
+                        'key': 'repair_no',
+                        'value': vm.repair_no,
+                        'type': ''
+                    })
+                    console.log(openid, filterObj)
+                    let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+                    axios.get('http://api.yx101.cn/management/api/service/?filter=' + filterTxt).then(obj => {
+                        console.log(obj.data)
+                    })
+                }
             }
         }
     })
