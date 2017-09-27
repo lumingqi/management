@@ -31,7 +31,7 @@
     <div id="app">
         <el-row>
             <el-col :span="22" :offset="1">
-                <h4 style="text-align:center">此项报修价格：{{]repair_price}}</h4>
+                <h4 style="text-align:center">此项报修价格：{{repair_price}}</h4>
                 <el-form :model="formData" ref="formData" label-width="80px">
                     <el-form-item label="是否维修" prop="datetime">
                         <el-radio class="radio" v-model="isRepair" label="0">同意</el-radio>
@@ -50,8 +50,8 @@
         el: '#app',
         data: {
             isRepair: '',
-                repair_price: '',
-                repair_no: '',
+            repair_price: '',
+            repair_no: '',
         },
         created() {
             function getParams(key) {
@@ -63,7 +63,7 @@
                 return null;
             };
             this.repair_price = getParams('repair_price')
-            this.frepair_no = getParams('repair_no')
+            this.repair_no = getParams('repair_no')
             console.log('------', this.repair_price, this.repair_no)
             // let vm=this
             // let codeurl = window.location.search
@@ -111,7 +111,7 @@
         },
         methods: {
             submitAgree() {
-                let vm=this
+                let vm = this
                 if (this.isRepair != '') {
                     filterObj = []
                     filterObj.push({
