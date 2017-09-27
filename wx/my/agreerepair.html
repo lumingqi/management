@@ -49,6 +49,7 @@
     var app = new Vue({
         el: '#app',
         data: {
+            radio:'',
             formData: {
                 repair_price: '',
                 repair_no: '',
@@ -65,7 +66,7 @@
             };
             this.repair_price = getParams('repair_price')
             this.repair_no = getParams('repair_no')
-            alert(this.repair_price, this.repair_no)
+            console.log('------',this.repair_price, this.repair_no)
             // let vm=this
             // let codeurl = window.location.search
             // let codeindex = codeurl.indexOf('=')
