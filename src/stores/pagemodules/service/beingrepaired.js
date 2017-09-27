@@ -58,6 +58,11 @@ export default {
         },
         {
             'type': 'text',
+            'label': '报修单号',
+            'prop': 'repair_no',
+        },
+        {
+            'type': 'text',
             'label': '房号',
             'prop': 'room_number',
         },
