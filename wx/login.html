@@ -16,7 +16,7 @@
     <div id="app">
         <el-row>
             <el-col :span="22" :offset="1">
-                <h3 style="text-align:center">您的账号还未绑定，请先绑定微信号</h3>
+                <h4 style="text-align:center">您的账号还未绑定，请先绑定微信号</h4>
                 <el-form :model="registerForm" :rules="rules" ref="registerForm" label-width="100px">
                     <el-form-item label="物业登记手机" prop="phone">
                         <el-input v-model="registerForm.phone"></el-input>
@@ -116,10 +116,10 @@
                                         console.log(ownid)
                                         axios.put('http://api.yx101.cn/management/api/owner/' + ownid, owninfo).then(obj => {
                                             console.log(obj)
-                                            // if (obj.status == '200') {
-                                            //     sessionStorage.setItem('wxopen_id',vm.openId)
-                                            //     window.location.href = 'http://wx.yx101.cn/my/myinfo.html'
-                                            // }
+                                            if (obj.status == '200') {
+                                                sessionStorage.setItem('wxopen_id',vm.openId)
+                                                window.location.href = 'http://wx.yx101.cn/my/myinfo.html'
+                                            }
                                         })
                                     } else {
                                         alert('此手机号已绑定微信，请用绑定微信登录或者解绑后再绑定')
