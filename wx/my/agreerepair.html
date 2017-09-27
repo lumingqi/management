@@ -117,13 +117,18 @@
                     filterObj = []
                     filterObj.push({
                         'key': 'repair_no',
-                        'value': vm.repair_no,
+                        'value': isRepair.repair_no,
                         'type': ''
                     })
                     console.log(vm.repair_no, filterObj)
                     let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
                     axios.get('http://api.yx101.cn/management/api/service/?filter=' + filterTxt).then(obj => {
-                        console.log(obj.data)
+                        console.log(obj.data.data[0])
+                        let info=obj.data.data[0]
+                        let id=info._id
+                        axios.put('http://api.yx101.cn/management/api/service/' + id,{'isRepair':vm.isRepair}).then(obj => {
+                            console.log(obj)
+                        })
                     })
                 }
             }
