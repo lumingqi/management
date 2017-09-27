@@ -464,7 +464,7 @@ export default {
             let msginfo = {
                 "touser": "oQBciwwrZulw5OGALBB74MVnlnn8",
                 "template_id": "EPoBuDGSu3F_9pWK2-uTR455ugxyL-TCkBfYILuBSyQ",
-                "url": "http://wx.yx101.cn/login.html?repair_no="+msg.repair_no+"&&repair_price="+msg.repair_price,
+                "url": "http://wx.yx101.cn/my/agreerepair.html?repair_no=" + msg.repair_no + "&&repair_price=" + msg.repair_price,
                 "topcolor": "#FF0000",
                 "data": {
                     "first": {
@@ -476,7 +476,7 @@ export default {
                         "color": "#173177"
                     },
                     "keyword2": {
-                        "value": "维修价格为"+msg.repair_price+"元",
+                        "value": "维修价格为" + msg.repair_price + "元",
                         "color": "#173177"
                     },
                     "remark": {
@@ -486,7 +486,7 @@ export default {
                 }
             }
             axios.post('http://api.yx101.cn/wxpostmsg', msginfo).then(obj => {
-                    console.log(obj)
+                console.log(obj)
             })
 
         },
