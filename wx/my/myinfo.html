@@ -84,7 +84,7 @@
                         console.log(obj.data.data.length)
                         if (obj.data.data.length == 0) {
                             console.log('obj.data.data.length')
-                            window.location.href = 'http://wx.yx101.cn/login.html'
+                            window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
                         }else{
                             let owninfo=obj.data.data[0]
                             vm.formData.room_number=owninfo.room_number
