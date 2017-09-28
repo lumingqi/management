@@ -112,9 +112,10 @@ module.exports.wxsignature = function* wxsignature() {
     if ('GET' != this.method) return yield next
     this.body = yield config
 }
-module.exports.wxjssignature = function* wxjssignature(href,next) {
+module.exports.wxjssignature = function* wxjssignature(next) {
     if ('GET' != this.method) return yield next
-    this.body = yield wxjssignaturefun(href)
+        console.log(this.query.href)
+    this.body = yield wxjssignaturefun(this.query.href)
 }
 //获取 access_token
 module.exports.wxmenus = function* wxmenus() {

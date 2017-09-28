@@ -13,7 +13,7 @@
     <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
 
     <script>
-        axios.get('http://api.yx101.cn/wxjssignature/?href='+encodeURI(location.href))
+        axios.get('http://api.yx101.cn/wxjssignature/?href='+location.href)
             .then(function (res) {
                 wx.config(res.data)
                 console.log(res.data)

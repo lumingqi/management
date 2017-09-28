@@ -24,7 +24,7 @@ app.use(route.get('/wxreg/', wx.wxreg))
 app.use(route.post('/wx/', wx.wx))
 app.use(route.get('/:db/wxqrcode/:id', wx.wxqrcode))
 app.use(route.get('/wxsignature/', wx.wxsignature))
-app.use(route.get('/wxjssignature/:href', wx.wxjssignature))
+app.use(route.get('/wxjssignature', wx.wxjssignature))
 app.use(route.post('/wxpostmsg/', wx.wxpostmsg))
 
 
