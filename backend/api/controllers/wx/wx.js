@@ -75,38 +75,46 @@ module.exports.wxqrcode = function* wxqrcode(db, id, next) {
     wxinfo = yield net.ajax(options, body)
     this.body = yield wxinfo
 }
+
+function wxjssignaturefun(href) {
+    return new Promise(function (resolve) {
+        let access_smssend = {}
+        let access_options = {
+            hostname: 'api.weixin.qq.com',
+            port: 443,
+            path: '/cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b&secret=def8cea610a77523e47b42d9a28f9182',
+            method: 'GET',
+        }
+        let access_info = {}
+        net.ajax(access_options).then(access_info => {
+            let options = {
+                hostname: 'api.weixin.qq.com',
+                port: 443,
+                path: '/cgi-bin/ticket/getticket?access_token=' + access_info.access_token + '&type=jsapi',
+                method: 'GET',
+            }
+            return net.ajax(options)
+        }).then(access_smssend => {
+            var sha1Code = crypto.createHash('sha1')
+            config.timestamp = parseInt(new Date().getTime() / 1000)
+            var code = sha1Code.update(access_smssend.ticket + config.timestamp, 'utf-8').digest('hex')
+            config.nonceStr = code.substring(0, 16)
+
+
+            var str = `jsapi_ticket=${access_smssend.ticket}&noncestr=${config.nonceStr}&timestamp=${config.timestamp}&url=` + href
+            var sha2Code = crypto.createHash('sha1')
+            config.signature = sha2Code.update(str, 'utf-8').digest('hex')
+            resolve(config)
+        })
+    })
+}
 module.exports.wxsignature = function* wxsignature() {
     if ('GET' != this.method) return yield next
     this.body = yield config
 }
-module.exports.wxjssignature = function () {
-    let access_smssend = {}
-    let access_options = {
-        hostname: 'api.weixin.qq.com',
-        port: 443,
-        path: '/cgi-bin/token?grant_type=client_credential&appid=wx7e0aa09a76fe616b&secret=def8cea610a77523e47b42d9a28f9182',
-        method: 'GET',
-    }
-    let access_info = {}
-    net.ajax(access_options).then(access_info => {
-        let options = {
-            hostname: 'api.weixin.qq.com',
-            port: 443,
-            path: '/cgi-bin/ticket/getticket?access_token=' + access_info.access_token + '&type=jsapi',
-            method: 'GET',
-        }
-        return net.ajax(options)
-    }).then(access_smssend => {
-        var sha1Code = crypto.createHash('sha1')
-        config.timestamp = parseInt(new Date().getTime() / 1000)
-        var code = sha1Code.update(access_smssend.ticket + config.timestamp, 'utf-8').digest('hex')
-        config.nonceStr = code.substring(0, 16)
-
-
-        var str = `jsapi_ticket=${access_smssend.ticket}&noncestr=${config.nonceStr}&timestamp=${config.timestamp}&url=`+location.href
-        var sha2Code = crypto.createHash('sha1')
-        config.signature = sha2Code.update(str, 'utf-8').digest('hex')
-    })
+module.exports.wxjssignature = function* wxjssignature(href,next) {
+    if ('GET' != this.method) return yield next
+    this.body = yield wxjssignaturefun(href)
 }
 //获取 access_token
 module.exports.wxmenus = function* wxmenus() {
@@ -328,10 +336,10 @@ module.exports.wxpostmsg = function* wxpostmsg() {
     }
     let access_info = {}
     access_info = yield net.ajax(access_options)
-    let reqinfo={}
+    let reqinfo = {}
     axios.post('http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + access_info.access_token, model).then(obj => {
         console.log(obj)
-        reqinfo=obj
+        reqinfo = obj
     })
     this.body = yield reqinfo
 }
