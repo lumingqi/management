@@ -30,17 +30,20 @@
 <body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg);background-size: cover;">
     <div id="app">
         <el-card class="box-card">
-            <div slot="header" class="clearfix">
-                <span style="line-height: 36px;">我的报修：</span>
-                <!-- <el-button style="float: right;" type="primary" @click="editinfo">修改资料</el-button> -->
+            <div v-if="!hasRep">暂无您的报修记录</div>
+            <div v-if="hasRep">
+                <div slot="header" class="clearfix">
+                    <span style="line-height: 36px;">我的报修：</span>
+                    <!-- <el-button style="float: right;" type="primary" @click="editinfo">修改资料</el-button> -->
+                </div>
+                <p>房 号：{{formData.room_number}}</p>
+                <p>报修人：{{formData.repair_name}}</p>
+                <p>电话号码：{{formData.tel_phone}}</p>
+                <p>内 容：{{formData.repair_content}}</p>
+                <p>图 片：</p>
+                <img :src="formData.picServerId" style="width:100%">
+                <p>维修进度:{{formData.repair_status}}</p>
             </div>
-            <p>房 号：{{formData.room_number}}</p>
-            <p>报修人：{{formData.repair_name}}</p>
-            <p>电话号码：{{formData.tel_phone}}</p>
-            <p>内 容：{{formData.repair_content}}</p>
-            <p>图 片：</p>
-            <img :src="formData.picServerId" style="width:100%">
-            <p>维修进度:{{formData.repair_status}}</p>
         </el-card>
     </div>
 </body>
@@ -48,6 +51,7 @@
     var app = new Vue({
         el: '#app',
         data: {
+            hasRep: false,
             formData: {}
         },
         created() {
@@ -88,15 +92,22 @@
                             console.log('obj.data.data.length')
                             window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
                         } else {
-                            let owninfo = obj.data.data[0]
-                            vm.formData.room_number = owninfo.room_number
-                            vm.formData.owner_name = owninfo.owner_name
-                            vm.formData.telephone_number = owninfo.telephone_number
-                            vm.formData.repair_content = owninfo.repair_content
-                            vm.formData.repair_status = owninfo.repair_status
-                            sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
-                            //获取cookie的openid
-                            //let  openid = sessionStorage.getItem('wxopen_id');
+                            axios.get('http://api.yx101.cn/management/api/service/?filter=' + filterTxt).then(obj => {
+                                if (obj.data.data.length >0) {
+                                    vm.hasRep=true
+                                    let owninfo = obj.data.data[0]
+                                vm.formData.room_number = owninfo.room_number
+                                vm.formData.owner_name = owninfo.owner_name
+                                vm.formData.telephone_number = owninfo.telephone_number
+                                vm.formData.repair_content = owninfo.repair_content
+                                vm.formData.repair_status = owninfo.repair_status
+                                sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
+                                //获取cookie的openid
+                                //let  openid = sessionStorage.getItem('wxopen_id');
+                                }
+                                
+                            })
+
                         }
                     })
                 })
