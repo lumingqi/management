@@ -13,7 +13,7 @@
     <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
 
     <script>
-        axios.get('http://api.yx101.cn/wxjssignature/?href='+encodeURIComponent(location.href))
+        axios.get('http://api.yx101.cn/wxjssignature/?href=' + encodeURIComponent(location.href))
             .then(function (res) {
                 wx.config(res.data)
                 console.log(res.data)
@@ -79,13 +79,13 @@
                 datetime: '',
                 room_number: '',
                 repair_name: '',
-                wxopen_id:'',
+                wxopen_id: '',
                 tel_phone: '',
                 //position: '',
-                isRepair:'2',
-                repair_no:'',
-                repair_price:'待报价',
-                repair_status:'受理中',
+                isRepair: '2',
+                repair_no: '',
+                repair_price: '待报价',
+                repair_status: '受理中',
                 // repair_type: '',
                 repair_content: '',
                 picServerId: ''
@@ -126,7 +126,7 @@
             }
         },
         created() {
-            let vm=this
+            let vm = this
             let codeurl = window.location.search
             let codeindex = codeurl.indexOf('=')
             let codeend = codeurl.indexOf('&')
@@ -141,7 +141,7 @@
             if (cdstr.length > 0) {
                 axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
                     console.log(obj.data)
-                    vm.formData.wxopen_id=obj.data.openid
+                    vm.formData.wxopen_id = obj.data.openid
                     let openid = obj.data.openid
                     console.log(vm.formData.wxopen_id)
                     filterObj = []
@@ -164,8 +164,12 @@
                 })
             }
         },
-        mounted(){
-            this.formData.repair_no='YX'+ moment().format('YYYYMMDDssSSSS')
+        mounted() {
+            let str=''
+            for (var i = 0; i < 6; i += 1) {
+                str += Math.floor(Math.random() * 10);
+            }
+            this.formData.repair_no = 'YX' + moment().format('YYYYMMDDssSSSS')+str
             console.log(this.formData.repair_no)
         },
         methods: {
