@@ -103,7 +103,7 @@ module.exports.wxjssignature = function () {
         config.nonceStr = code.substring(0, 16)
 
 
-        var str = `jsapi_ticket=${access_smssend.ticket}&noncestr=${config.nonceStr}&timestamp=${config.timestamp}&url=http://wx.yx101.cn/`
+        var str = `jsapi_ticket=${access_smssend.ticket}&noncestr=${config.nonceStr}&timestamp=${config.timestamp}&url=`+window.location.href
         var sha2Code = crypto.createHash('sha1')
         config.signature = sha2Code.update(str, 'utf-8').digest('hex')
     })
