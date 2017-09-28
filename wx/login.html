@@ -119,6 +119,7 @@
                                             if (obj.status == '200') {
                                                 sessionStorage.setItem('wxopen_id',vm.openId)
                                                 window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/my/myinfo.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
+                                                 alert('恭喜你，验证通过，即将跳转个人资料')
                                             }
                                         })
                                     } else {
@@ -130,7 +131,7 @@
                                 return false;
                             }
                         });
-                        alert('恭喜你，验证通过，即将跳转个人资料')
+                       
                     } else {
                         alert('短信验证码错误或者已超时')
                     }
