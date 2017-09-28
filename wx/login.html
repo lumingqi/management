@@ -15,7 +15,10 @@
 <body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg);background-size: cover;">
     <div id="app">
         <el-row>
-            <el-col :span="22" :offset="1">
+            <el-col :span="22" :offset="1" v-if="isSucceed">
+                <h3>恭喜你，验证通过，即将跳转个人资料页面...</h3>
+            </el-col>
+            <el-col :span="22" :offset="1" v-if="!isSucceed">
                 <h4 style="text-align:center">您的账号还未绑定，请先绑定微信号</h4>
                 <el-form :model="registerForm" :rules="rules" ref="registerForm" label-width="100px">
                     <el-form-item label="物业登记手机" prop="phone">
@@ -40,6 +43,7 @@
     var app = new Vue({
         el: '#app',
         data: {
+            isSucceed:false,
             msgDisabled: false,
             msgText: '获取验证码',
             openId: '',
@@ -86,7 +90,7 @@
             if (cdstr.length > 0) {
                 axios.post('http://api.yx101.cn/wx', { code: cdstr }).then(obj => {
                     vm.openId = obj.data.openid
-                    console.log('------',vm.openId)
+                    console.log('------', vm.openId)
                 })
             }
         },
@@ -117,9 +121,9 @@
                                         axios.put('http://api.yx101.cn/management/api/owner/' + ownid, owninfo).then(obj => {
                                             console.log(obj)
                                             if (obj.status == '200') {
-                                                sessionStorage.setItem('wxopen_id',vm.openId)
+                                                sessionStorage.setItem('wxopen_id', vm.openId)
+                                                vm.isSucceed=true
                                                 window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/my/myinfo.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
-                                                 alert('恭喜你，验证通过，即将跳转个人资料')
                                             }
                                         })
                                     } else {
@@ -131,7 +135,7 @@
                                 return false;
                             }
                         });
-                       
+
                     } else {
                         alert('短信验证码错误或者已超时')
                     }
