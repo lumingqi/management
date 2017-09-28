@@ -103,7 +103,7 @@ module.exports.wxjssignature = function () {
         config.nonceStr = code.substring(0, 16)
 
 
-        var str = `jsapi_ticket=${access_smssend.ticket}&noncestr=${config.nonceStr}&timestamp=${config.timestamp}&url=http://wx.yx101.cn/`
+        var str = `jsapi_ticket=${access_smssend.ticket}&noncestr=${config.nonceStr}&timestamp=${config.timestamp}&url=https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/&response_type=code&scope=snsapi_base&state=123#wechat_redirect`
         var sha2Code = crypto.createHash('sha1')
         config.signature = sha2Code.update(str, 'utf-8').digest('hex')
     })
@@ -157,12 +157,12 @@ module.exports.wxmenus = function* wxmenus() {
                     {
                         "type": "view",
                         "name": "家里的报修",
-                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                        "url": "http://wx.yx101.cn"
                     },
                     {
                         "type": "view",
                         "name": "公共的报修",
-                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                        "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
                     },
                 ]
             },

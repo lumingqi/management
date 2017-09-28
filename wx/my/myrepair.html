@@ -93,19 +93,19 @@
                             window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
                         } else {
                             axios.get('http://api.yx101.cn/management/api/service/?filter=' + filterTxt).then(obj => {
-                                if (obj.data.data.length >0) {
-                                    vm.hasRep=true
+                                if (obj.data.data.length > 0) {
+                                    vm.hasRep = true
                                     let owninfo = obj.data.data[0]
-                                vm.formData.room_number = owninfo.room_number
-                                vm.formData.owner_name = owninfo.owner_name
-                                vm.formData.telephone_number = owninfo.telephone_number
-                                vm.formData.repair_content = owninfo.repair_content
-                                vm.formData.repair_status = owninfo.repair_status
-                                sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
-                                //获取cookie的openid
-                                //let  openid = sessionStorage.getItem('wxopen_id');
+                                    vm.formData.room_number = owninfo.room_number
+                                    vm.formData.owner_name = owninfo.owner_name
+                                    vm.formData.telephone_number = owninfo.telephone_number
+                                    vm.formData.repair_content = owninfo.repair_content
+                                    vm.formData.repair_status = owninfo.repair_status
+                                    sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
+                                    //获取cookie的openid
+                                    //let  openid = sessionStorage.getItem('wxopen_id');
                                 }
-                                
+
                             })
 
                         }
