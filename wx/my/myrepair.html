@@ -18,16 +18,14 @@
         <el-card class="box-card">
             <div v-if="noRep">暂无您的报修记录</div>
             <div v-if="hasRep">
-                <div slot="header" class="clearfix">
-                    <span style="line-height: 36px;">我的报修：</span>
-                    <!-- <el-button style="float: right;" type="primary" @click="editinfo">修改资料</el-button> -->
-                </div>
+                <p>报修单号：{{room_number}}</p>
                 <p>房 号：{{room_number}}</p>
                 <p>报修人：{{repair_name}}</p>
                 <p>电话号码：{{tel_phone}}</p>
                 <p>内 容：{{repair_content}}</p>
                 <p>图 片：</p>
-                <img :src="picServerId" style="width:100%">
+                <a href="picServerId">点击查看图片</a>
+                <!-- <img :src="picServerId" style="width:100%"> -->
                 <p>维修进度:{{repair_status}}</p>
             </div>
         </el-card>
@@ -37,14 +35,15 @@
     var app = new Vue({
         el: '#app',
         data: {
-            noRep:false,
+            noRep: false,
             hasRep: false,
-            room_number:'',
-            repair_name:'',
-            tel_phone:'',
-            repair_content:'',
-            picServerId:'',
-            repair_status:'',
+            repair_no: '',
+            room_number: '',
+            repair_name: '',
+            tel_phone: '',
+            repair_content: '',
+            picServerId: '',
+            repair_status: '',
         },
         created() {
             // let vm=this
@@ -88,19 +87,18 @@
                                 if (obj.data.data.length > 0) {
                                     vm.hasRep = true
                                     let owninfo = obj.data.data[0]
+                                    vm.repair_no = owninfo.repair_no
                                     vm.room_number = owninfo.room_number
                                     vm.repair_name = owninfo.repair_name
                                     vm.tel_phone = owninfo.tel_phone
                                     vm.repair_content = owninfo.repair_content
-                                    vm.picServerId= owninfo.picServerId
+                                    vm.picServerId = owninfo.picServerId
                                     vm.repair_status = owninfo.repair_status
                                     sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
                                     //获取cookie的openid
                                     //let  openid = sessionStorage.getItem('wxopen_id');
                                 }
-
                             })
-
                         }
                     })
                 })
