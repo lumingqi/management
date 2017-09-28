@@ -11,26 +11,12 @@
     <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
     <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
-
-    <script>
-        axios.get('http://api.yx101.cn/wxsignature')
-            .then(function (res) {
-                wx.config(res.data)
-                console.log(res.data)
-                wx.ready(() => {
-                    console.log('wx ready')
-                });
-                wx.error(function (res) {
-                    console.log("wx.config failed.0", res);
-                })
-            })
-    </script>
 </head>
 
 <body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg);background-size: cover;">
     <div id="app">
         <el-card class="box-card">
-            <div v-if="!hasRep">暂无您的报修记录</div>
+            <div v-if="noRep">暂无您的报修记录</div>
             <div v-if="hasRep">
                 <div slot="header" class="clearfix">
                     <span style="line-height: 36px;">我的报修：</span>
@@ -51,6 +37,7 @@
     var app = new Vue({
         el: '#app',
         data: {
+            noRep:false,
             hasRep: false,
             formData: {}
         },
@@ -97,9 +84,10 @@
                                     vm.hasRep = true
                                     let owninfo = obj.data.data[0]
                                     vm.formData.room_number = owninfo.room_number
-                                    vm.formData.owner_name = owninfo.owner_name
-                                    vm.formData.telephone_number = owninfo.telephone_number
+                                    vm.formData.repair_name = owninfo.owner_name
+                                    vm.formData.tel_phone = owninfo.telephone_number
                                     vm.formData.repair_content = owninfo.repair_content
+                                    vm.formData.picServerId= owninfo.picServerId
                                     vm.formData.repair_status = owninfo.repair_status
                                     sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
                                     //获取cookie的openid
