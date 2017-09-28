@@ -127,6 +127,7 @@
             }
         },
         created() {
+            let vm=this
             let codeurl = window.location.search
             let codeindex = codeurl.indexOf('=')
             let codeend = codeurl.indexOf('&')
@@ -143,7 +144,7 @@
                     console.log(obj.data)
                     vm.formData.wxopen_id=obj.data.openid
                     let openid = obj.data.openid
-                    console.log(openid)
+                    console.log(vm.formData.wxopen_id)
                     filterObj = []
                     filterObj.push({
                         'key': 'wxopen_id',
