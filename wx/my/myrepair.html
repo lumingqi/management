@@ -34,12 +34,12 @@
                 <span style="line-height: 36px;">我的报修：</span>
                 <!-- <el-button style="float: right;" type="primary" @click="editinfo">修改资料</el-button> -->
             </div>
-            <p>房   号：{{formData.room_number}}</p>
+            <p>房 号：{{formData.room_number}}</p>
             <p>报修人：{{formData.repair_name}}</p>
             <p>电话号码：{{formData.tel_phone}}</p>
-            <p>内   容：{{formData.repair_content}}</p>
-            <p>图   片：</p>
-            <img :src="formData.picServerId" style="width:100%" >
+            <p>内 容：{{formData.repair_content}}</p>
+            <p>图 片：</p>
+            <img :src="formData.picServerId" style="width:100%">
             <p>维修进度:{{formData.repair_status}}</p>
         </el-card>
     </div>
@@ -56,7 +56,7 @@
             //     console.log(obj.data[0])
             //     this.formData=obj.data[0]
             // })
-            let vm=this
+            let vm = this
             let codeurl = window.location.search
             let codeindex = codeurl.indexOf('=')
             let codeend = codeurl.indexOf('&')
@@ -86,15 +86,15 @@
                         console.log(obj.data.data.length)
                         if (obj.data.data.length == 0) {
                             console.log('obj.data.data.length')
-                             window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
-                        }else{
-                            let owninfo=obj.data.data[0]
-                            vm.formData.room_number=owninfo.room_number
-                            vm.formData.owner_name=owninfo.owner_name
-                            vm.formData.telephone_number=owninfo.telephone_number
-                            vm.formData.repair_content=owninfo.repair_content
-                            vm.formData.repair_status=owninfo.repair_status
-                            sessionStorage.setItem('wxopen_id',owninfo.wxopen_id)
+                            window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
+                        } else {
+                            let owninfo = obj.data.data[0]
+                            vm.formData.room_number = owninfo.room_number
+                            vm.formData.owner_name = owninfo.owner_name
+                            vm.formData.telephone_number = owninfo.telephone_number
+                            vm.formData.repair_content = owninfo.repair_content
+                            vm.formData.repair_status = owninfo.repair_status
+                            sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
                             //获取cookie的openid
                             //let  openid = sessionStorage.getItem('wxopen_id');
                         }
@@ -103,9 +103,6 @@
             }
         },
         methods: {
-            editinfo(){
-                window.location.href = 'http://wx.yx101.cn/my/editinfo.html'
-            }
         }
     })
 
