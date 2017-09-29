@@ -115,6 +115,7 @@
             },
             checkHasphone: function (rule, value, callback) {
                 if (value === '') {
+                    console.log('手机为空')
                     callback(new Error('注册手机号不能为空'));
                 } else {
                     let Regphone = /(^(\+86|0086)?\s*1[34578]\d{9}$)/;
