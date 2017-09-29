@@ -25,7 +25,6 @@
                     <el-radio class="radio" v-model="person_type" label="1">业主</el-radio>
                     <el-radio class="radio" v-model="person_type" label="2">物业</el-radio>
                 </div>
-
                 <el-form :model="registerForm" :rules="rules" ref="registerForm" label-width="100px" v-if="person_type=='1'">
                     <el-form-item label="物业登记手机" prop="phone">
                         <el-input v-model="registerForm.phone"></el-input>
@@ -123,7 +122,7 @@
                         callback(new Error('请输入11位手机号码'));
                     } else {
                         axios.get('http://api.yx101.cn/management/api/owner?phone=' + value).then(obj => {
-                            console.log('data',obj.data)
+                            console.log('data', obj.data)
                             if (obj.data <= 0) {
                                 callback(new Error('该手机号未在物业登记过,请更换已登记手机号或登记该手机.'))
                             } else {
@@ -198,23 +197,24 @@
         },
         methods: {
             submitForm(formName) {
-                let vm = this
-                let phone=''
-                let msg=''
-                let table=''
-                if(this.person_type=='1'){
-                    phone=vm.registerForm.ownphone
-                    msg=vm.registerForm.phonemsg
-                    table='owner'
-                }else if(this.person_type=='2'){
-                    phone=vm.employeeForm.ownphone
-                    msg=vm.employeeForm.phonemsg
-                    table='employee'
-                }
-                axios.post('http://api.yx101.cn/checksms', { phone: phone, number: msg }).then(obj => {
-                    if (obj.data.status == 0) {
-                        this.$refs[formName].validate((valid) => {
-                            if (valid) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        let vm = this
+                        let phone = ''
+                        let msg = ''
+                        let table = ''
+                        if (this.person_type == '1') {
+                            phone = vm.registerForm.ownphone
+                            msg = vm.registerForm.phonemsg
+                            table = 'owner'
+                        } else if (this.person_type == '2') {
+                            phone = vm.employeeForm.ownphone
+                            msg = vm.employeeForm.phonemsg
+                            table = 'employee'
+                        }
+                        axios.post('http://api.yx101.cn/checksms', { phone: phone, number: msg }).then(obj => {
+                            if (obj.data.status == 0) {
+
                                 let filterObj = []
                                 filterObj.push({
                                     'key': 'telephone_number',
@@ -224,7 +224,7 @@
                                 console.log(phone, filterObj)
                                 let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
                                 console.log('filterTxt', filterTxt)
-                                axios.get('http://api.yx101.cn/management/api/'+table+'/?filter=' + filterTxt).then(obj => {
+                                axios.get('http://api.yx101.cn/management/api/' + table + '/?filter=' + filterTxt).then(obj => {
                                     console.log(obj.data.data)
                                     let owninfo = obj.data.data[0]
                                     console.log(owninfo._id)
@@ -232,7 +232,7 @@
                                         owninfo.wxopen_id = vm.openId
                                         let ownid = owninfo._id
                                         console.log(ownid)
-                                        axios.put('http://api.yx101.cn/management/api/'+table+'/' + ownid, owninfo).then(obj => {
+                                        axios.put('http://api.yx101.cn/management/api/' + table + '/' + ownid, owninfo).then(obj => {
                                             console.log(obj)
                                             if (obj.status == '200') {
                                                 sessionStorage.setItem('wxopen_id', vm.openId)
@@ -244,24 +244,24 @@
                                         alert('此手机号已绑定微信，请用绑定微信登录或者解绑后再绑定')
                                     }
                                 })
-                            } else {
-                                console.log('error submit!!');
-                                return false;
-                            }
-                        });
 
+                            } else {
+                                alert('短信验证码错误或者已超时')
+                            }
+                        })
                     } else {
-                        alert('短信验证码错误或者已超时')
+                        console.log('error submit!!');
+                        return false;
                     }
-                })
+                });
             },
             getMsg() {
                 let vm = this
-                let phone=''
-                if(this.person_type=='1'){
-                    phone=vm.registerForm.ownphone
-                }else if(this.person_type=='2'){
-                    phone=vm.employeeForm.ownphone
+                let phone = ''
+                if (this.person_type == '1') {
+                    phone = vm.registerForm.ownphone
+                } else if (this.person_type == '2') {
+                    phone = vm.employeeForm.ownphone
                 }
                 axios.post('http://api.yx101.cn/sms', { phone: phone }).then(obj => {
                     console.log(obj)
