@@ -36,39 +36,40 @@ export default {
                 }],
             }]
         },
-        {
-            menuTitle: '后台人员资料',
-            menuIcon: 'fa fa-envelope-open',
-            index: '1-2',
-            submenu: [{
-                menuTitle: '业主',
-                index: '1-2-1',
-                to: 'backstageowner',
-                menuIcon: 'fa fa-envelope-open-o',
-                dropDownMenu: [{
-                    'url': 'useingOwnerAdd',
-                    'icon': 'fa fa-pencil',
-                    'text': '编辑'
-                }, {
-                    'action': 'delete',
-                    'icon': 'fa fa-times',
-                    'text': '删除'
-                }],
-            }, {
-                menuTitle: '物业处人员',
-                index: '1-2-2',
-                to: 'backpropertystaff',
-                menuIcon: 'fa fa-envelope-open-o',
-                dropDownMenu: [{
-                    'url': 'useingEmployeeAdd',
-                    'icon': 'fa fa-pencil',
-                    'text': '编辑'
-                }, {
-                    'action': 'delete',
-                    'icon': 'fa fa-times',
-                    'text': '删除'
-                }],
-            }]
-        }
+        // {
+        //     menuTitle: '后台人员资料',
+        //     menuIcon: 'fa fa-envelope-open',
+        //     menuShow: 0,
+        //     index: '1-2',
+        //     submenu: [{
+        //         menuTitle: '业主',
+        //         index: '1-2-1',
+        //         to: 'backstageowner',
+        //         menuIcon: 'fa fa-envelope-open-o',
+        //         dropDownMenu: [{
+        //             'url': 'useingOwnerAdd',
+        //             'icon': 'fa fa-pencil',
+        //             'text': '编辑'
+        //         }, {
+        //             'action': 'delete',
+        //             'icon': 'fa fa-times',
+        //             'text': '删除'
+        //         }],
+        //     }, {
+        //         menuTitle: '物业处人员',
+        //         index: '1-2-2',
+        //         to: 'backpropertystaff',
+        //         menuIcon: 'fa fa-envelope-open-o',
+        //         dropDownMenu: [{
+        //             'url': 'useingEmployeeAdd',
+        //             'icon': 'fa fa-pencil',
+        //             'text': '编辑'
+        //         }, {
+        //             'action': 'delete',
+        //             'icon': 'fa fa-times',
+        //             'text': '删除'
+        //         }],
+        //     }]
+        // }
     ]
 }

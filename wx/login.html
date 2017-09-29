@@ -20,7 +20,13 @@
             </el-col>
             <el-col :span="22" :offset="1" v-if="!isSucceed">
                 <h4 style="text-align:center">您的账号还未绑定，请先绑定微信号</h4>
-                <el-form :model="registerForm" :rules="rules" ref="registerForm" label-width="100px">
+                <div style="margin-bottom:1em">
+                    请选择您的分类：
+                    <el-radio class="radio" v-model="person_type" label="1">业主</el-radio>
+                    <el-radio class="radio" v-model="person_type" label="2">物业</el-radio>
+                </div>
+
+                <el-form :model="registerForm" :rules="rules" ref="registerForm" label-width="100px" v-if="person_type=='1'">
                     <el-form-item label="物业登记手机" prop="phone">
                         <el-input v-model="registerForm.phone"></el-input>
                     </el-form-item>
@@ -35,6 +41,30 @@
                         <el-button type="primary" @click="submitForm('registerForm')">立即绑定</el-button>
                     </el-form-item>
                 </el-form>
+                <el-form :model="employeeForm" :rules="rules" ref="employeeForm" label-width="100px" v-if="person_type=='2'">
+                    <el-form-item label="物业登记手机" prop="phone">
+                        <el-input v-model="employeeForm.phone"></el-input>
+                    </el-form-item>
+                    <el-form-item label="所属部门" prop="department">
+                        <el-select v-model="employeeForm.department" placeholder="请选择">
+                            <el-option v-for="item in departments" :key="item.value" :label="item.label" :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="职务" prop="job_post">
+                        <el-input v-model="employeeForm.job_post"></el-input>
+                    </el-form-item>
+                    <el-form-item label="本人手机" prop="ownphone">
+                        <el-input v-model="employeeForm.ownphone"></el-input>
+                    </el-form-item>
+                    <el-form-item label="短信验证码" prop="phonemsg">
+                        <el-input v-model="employeeForm.phonemsg"></el-input>
+                        <el-button @click="getMsg()" :disabled="msgDisabled">{{msgText}}</el-button>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="submitForm('employeeForm')">立即绑定</el-button>
+                    </el-form-item>
+                </el-form>
             </el-col>
         </el-row>
     </div>
@@ -43,15 +73,35 @@
     var app = new Vue({
         el: '#app',
         data: {
-            isSucceed:false,
+            isSucceed: false,
             msgDisabled: false,
             msgText: '获取验证码',
             openId: '',
+            person_type: '',
             registerForm: {
                 phone: '',
+                person_type: this.person_type,
                 ownphone: '',
                 phonemsg: '',
             },
+            employeeForm: {
+                ma_phone: '',
+                department: '',
+                person_type: this.person_type,
+                job_post: '',
+                ma_ownphone: '',
+                ma_phonemsg: '',
+            },
+            departments: [{
+                value: '0',
+                label: '办公室'
+            }, {
+                value: '1',
+                label: '维修部'
+            }, {
+                value: '2',
+                label: '保安部'
+            }],
             checkphone: function (rule, value, callback) {
                 if (value === '') {
                     callback(new Error('注册手机号不能为空'));
@@ -64,15 +114,66 @@
                     }
                 }
             },
+            checkHasphone: function (rule, value, callback) {
+                if (value === '') {
+                    callback(new Error('注册手机号不能为空'));
+                } else {
+                    let Regphone = /(^(\+86|0086)?\s*1[34578]\d{9}$)/;
+                    if (!Regphone.test(value)) {
+                        callback(new Error('请输入11位手机号码'));
+                    } else {
+                        axios.get('http://api.yx101.cn/management/api/employee?phone=' + value).then(obj => {
+                            if (obj.data <= 0) {
+                                callback(new Error('该手机号未在物业登记过,请更换已登记手机号或登记该手机.'))
+                            } else {
+                                callback();
+                            }
+                        })
+                    }
+                }
+            },
+            checkHasMaphone: function (rule, value, callback) {
+                if (value === '') {
+                    callback(new Error('注册手机号不能为空'));
+                } else {
+                    let Regphone = /(^(\+86|0086)?\s*1[34578]\d{9}$)/;
+                    if (!Regphone.test(value)) {
+                        callback(new Error('请输入11位手机号码'));
+                    } else {
+                        axios.get('http://api.yx101.cn/management/api/owner?phone=' + value).then(obj => {
+                            if (obj.data <= 0) {
+                                callback(new Error('该手机号未在物业登记过,请更换已登记手机号.'))
+                            } else {
+                                callback();
+                            }
+                        })
+                    }
+                }
+            },
             rules: {
                 phone: [
-                    { required: true, validator: this.checkphone, trigger: 'change' },
+                    { required: true, validator: this.checkHasphone, trigger: 'change' },
                 ],
                 ownphone: [
                     { required: true, validator: this.checkphone, trigger: 'change' },
                 ],
                 phonemsg: [
                     { required: true, message: '请输入正确的短信验证码', trigger: 'change' }
+                ],
+                ma_phone: [
+                    { required: true, validator: this.checkHasMaphone, trigger: 'change' },
+                ],
+                department: [
+                    { required: true, message: '请选择所属部门', trigger: 'change' }
+                ],
+                ma_ownphone: [
+                    { required: true, validator: this.checkphone, trigger: 'change' },
+                ],
+                ma_phonemsg: [
+                    { required: true, message: '请输入正确的短信验证码', trigger: 'change' }
+                ],
+                job_post: [
+                    { required: true, message: '请输入您的职务', trigger: 'change' }
                 ],
             }
         },
@@ -97,20 +198,32 @@
         methods: {
             submitForm(formName) {
                 let vm = this
-                axios.post('http://api.yx101.cn/checksms', { phone: vm.registerForm.ownphone, number: vm.registerForm.phonemsg }).then(obj => {
+                let phone=''
+                let msg=''
+                let table=''
+                if(this.person_type=='1'){
+                    phone=vm.registerForm.ownphone
+                    msg=vm.registerForm.phonemsg
+                    table='owner'
+                }else if(this.person_type=='2'){
+                    phone=vm.employeeForm.ownphone
+                    msg=vm.employeeForm.phonemsg
+                    table='employee'
+                }
+                axios.post('http://api.yx101.cn/checksms', { phone: phone, number: msg }).then(obj => {
                     if (obj.data.status == 0) {
                         this.$refs[formName].validate((valid) => {
                             if (valid) {
                                 let filterObj = []
                                 filterObj.push({
                                     'key': 'telephone_number',
-                                    'value': this.registerForm.phone,
+                                    'value': phone,
                                     'type': ''
                                 })
-                                console.log(this.registerForm.phone, filterObj)
+                                console.log(phone, filterObj)
                                 let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
                                 console.log('filterTxt', filterTxt)
-                                axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
+                                axios.get('http://api.yx101.cn/management/api/'+table+'/?filter=' + filterTxt).then(obj => {
                                     console.log(obj.data.data)
                                     let owninfo = obj.data.data[0]
                                     console.log(owninfo._id)
@@ -118,11 +231,11 @@
                                         owninfo.wxopen_id = vm.openId
                                         let ownid = owninfo._id
                                         console.log(ownid)
-                                        axios.put('http://api.yx101.cn/management/api/owner/' + ownid, owninfo).then(obj => {
+                                        axios.put('http://api.yx101.cn/management/api/'+table+'/' + ownid, owninfo).then(obj => {
                                             console.log(obj)
                                             if (obj.status == '200') {
                                                 sessionStorage.setItem('wxopen_id', vm.openId)
-                                                vm.isSucceed=true
+                                                vm.isSucceed = true
                                                 window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/my/myinfo.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
                                             }
                                         })
@@ -143,7 +256,13 @@
             },
             getMsg() {
                 let vm = this
-                axios.post('http://api.yx101.cn/sms', { phone: vm.registerForm.ownphone }).then(obj => {
+                let phone=''
+                if(this.person_type=='1'){
+                    phone=vm.registerForm.ownphone
+                }else if(this.person_type=='2'){
+                    phone=vm.employeeForm.ownphone
+                }
+                axios.post('http://api.yx101.cn/sms', { phone: phone }).then(obj => {
                     console.log(obj)
                 })
                 this.msgDisabled = true
@@ -151,7 +270,6 @@
                 let msg = setInterval(() => {
                     count--
                     this.msgText = count + 's后重新获取'
-                    console.log(this.msgText)
                     if (count <= 0) {
                         clearInterval(msg)
                         this.msgDisabled = false
