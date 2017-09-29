@@ -123,6 +123,7 @@
                         callback(new Error('请输入11位手机号码'));
                     } else {
                         axios.get('http://api.yx101.cn/management/api/owner?phone=' + value).then(obj => {
+                            console.log('data',obj.data)
                             if (obj.data <= 0) {
                                 callback(new Error('该手机号未在物业登记过,请更换已登记手机号或登记该手机.'))
                             } else {
