@@ -126,6 +126,16 @@
             }
         },
         created() {
+            var u = navigator.userAgent, app = navigator.appVersion;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            if (isAndroid) {
+                alert('appDownload.html');
+            }
+            if (isIOS) {
+                alert('ios.html');
+            }
+
             let vm = this
             let codeurl = window.location.search
             let codeindex = codeurl.indexOf('=')
@@ -165,11 +175,11 @@
             }
         },
         mounted() {
-            let str=''
+            let str = ''
             for (var i = 0; i < 6; i += 1) {
                 str += Math.floor(Math.random() * 10);
             }
-            this.formData.repair_no = 'YX' + moment().format('YYYYMMDDssSSSS')+str
+            this.formData.repair_no = 'YX' + moment().format('YYYYMMDDssSSSS') + str
             console.log(this.formData.repair_no)
         },
         methods: {
@@ -179,7 +189,7 @@
                     if (valid) {
                         axios.post('http://api.yx101.cn/management/api/service', vm.formData)
                             .then(function (res) {
-                                alert('res', res.data)
+                                alert('申请报修成功，可到我的报修中查看')
                             })
                     }
                 })
