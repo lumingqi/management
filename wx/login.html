@@ -187,7 +187,7 @@
                                 let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
                                 console.log('filterTxt', filterTxt)
                                 axios.get('http://api.yx101.cn/management/api/' + table + '/?filter=' + filterTxt).then(obj => {
-                                    console.log(obj.data.data)
+                                    console.log('---data',obj.data.data)
                                     let owninfo = obj.data.data[0]
                                     console.log(owninfo._id)
                                     if (owninfo.wxopen_id == '' || owninfo.wxopen_id == undefined) {
