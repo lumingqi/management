@@ -24,8 +24,8 @@ export default {
         {
             'type': 'input',
             'label': '联系方式',
-            'prop': 'tel_number',
-            'field': 'tel_number'
+            'prop': 'telephone_number',
+            'field': 'telephone_number'
         },
         {
             'type': 'input',

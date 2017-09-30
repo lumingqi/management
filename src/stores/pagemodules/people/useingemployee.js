@@ -68,7 +68,7 @@ export default {
     {
         'type': 'text',
         'label': '联系方式',
-        'prop': 'tel_number',
+        'prop': 'telephone_number',
     },
     {
         'type': 'text',
