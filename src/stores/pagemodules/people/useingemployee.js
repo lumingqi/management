@@ -76,6 +76,11 @@ export default {
             'prop': 'position',
         },
         {
+        'type': 'text',
+        'label': 'openId',
+        'prop': 'wxopen_id',
+    },
+        {
             'type': 'text',
             'label': '备注',
             'prop': 'note',

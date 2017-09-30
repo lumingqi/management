@@ -44,15 +44,6 @@
                     <el-form-item label="物业登记手机" prop="phone">
                         <el-input v-model="employeeForm.phone"></el-input>
                     </el-form-item>
-                    <el-form-item label="所属部门" prop="department">
-                        <el-select v-model="employeeForm.department" placeholder="请选择">
-                            <el-option v-for="item in departments" :key="item.value" :label="item.label" :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="职务" prop="job_post">
-                        <el-input v-model="employeeForm.job_post"></el-input>
-                    </el-form-item>
                     <el-form-item label="本人手机" prop="ownphone">
                         <el-input v-model="employeeForm.ownphone"></el-input>
                     </el-form-item>
@@ -85,22 +76,10 @@
             },
             employeeForm: {
                 ma_phone: '',
-                department: '',
                 person_type: this.person_type,
-                job_post: '',
                 ma_ownphone: '',
                 ma_phonemsg: '',
             },
-            departments: [{
-                value: '0',
-                label: '办公室'
-            }, {
-                value: '1',
-                label: '维修部'
-            }, {
-                value: '2',
-                label: '保安部'
-            }],
             checkphone: function (rule, value, callback) {
                 if (value === '') {
                     callback(new Error('注册手机号不能为空'));
@@ -152,18 +131,12 @@
                 ma_phone: [
                     { required: true, validator: this.checkHasphone, trigger: 'change' },
                 ],
-                department: [
-                    { required: true, message: '请选择所属部门', trigger: 'change' }
-                ],
                 ma_ownphone: [
                     { required: true, validator: this.checkphone, trigger: 'change' },
                 ],
                 ma_phonemsg: [
                     { required: true, message: '请输入正确的短信验证码', trigger: 'change' }
-                ],
-                job_post: [
-                    { required: true, message: '请输入您的职务', trigger: 'change' }
-                ],
+                ]
             }
         },
         mounted() {

@@ -30,16 +30,32 @@
 <body style="background:url(http://img.hicloudshop.com/t76482/infoimg/2013-04/130428114756ni.jpg);background-size: cover;">
     <div id="app">
         <el-card class="box-card">
-            <div slot="header" class="clearfix">
-                <span style="line-height: 36px;">我的资料：</span>
-                <!-- <el-button style="float: right;" type="primary" @click="editinfo">修改资料</el-button> -->
-            </div>
-            <p>房   号：</p>
-            <el-tag type="gray">{{formData.room_number}}</el-tag>
-            <p>业主姓名:</p>
-            <el-tag type="gray">{{formData.owner_name}}</el-tag>
-            <p>登记手机:</p>
-            <el-tag type="gray">{{formData.telephone_number}}</el-tag>
+            <template v-if="idOwner"> 
+                <div slot="header" class="clearfix">
+                    <span style="line-height: 36px;">我的资料：</span>
+                    <!-- <el-button style="float: right;" type="primary" @click="editinfo">修改资料</el-button> -->
+                </div>
+                <p>房 号：</p>
+                <el-tag type="gray">{{formData.room_number}}</el-tag>
+                <p>业主姓名:</p>
+                <el-tag type="gray">{{formData.owner_name}}</el-tag>
+                <p>登记手机:</p>
+                <el-tag type="gray">{{formData.telephone_number}}</el-tag>
+            </template>
+            <template v-if="isManagenment"> 
+                <div slot="header" class="clearfix">
+                    <span style="line-height: 36px;">我的资料：</span>
+                    <!-- <el-button style="float: right;" type="primary" @click="editinfo">修改资料</el-button> -->
+                </div>
+                <p>姓  名:</p>
+                <el-tag type="gray">{{jobformData.employee_name}}</el-tag>
+                <p>部  门：</p>
+                <el-tag type="gray">{{jobformData.department}}</el-tag>
+                <p>职  务:</p>
+                <el-tag type="gray">{{jobformData.position}}</el-tag>
+                <p>电  话:</p>
+                <el-tag type="gray">{{jobformData.tel_number}}</el-tag>
+            </template>
         </el-card>
     </div>
 </body>
@@ -47,14 +63,22 @@
     var app = new Vue({
         el: '#app',
         data: {
+            idOwner:false,
+            isManagenment:false,
             formData: {
                 room_number: '',
                 owner_name: '',
                 telephone_number: '',
+            },
+            jobformData: {
+                department: '',
+                employee_name: '',
+                tel_number: '',
+                position:'',
             }
         },
         created() {
-            let vm=this
+            let vm = this
             let codeurl = window.location.search
             let codeindex = codeurl.indexOf('=')
             let codeend = codeurl.indexOf('&')
@@ -77,20 +101,30 @@
                         'value': openid,
                         'type': ''
                     })
-                    console.log(openid, filterObj)
                     let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
-                    console.log('filterTxt', filterTxt)
                     axios.get('http://api.yx101.cn/management/api/owner/?filter=' + filterTxt).then(obj => {
-                        console.log(obj.data.data.length)
                         if (obj.data.data.length == 0) {
-                            console.log('obj.data.data.length')
-                            window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
-                        }else{
-                            let owninfo=obj.data.data[0]
-                            vm.formData.room_number=owninfo.room_number
-                            vm.formData.owner_name=owninfo.owner_name
-                            vm.formData.telephone_number=owninfo.telephone_number
-                            sessionStorage.setItem('wxopen_id',owninfo.wxopen_id)
+                            axios.get('http://api.yx101.cn/management/api/employee/?filter=' + filterTxt).then(obj => {
+                                if (obj.data.data.length == 0) {
+                                    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7e0aa09a76fe616b&redirect_uri=http://wx.yx101.cn/login.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
+                                } else {
+                                    vm.isManagenment=true
+                                    let owninfo = obj.data.data[0]
+                                    vm.jobformData.employee_name = owninfo.employee_name
+                                    vm.jobformData.department= owninfo.department
+                                    vm.jobformData.position = owninfo.position
+                                    vm.jobformData.tel_number=owninfo.tel_number
+                                    sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
+                                }
+                            })
+
+                        } else {
+                            vm.idOwner=true
+                            let owninfo = obj.data.data[0]
+                            vm.formData.room_number = owninfo.room_number
+                            vm.formData.owner_name = owninfo.owner_name
+                            vm.formData.telephone_number = owninfo.telephone_number
+                            sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
                             //获取cookie的openid
                             //let  openid = sessionStorage.getItem('wxopen_id');
                         }
@@ -99,7 +133,7 @@
             }
         },
         methods: {
-            editinfo(){
+            editinfo() {
                 window.location.href = 'http://wx.yx101.cn/my/editinfo.html'
             }
         }
