@@ -54,7 +54,7 @@
                 <p>职  务:</p>
                 <el-tag type="gray">{{jobformData.position}}</el-tag>
                 <p>电  话:</p>
-                <el-tag type="gray">{{jobformData.tel_number}}</el-tag>
+                <el-tag type="gray">{{jobformData.telephone_number}}</el-tag>
             </template>
         </el-card>
     </div>
@@ -73,7 +73,7 @@
             jobformData: {
                 department: '',
                 employee_name: '',
-                tel_number: '',
+                telephone_number: '',
                 position:'',
             }
         },
@@ -113,7 +113,7 @@
                                     vm.jobformData.employee_name = owninfo.employee_name
                                     vm.jobformData.department= owninfo.department
                                     vm.jobformData.position = owninfo.position
-                                    vm.jobformData.tel_number=owninfo.tel_number
+                                    vm.jobformData.telephone_number=owninfo.telephone_number
                                     sessionStorage.setItem('wxopen_id', owninfo.wxopen_id)
                                 }
                             })
