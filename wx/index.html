@@ -126,16 +126,9 @@
             }
         },
         created() {
-            var u = navigator.userAgent, app = navigator.appVersion;
-            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
-            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-            if (isAndroid) {
-                alert('appDownload.html');
-            }
-            if (isIOS) {
-                alert('ios.html');
-            }
-
+            let u = navigator.userAgent, app = navigator.appVersion;
+            let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; 
+            let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
             let vm = this
             let codeurl = window.location.search
             let codeindex = codeurl.indexOf('=')
@@ -206,7 +199,13 @@
                         wx.getLocalImgData({
                             localId: res.localIds[0], // 图片的localID
                             success: function (obj) {
-                                vm.formData.picServerId = obj.localData; // localData是图片的base64数据，可以用img标签显示
+                                if(isAndroid){
+                                    vm.formData.picServerId = 'data:image/jgp;base64'+obj.localData
+                                }
+                                if(isIOS){
+                                    vm.formData.picServerId =obj.localData
+                                }
+                                 // localData是图片的base64数据，可以用img标签显示
                             }
                         });
                         // wx.uploadImage({
