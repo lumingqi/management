@@ -81,6 +81,7 @@
             if (!Regphone.test(value)) {
                 callback(new Error('请输入11位手机号码'));
             } else {
+                console.log(app.person_type)
                 let table = ''
                 if (app.person_type == '1') {
                     table = 'owner'
