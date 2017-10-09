@@ -201,8 +201,7 @@
                             success: function (obj) {
                                 if(isAndroid){
                                     vm.formData.picServerId = 'data:image/jgp;base64,'+obj.localData
-                                }
-                                if(isIOS){
+                                }else if(isIOS){
                                     vm.formData.picServerId =obj.localData
                                 }
                                  // localData是图片的base64数据，可以用img标签显示
