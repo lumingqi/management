@@ -86,7 +86,14 @@
                 } else if (app.person_type == '2') {
                     table = 'employee'
                 }
-                axios.get('http://api.yx101.cn/management/api/' + table + '?telephone_number=' + value).then(obj => {
+                let filterObj = []
+                filterObj.push({
+                    'key': 'telephone_number',
+                    'value': value,
+                    'type': ''
+                })
+                let filterTxt = BASE64.encoder(JSON.stringify(filterObj))
+                axios.get('http://api.yx101.cn/management/api/' + table + '/?filter=' + filterTxt).then(obj => {
                     console.log('data', obj.data)
                     if (obj.data <= 0) {
                         callback(new Error('该手机号未在物业登记过,请更换已登记手机号或登记该手机.'))
@@ -175,7 +182,6 @@
                         }
                         axios.post('http://api.yx101.cn/checksms', { phone: phone, number: msg }).then(obj => {
                             if (obj.data.status == 0) {
-
                                 let filterObj = []
                                 filterObj.push({
                                     'key': 'telephone_number',
