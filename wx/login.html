@@ -60,7 +60,7 @@
     </div>
 </body>
 <script>
-    function checkphone(rule, value, callback){
+    function checkphone(rule, value, callback) {
         if (value === '') {
             callback(new Error('注册手机号不能为空'));
         } else {
@@ -72,8 +72,32 @@
             }
         }
     }
-
-
+    function checkHasphone(rule, value, callback) {
+        if (value === '') {
+            console.log('手机为空')
+            callback(new Error('注册手机号不能为空'));
+        } else {
+            let Regphone = /(^(\+86|0086)?\s*1[34578]\d{9}$)/;
+            if (!Regphone.test(value)) {
+                callback(new Error('请输入11位手机号码'));
+            } else {
+                let table = ''
+                if (app.person_type == '1') {
+                    table = 'owner'
+                } else if (app.person_type == '2') {
+                    table = 'employee'
+                }
+                axios.get('http://api.yx101.cn/management/api/' + table + '?phone=' + value).then(obj => {
+                    console.log('data', obj.data)
+                    if (obj.data <= 0) {
+                        callback(new Error('该手机号未在物业登记过,请更换已登记手机号或登记该手机.'))
+                    } else {
+                        callback();
+                    }
+                })
+            }
+        }
+    }
     var app = new Vue({
         el: '#app',
         data: {
@@ -94,59 +118,21 @@
                 ma_ownphone: '',
                 ma_phonemsg: '',
             },
-            // checkphone: function (rule, value, callback) {
-            //     if (value === '') {
-            //         callback(new Error('注册手机号不能为空'));
-            //     } else {
-            //         let Regphone = /(^(\+86|0086)?\s*1[34578]\d{9}$)/;
-            //         if (!Regphone.test(value)) {
-            //             callback(new Error('请输入11位手机号码'));
-            //         } else {
-            //             callback();
-            //         }
-            //     }
-            // },
-            checkHasphone: function (rule, value, callback) {
-                if (value === '') {
-                    console.log('手机为空')
-                    callback(new Error('注册手机号不能为空'));
-                } else {
-                    let Regphone = /(^(\+86|0086)?\s*1[34578]\d{9}$)/;
-                    if (!Regphone.test(value)) {
-                        callback(new Error('请输入11位手机号码'));
-                    } else {
-                        let table = ''
-                        if (this.person_type == '1') {
-                            table = 'owner'
-                        } else if (this.person_type == '2') {
-                            table = 'employee'
-                        }
-                        axios.get('http://api.yx101.cn/management/api/' + table + '?phone=' + value).then(obj => {
-                            console.log('data', obj.data)
-                            if (obj.data <= 0) {
-                                callback(new Error('该手机号未在物业登记过,请更换已登记手机号或登记该手机.'))
-                            } else {
-                                callback();
-                            }
-                        })
-                    }
-                }
-            },
             rules: {
                 phone: [
-                    { required: true, validator: this.checkHasphone, trigger: 'change' },
+                    { required: true, validator: checkHasphone, trigger: 'change' },
                 ],
                 ownphone: [
-                    { required: true, validator:checkphone, trigger: 'change' },
+                    { required: true, validator: checkphone, trigger: 'change' },
                 ],
                 phonemsg: [
                     { required: true, message: '请输入正确的短信验证码', trigger: 'change' }
                 ],
                 ma_phone: [
-                    { required: true, validator: this.checkHasphone, trigger: 'change' },
+                    { required: true, validator:checkHasphone, trigger: 'change' },
                 ],
                 ma_ownphone: [
-                    { required: true, validator: this.checkphone, trigger: 'change' },
+                    { required: true, validator:checkphone, trigger: 'change' },
                 ],
                 ma_phonemsg: [
                     { required: true, message: '请输入正确的短信验证码', trigger: 'change' }
