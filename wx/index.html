@@ -200,6 +200,7 @@
                             localId: res.localIds[0], // 图片的localID
                             success: function (obj) {
                                 if(isAndroid){
+                                    console.log('android')
                                     vm.formData.picServerId = 'data:image/jgp;base64,'+obj.localData
                                 }else if(isIOS){
                                     vm.formData.picServerId =obj.localData
