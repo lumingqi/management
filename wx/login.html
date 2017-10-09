@@ -86,7 +86,7 @@
                 } else if (app.person_type == '2') {
                     table = 'employee'
                 }
-                axios.get('http://api.yx101.cn/management/api/' + table + '?phone=' + value).then(obj => {
+                axios.get('http://api.yx101.cn/management/api/' + table + '?telephone_number=' + value).then(obj => {
                     console.log('data', obj.data)
                     if (obj.data <= 0) {
                         callback(new Error('该手机号未在物业登记过,请更换已登记手机号或登记该手机.'))
@@ -128,10 +128,10 @@
                     { required: true, message: '请输入正确的短信验证码', trigger: 'change' }
                 ],
                 ma_phone: [
-                    { required: true, validator:checkHasphone, trigger: 'change' },
+                    { required: true, validator: checkHasphone, trigger: 'change' },
                 ],
                 ma_ownphone: [
-                    { required: true, validator:checkphone, trigger: 'change' },
+                    { required: true, validator: checkphone, trigger: 'change' },
                 ],
                 ma_phonemsg: [
                     { required: true, message: '请输入正确的短信验证码', trigger: 'change' }
