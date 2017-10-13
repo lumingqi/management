@@ -20,7 +20,7 @@ export default {
             'label': '联系方式',
             'defvalue': '',
             'default': true,
-            'value': 'tel_number'
+            'value': 'telephone_number'
         },
         {
             'label': '职务',

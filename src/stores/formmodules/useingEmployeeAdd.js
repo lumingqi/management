@@ -35,6 +35,12 @@ export default {
         },
         {
             'type': 'input',
+            'label': 'openId',
+            'prop': '',
+            'field': 'wxopen_id'
+        },
+        {
+            'type': 'input',
             'label': '备注',
             'prop': '',
             'field': 'note',

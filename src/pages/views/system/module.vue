@@ -463,7 +463,7 @@ export default {
             console.log(msg)
             let msginfo = {
                 "touser": "oQBciwwrZulw5OGALBB74MVnlnn8",
-                "template_id": "EPoBuDGSu3F_9pWK2-uTR455ugxyL-TCkBfYILuBSyQ",
+                "template_id": msg.wxopen_id,
                 "url": "http://wx.yx101.cn/my/agreerepair.html?repair_no=" + msg.repair_no + "&&repair_price=" + msg.repair_price,
                 "topcolor": "#FF0000",
                 "data": {
