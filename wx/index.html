@@ -127,9 +127,9 @@
         },
         created() {
             let u = navigator.userAgent, app = navigator.appVersion;
-            let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; 
+            let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
             let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-            console.log(isAndroid,isIOS)
+            console.log(isAndroid, isIOS)
             let vm = this
             let codeurl = window.location.search
             let codeindex = codeurl.indexOf('=')
@@ -189,6 +189,9 @@
                 })
             },
             handleCamera() {
+                let u = navigator.userAgent, app = navigator.appVersion;
+                let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
+                let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
                 let vm = this
                 wx.chooseImage({
                     count: 1, //张数， 默认9
@@ -200,13 +203,13 @@
                         wx.getLocalImgData({
                             localId: res.localIds[0], // 图片的localID
                             success: function (obj) {
-                                if(isAndroid){
+                                if (isAndroid) {
                                     console.log('android')
-                                    vm.formData.picServerId = 'data:image/jgp;base64,'+obj.localData
-                                }else if(isIOS){
-                                    vm.formData.picServerId =obj.localData
+                                    vm.formData.picServerId = 'data:image/jgp;base64,' + obj.localData
+                                } else if (isIOS) {
+                                    vm.formData.picServerId = obj.localData
                                 }
-                                 // localData是图片的base64数据，可以用img标签显示
+                                // localData是图片的base64数据，可以用img标签显示
                             }
                         });
                         // wx.uploadImage({
